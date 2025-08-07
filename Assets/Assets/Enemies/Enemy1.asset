@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 932647ac7ac72d94897f878e6025121b, type: 3}
+  m_Name: Enemy1
+  m_EditorClassIdentifier: 
+  hp: 100
+  attack: 10
+  unitSprite: {fileID: -5615696279337049406, guid: 82db949e8370447489387f953fa984a2, type: 3}
+  unitColor: {r: 1, g: 1, b: 1, a: 1}
+  hpBarPrefab: {fileID: 2669600942163248997, guid: 0b288b66d6d49254fa4225016b42d65b, type: 3}
+  animatorController: {fileID: 9100000, guid: 26abc262373f97240ab5e4f7282beb5c, type: 2}

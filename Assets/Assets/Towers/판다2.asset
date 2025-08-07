@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b20cbeacb83d1c488b6f17a21013f15, type: 3}
+  m_Name: "\uD310\uB2E42"
+  m_EditorClassIdentifier: 
+  hp: 80
+  attack: 3
+  moveSpeed: 2.5
+  attackRange: 3
+  attackSpeed: 1
+  bulletPrefab: {fileID: 6786711891071428037, guid: a68a0b78b2168ea4090b99924301ddd1, type: 3}
+  bulletSpeed: 3
+  towerType: 1
+  unitSprite: {fileID: 5525973420213172563, guid: 7a5fdc16ebf77d942b8c5b8394686059, type: 3}
+  unitColor: {r: 1, g: 1, b: 1, a: 1}
+  goldCost: 4
+  TowerSprite: {fileID: -7043180767314402695, guid: ea2294206fd3db54f974e795a6cc24b4, type: 3}
+  spawnCooldown: 20
+  animatorController: {fileID: 9100000, guid: 110713aa2907cd3448011bea40438be7, type: 2}
