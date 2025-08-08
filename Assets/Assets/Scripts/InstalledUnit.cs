@@ -78,7 +78,7 @@ public class InstalledUnit : MonoBehaviour
         if (!isPreview)
         {
             GameObject hpBarInstance = Instantiate(hpBarPrefab, transform);
-            hpBarInstance.transform.localPosition = new Vector3(0, 0.6f, 0); // Position above the unit
+            hpBarInstance.transform.localPosition = new Vector3(0, 3.8f, 0); // Position above the unit
 
             hpBarTransform = hpBarInstance.transform;
             hpBarComponent = hpBarInstance.GetComponent<hpbar>();
@@ -212,9 +212,15 @@ public class InstalledUnit : MonoBehaviour
             DrawRangeCircle();
         }
 
-        // moveUnit 명령으로 이동 중인지 체크
+        // moveUnit 명령으로 이동 중일 때 프레임별 이동 처리
         if (isMovingByCommand)
         {
+            if (rigidbody != null)
+            {
+                Vector2 directionToTarget = (moveTargetPosition - transform.position).normalized;
+                rigidbody.linearVelocity = directionToTarget * moveSpeed;
+                UpdateAnimation(rigidbody.linearVelocity);
+            }
             CheckMoveCompletion();
         }
 
@@ -412,15 +418,8 @@ public class InstalledUnit : MonoBehaviour
     {
         moveTargetPosition = target;
         isMovingByCommand = true;
-        while(Vector2.Distance(transform.position,target)>0.05f)
-        {
-            rigidbody.linearVelocity = (target - transform.position).normalized * moveSpeed;
-            
-        }
-        rigidbody.linearVelocity = Vector2.zero;
-        isMovingByCommand = false;
-        
-        Debug.Log($"[InstalledUnit] moveUnit 시작 - 목표 위치: {target}, 타겟 탐지 중단");
+        // 이동은 Update에서 프레임 단위로 처리
+        Debug.Log($"[InstalledUnit] moveUnit 시작 - 목표 위치: {target}, 프레임별 이동 진행");
     }
 
     void CheckMoveCompletion()

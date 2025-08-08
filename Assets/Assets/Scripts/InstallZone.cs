@@ -342,26 +342,11 @@ public class InstallZone : MonoBehaviour, IDroppable
             return;
         }
 
-        // 이미 설치된 오브젝트가 있거나 생성 중이면 초기화
-        if (installedObject != null || isSpawning)
+        // 이미 설치가 이루어진 경우 추가 설치를 막음
+        if (!isInstallable || installedUnit != null || installedObject != null || isSpawning)
         {
-            Debug.Log("기존 유닛이 있거나 생성 중이므로 초기화");
-
-            // 생성 프로세스 중단
-            StopAllCoroutines();
-            isSpawning = false;
-
-            // 기존 유닛 제거
-            if (installedObject != null)
-            {
-                Destroy(installedObject);
-                installedObject = null;
-                
-            }
-
-            installedUnit = null;
-            unitPrefab = null;
-            isInstallable = true;
+            Debug.Log("설치 불가: 이미 설치가 완료된 존입니다.");
+            return;
         }
 
         Debug.Log($"드롭된 유닛: {uiUnit.towerData.name}");

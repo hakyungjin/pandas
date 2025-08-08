@@ -22,6 +22,17 @@ public class waveManager : MonoBehaviour
     public Vector3 endPosition = new Vector3(1.7f, 0f);
 
     private bool isGaugeFull => hp.fillAmount >= 1f;
+    
+    // 경고 트리거 제어 플래그
+    private bool firedAt60 = false;
+    private bool firedAt240 = false;
+    private bool isAlertPlaying = false;
+
+    [Header("경고 UI 이동 설정")]
+    public float alertMoveDistance = 100f;      // 위로 이동 거리 (UI 좌표)
+    public float alertMoveDuration = 0.35f;     // 위로/아래로 이동 시간
+    public AnimationCurve alertEaseCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f); // 이징 커브
+    public float alertHoldTime = 0.2f;          // 꼭대기/바닥에서 머무는 시간
 
     void Start()
     {
@@ -52,12 +63,14 @@ public class waveManager : MonoBehaviour
             MoveTargetObject();
         }
         
-        if(currentTime >= 60f && currentTime < 61f)
+        if(!firedAt60 && currentTime >= 2f)
         {
+            firedAt60 = true;
             TriggerWaveEffect();
         }
-        if(currentTime >= 240f && currentTime < 241f)
+        if(!firedAt240 && currentTime >= 240f)
         {
+            firedAt240 = true;
             TriggerWaveEffect();
         }
     }
@@ -75,30 +88,86 @@ public class waveManager : MonoBehaviour
 
     public void TriggerWaveEffect()
     {
-        if (!isGaugeFull) return;
-
-        if (targetObject != null)
-        {
-            StartCoroutine(WaveEffectCoroutine());
-        }
+        if (isAlertPlaying) return;
+        StartCoroutine(WaveEffectCoroutine());
     }
 
     IEnumerator WaveEffectCoroutine()
     {
+        isAlertPlaying = true;
+
         if (targetObject != null)
         {
             targetObject.SetActive(false);
+        }
+
+        if (alert != null)
+        {
             alert.SetActive(true);
-            //위로올라감    
-            alert.transform.position += new Vector3(0f, 100f, 0f);
-            yield return new WaitForSeconds(0.5f);
-            //아래로내려감
-            alert.transform.position -= new Vector3(0f, 100f, 0f);
-            yield return new WaitForSeconds(0.5f);
-            yield return new WaitForSeconds(1f);
-            targetObject.SetActive(true);
+
+            RectTransform rt = alert.GetComponent<RectTransform>();
+            if (rt != null)
+            {
+                Vector2 baseAnchored = rt.anchoredPosition;
+                // 위로 부드럽게 이동
+                float t = 0f;
+                while (t < 1f)
+                {
+                    t += Time.deltaTime / Mathf.Max(0.0001f, alertMoveDuration);
+                    float eased = alertEaseCurve != null ? alertEaseCurve.Evaluate(Mathf.Clamp01(t)) : Mathf.SmoothStep(0f, 1f, Mathf.Clamp01(t));
+                    rt.anchoredPosition = baseAnchored + Vector2.up * (alertMoveDistance * eased);
+                    yield return null;
+                }
+                // 꼭대기에서 잠깐 유지
+                if (alertHoldTime > 0f) yield return new WaitForSeconds(alertHoldTime);
+                // 아래로 부드럽게 복귀
+                t = 0f;
+                while (t < 1f)
+                {
+                    t += Time.deltaTime / Mathf.Max(0.0001f, alertMoveDuration);
+                    float eased = alertEaseCurve != null ? alertEaseCurve.Evaluate(Mathf.Clamp01(t)) : Mathf.SmoothStep(0f, 1f, Mathf.Clamp01(t));
+                    rt.anchoredPosition = baseAnchored + Vector2.up * (alertMoveDistance * (1f - eased));
+                    yield return null;
+                }
+                // 바닥에서 잠깐 유지
+                if (alertHoldTime > 0f) yield return new WaitForSeconds(alertHoldTime);
+                rt.anchoredPosition = baseAnchored;
+            }
+            else
+            {
+                Vector3 baseWorld = alert.transform.position;
+                float t = 0f;
+                // 위로 부드럽게 이동 (월드 좌표)
+                while (t < 1f)
+                {
+                    t += Time.deltaTime / Mathf.Max(0.0001f, alertMoveDuration);
+                    float eased = alertEaseCurve != null ? alertEaseCurve.Evaluate(Mathf.Clamp01(t)) : Mathf.SmoothStep(0f, 1f, Mathf.Clamp01(t));
+                    alert.transform.position = baseWorld + Vector3.up * (alertMoveDistance * eased);
+                    yield return null;
+                }
+                if (alertHoldTime > 0f) yield return new WaitForSeconds(alertHoldTime);
+                // 아래로 부드럽게 복귀
+                t = 0f;
+                while (t < 1f)
+                {
+                    t += Time.deltaTime / Mathf.Max(0.0001f, alertMoveDuration);
+                    float eased = alertEaseCurve != null ? alertEaseCurve.Evaluate(Mathf.Clamp01(t)) : Mathf.SmoothStep(0f, 1f, Mathf.Clamp01(t));
+                    alert.transform.position = baseWorld + Vector3.up * (alertMoveDistance * (1f - eased));
+                    yield return null;
+                }
+                if (alertHoldTime > 0f) yield return new WaitForSeconds(alertHoldTime);
+                alert.transform.position = baseWorld;
+            }
+
             alert.SetActive(false);
         }
+
+        if (targetObject != null)
+        {
+            targetObject.SetActive(true);
+        }
+
+        isAlertPlaying = false;
     }
     
     // 위치 설정을 위한 헬퍼 메서드들
