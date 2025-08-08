@@ -112,6 +112,7 @@ MonoBehaviour:
   hpBar2: {fileID: 2669600942163248997, guid: 0b288b66d6d49254fa4225016b42d65b, type: 3}
   hpBarInstance2: {fileID: 0}
   TowerPrefab: {fileID: 4151191176589525021, guid: 451e294f0665f874688e8e22e230077b, type: 3}
+  TowerPrefab2: {fileID: 0}
   unitSprite: {fileID: 0}
   hp: 0
   attack: 0
@@ -120,6 +121,7 @@ MonoBehaviour:
   level: 1
   levelupUI: {fileID: 0}
   exhenceList: []
+  gameManager: {fileID: 0}
 --- !u!61 &8020656127840020597
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -180,6 +182,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiPrefab1: {fileID: 0}
   installZone: {fileID: 0}
+  levelupUI2: {fileID: 1109882549031366782, guid: 0833ced722b8b4a4d81177db2e606cf4, type: 3}
+  levelupUI2_1: {fileID: 0}
 --- !u!1001 &6364982437918567764
 PrefabInstance:
   m_ObjectHideFlags: 0
