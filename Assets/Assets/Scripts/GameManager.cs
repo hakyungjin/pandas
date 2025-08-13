@@ -35,6 +35,14 @@ public class GameManager : MonoBehaviour
     private List<InstallZone> installZones = new List<InstallZone>(); // 모든 설치 구역 관리
 
     public static GameManager instance;
+    public static GameManager Instance => instance;
+
+    [Header("오디오 시스템")]
+    public AudioSource bgmSource; // BGM 재생용 AudioSource (인스펙터에서 연결)
+    public AudioSource sfxSource; // SFX 재생용 AudioSource (인스펙터에서 연결)
+    public List<AudioClip> bgmMap = new List<AudioClip>(); // 인스펙터에서 키-클립 등록
+    public List<AudioClip> sfxMap = new List<AudioClip>(); // 인스펙터에서 키-클립 등록
+   
 
     void Awake()
     {
@@ -43,6 +51,7 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            
         }
         else
         {
@@ -71,6 +80,7 @@ public class GameManager : MonoBehaviour
         // InstallZone 찾기 및 등록
         InitializeInstallZones();
         
+        
         // 몬스터 스폰 시스템 초기화
         if (enemySpawner != null)
         {
@@ -87,6 +97,8 @@ public class GameManager : MonoBehaviour
         
         
     }
+
+  
 
     void Update()
     {
@@ -294,5 +306,99 @@ public class GameManager : MonoBehaviour
        
         TriggerGameClear();
     }
+
+    
+
+    public void PlayBGM(int key, float volume = 1f, bool loop = true)
+    {
+        if (bgmSource == null)
+        {
+            Debug.LogWarning("[GameManager] bgmSource가 연결되지 않았습니다!");
+            return;
+        }
+
+        // 인덱스/널 체크
+        if (bgmMap == null || bgmMap.Count == 0)
+        {
+            Debug.LogWarning("[GameManager] bgmMap이 비어있습니다.");
+            return;
+        }
+        if (key < 0 || key >= bgmMap.Count)
+        {
+            Debug.LogWarning($"[GameManager] BGM 인덱스 범위를 벗어났습니다: {key}");
+            return;
+        }
+        if (bgmMap[key] == null)
+        {
+            Debug.LogWarning("[GameManager] 선택한 BGM 클립이 비어있습니다.");
+            return;
+        }
+        if (bgmSource.clip == bgmMap[key] && bgmSource.isPlaying)
+        {
+            bgmSource.volume = volume;
+            bgmSource.loop = loop;
+            return;
+        }
+        bgmSource.clip = bgmMap[key];
+        bgmSource.volume = volume;
+        bgmSource.loop = loop;
+        bgmSource.Play();
+    }
+
+    public void StopBGM()
+    {
+        if (bgmSource != null)
+        {
+            bgmSource.Stop();
+            bgmSource.clip = null;
+        }
+    }
+
+    public void SetBGMVolume(float volume)
+    {
+        if (bgmSource != null)
+        {
+            bgmSource.volume = Mathf.Clamp01(volume);
+        }
+    }
+
+    public void SetSFXVolume(float volume)
+    {
+        if (sfxSource != null)
+        {
+            sfxSource.volume = Mathf.Clamp01(volume);
+        }
+    }
+
+    // 직접 클립으로 SFX 재생
+    public void PlaySFX(int key, float volume = 1f, float pitch = 1f)
+    {
+        if (sfxSource == null)
+        {
+            Debug.LogWarning("[GameManager] sfxSource가 연결되지 않았습니다!");
+            return;
+        }
+        if (sfxMap == null || sfxMap.Count == 0)
+        {
+            Debug.LogWarning("[GameManager] sfxMap이 비어있습니다.");
+            return;
+        }
+        if (key < 0 || key >= sfxMap.Count)
+        {
+            Debug.LogWarning($"[GameManager] SFX 인덱스 범위를 벗어났습니다: {key}");
+            return;
+        }
+        if (sfxMap[key] == null)
+        {
+            Debug.LogWarning("[GameManager] 선택한 SFX 클립이 비어있습니다.");
+            return;
+        }
+        sfxSource.pitch = pitch;
+        sfxSource.loop = false;
+        sfxSource.PlayOneShot(sfxMap[key], volume);
+    }
+
+
+
     
 } 

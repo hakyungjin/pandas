@@ -41,6 +41,7 @@ public class Uiunit : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
         dragIconInstance = Instantiate(dragIconPrefab, canvas.transform);
         dragIconInstance.GetComponent<Image>().sprite = unitImage.sprite;
         dragIconInstance.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.5f); // 반투명
+        GameManager.instance.PlaySFX(1,0.5f,1f);
         
     }
 
@@ -65,6 +66,7 @@ public class Uiunit : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
         if (dragIconInstance != null)
         {
             Destroy(dragIconInstance);
+            GameManager.instance.PlaySFX(1,0.5f,1f);
         }
 
         // 드롭된 위치 → 월드 좌표 변환

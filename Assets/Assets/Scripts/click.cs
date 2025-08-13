@@ -33,6 +33,7 @@ public class click : MonoBehaviour
             
             levelupUI2_1.GetComponent<loading>().up(installZone);
             uiPrefab1.SetActive(true);
+            GameManager.instance.PlaySFX(1,0.5f,1f);
 
             installZone.SetUnitInfo(installZone);
             Debug.Log("uiPrefab1.SetActive(true)");
@@ -48,7 +49,7 @@ public class click : MonoBehaviour
 
     void OnMouseDown()
     {
-        
+       
         // installed unit이 있고 levelupUI가 있으면 강화 시작
         if (installZone.installedUnit != null && levelupUI2_1 != null)
         {
@@ -57,6 +58,7 @@ public class click : MonoBehaviour
             {
                 loadingComponent.StartUpgrade();
                 Debug.Log("강화 시작!");
+                GameManager.instance.PlaySFX(2,0.5f,1f);
             }
         }
     }

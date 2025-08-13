@@ -4,6 +4,8 @@ using UnityEngine.UI;
 public class loading : MonoBehaviour
 {
     public Image fillImage;     // 초록색 이미지 (Image Type: Filled)
+
+    public Image background;
     public float duration = 3f; // 총 강화 시간 (초)
     public int upgradeCost = 10; // 강화 비용
 
@@ -15,6 +17,7 @@ public class loading : MonoBehaviour
     // InstallZone 참조
     public InstallZone installZone;
     public Canvas canvas;
+    public Color upcolor;
 
 
 
@@ -64,15 +67,21 @@ public class loading : MonoBehaviour
             {
                 isUpgrading = false;
                 Debug.Log("강화 완료!");
-                fillImage.color = Color.green;
+                GameManager.instance.PlaySFX(3,0.5f,1f);
+                background.color = upcolor;
                 ResetFill();
+                
 
                 // 강화 완료 시 골드 차감
                 GameManager.instance.SpendGold(upgradeCost);
+
+                
                 
 
                 installZone.level++;
-                Destroy(gameObject);
+                //1.5초뒤
+                Invoke("DestroyObject", 0.5f);
+                
             }
         }
     }
@@ -124,6 +133,11 @@ public class loading : MonoBehaviour
         {
             fillImage.fillAmount = 0f;
         }
+    }
+
+    public void DestroyObject()
+    {
+        Destroy(gameObject);
     }
     
 }

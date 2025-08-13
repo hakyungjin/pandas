@@ -63,7 +63,7 @@ public class waveManager : MonoBehaviour
             MoveTargetObject();
         }
         
-        if(!firedAt60 && currentTime >= 2f)
+        if(!firedAt60 && currentTime >= 60f)
         {
             firedAt60 = true;
             TriggerWaveEffect();

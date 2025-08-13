@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-public class unitManager : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
+public class unitManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
 {
     public GameObject towerUI;
     public List<GameObject> slots; // 미리 만들어둔 슬롯 오브젝트들
@@ -47,15 +47,7 @@ public class unitManager : MonoBehaviour,IPointerEnterHandler,IPointerExitHandle
         UpdateTowerSlots();
     }
 
-    void OnMouseDown()
-    {
-        UnitSelector.instance.setUnitDraged(true);
-    }
-
-    void OnMouseUp()
-    {
-        UnitSelector.instance.setUnitDraged(false);
-    }
+   
 
     public void OnPointerEnter(PointerEventData eventData)
     {

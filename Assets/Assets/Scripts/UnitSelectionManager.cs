@@ -37,6 +37,28 @@ public class UnitSelector : MonoBehaviour
         unitdraged=isDraged;
     }
 
+    private bool IsPointerOverUI()
+    {
+        if (EventSystem.current == null)
+        {
+            return false;
+
+        }
+
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return true;
+        }
+
+        PointerEventData eventData = new PointerEventData(EventSystem.current)
+        {
+            position = Input.mousePosition
+        };
+        List<RaycastResult> raycastResults = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, raycastResults);
+        return raycastResults.Count > 0;
+    }
+
     public void selectUnit(SelectedUnit unit)
     {
         selectedUnits.Add(unit);
@@ -70,14 +92,14 @@ public class UnitSelector : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !unitdraged)
+        if (Input.GetMouseButtonDown(0) && !unitdraged && !IsPointerOverUI())
         {
             isSelecting = true;
             startMousePos = Input.mousePosition;
             selectionBox.gameObject.SetActive(true);
         }
 
-        if (Input.GetMouseButton(0) && !unitdraged)
+        if (Input.GetMouseButton(0) )
         {
             
             endMousePos = Input.mousePosition;
@@ -85,7 +107,7 @@ public class UnitSelector : MonoBehaviour
 
         }
 
-        if (Input.GetMouseButtonUp(0) && !unitdraged)
+        if (Input.GetMouseButtonUp(0))
         {
             isSelecting = false;
             selectionBox.gameObject.SetActive(false);

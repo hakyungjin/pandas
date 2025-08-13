@@ -192,10 +192,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fillImage: {fileID: 3349770209959480220}
+  background: {fileID: 8024301507560622863}
   duration: 3
   upgradeCost: 10
   installZone: {fileID: 0}
   canvas: {fileID: 0}
+  upcolor: {r: 0, g: 0.6745098, b: 1, a: 1}
 --- !u!1 &1312014377346734390
 GameObject:
   m_ObjectHideFlags: 0
