@@ -7,8 +7,7 @@ public class loading : MonoBehaviour
 
     public Image background;
     public float duration = 3f; // 총 강화 시간 (초)
-    public int upgradeCost = 10; // 강화 비용
-
+    public int upgradeCost = 0;
     private float timer = 0f;
     private bool isUpgrading = false;
 
@@ -52,6 +51,7 @@ public class loading : MonoBehaviour
     public void up(InstallZone installZone)
     {
         this.installZone=installZone;
+        RecalculateUpgradeCost();
     }
 
     void Update()
@@ -71,14 +71,19 @@ public class loading : MonoBehaviour
                 background.color = upcolor;
                 ResetFill();
                 
-
-                // 강화 완료 시 골드 차감
-                GameManager.instance.SpendGold(upgradeCost);
-
-                
-                
-
-                installZone.level++;
+                // 유효한 업그레이드인지 확인
+                if (installZone != null && installZone.level<2)
+                {
+                    // 강화 완료 시 골드 차감
+                    GameManager.instance.SpendGold(upgradeCost);
+                    
+                    installZone.levelup(installZone.towerData.exhenceList[installZone.level-1]);
+                    RecalculateUpgradeCost();
+                }
+                else
+                {
+                    Debug.LogWarning("더 이상 강화할 수 없습니다. 최대 레벨입니다.");
+                }
                 //1.5초뒤
                 Invoke("DestroyObject", 0.5f);
                 
@@ -92,6 +97,15 @@ public class loading : MonoBehaviour
         // GameManager 찾기
 
         // 골드 체크만 (차감은 완료 후에)
+        // 업그레이드 가능 여부 확인
+        bool canUpgrade = installZone != null &&installZone.level<2;
+        if (!canUpgrade)
+        {
+            Debug.LogWarning("업그레이드 불가: 최대 레벨이거나 데이터가 없습니다.");
+            SetRedColor();
+            return;
+        }
+
         if (GameManager.instance.GetCurrentGold() >= upgradeCost)
         {
             timer = 0f;
@@ -100,6 +114,7 @@ public class loading : MonoBehaviour
         }
         else
         {
+            Debug.Log("upgradeCost: " + upgradeCost);
             // 골드 부족 시 프리팹 색깔을 빨간색으로 변경
             SetRedColor();
         }
@@ -138,6 +153,19 @@ public class loading : MonoBehaviour
     public void DestroyObject()
     {
         Destroy(gameObject);
+    }
+    
+    private void RecalculateUpgradeCost()
+    {
+        if (installZone != null && installZone.level<2)
+        {
+            upgradeCost = installZone.towerData.exhenceList[installZone.level-1].goldcost;
+            Debug.Log("upgradeCost: " + upgradeCost);
+        }
+        else
+        {
+            upgradeCost = 0;
+        }
     }
     
 }

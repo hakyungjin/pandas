@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.EventSystems;
 
 public class InstalledUnit : MonoBehaviour
 {
@@ -44,11 +45,36 @@ public class InstalledUnit : MonoBehaviour
     private Vector3 moveTargetPosition;
     
 
-    private List<Exhence> exhence = new List<Exhence>();
+    public List<Exhence> exhence = new List<Exhence>();
 
     private int attack;
     
     private float attackSpeed;
+
+
+    void OnMouseEnter()
+    {
+        Debug.Log("OnMouseEnter");
+        if (rangeRenderer == null)
+        {
+            CreateRangeRenderer();
+        }
+        else
+        {
+            rangeRenderer.enabled = true;
+            DrawRangeCircle();
+        }
+
+    }
+    void OnMouseExit()
+    {
+        Debug.Log("OnMouseExit");
+        if (rangeRenderer != null)
+        {
+            Destroy(rangeRenderer);
+            rangeRenderer = null;
+        }
+    }
 
     public void Initialize(Tower data, bool preview = false)
     {
@@ -99,7 +125,7 @@ public class InstalledUnit : MonoBehaviour
             }
 
             // 공격 범위 표시용 LineRenderer 생성 (프리뷰가 아닐 때만)
-            CreateRangeRenderer();
+            
         }
 
         // 공격 타이머 초기화
@@ -110,6 +136,8 @@ public class InstalledUnit : MonoBehaviour
         {
             SetupMovementComponents();
         }
+        exhence = unitData.exhenceList;
+       
     }
 
     void SetupMovementComponents()
@@ -175,6 +203,8 @@ public class InstalledUnit : MonoBehaviour
             }
         }
     }
+  
+    
 
     public void TakeDamage(int damageAmount)
     {
@@ -512,10 +542,10 @@ public class InstalledUnit : MonoBehaviour
             Gizmos.DrawWireSphere(transform.position, unitData.attackRange);
         }
     }
-    void Levleup(Exhence e) {
+    public void Levleup(Exhence e) {
         exhence.Add(e);
         currentHealth = unitData.hp + exhence.Sum(x => x.hpBonus);
-        attack = unitData.attack + exhence.Sum(x => x.damageBonus);
+        attack = unitData.attack + exhence.Sum(x => x.attackBonus);
         moveSpeed = unitData.moveSpeed + exhence.Sum(x => x.moveSpeedBonus);
         attackSpeed = unitData.attackSpeed + exhence.Sum(x => x.attackSpeedBonus);
     }

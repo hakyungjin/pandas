@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public enum TowerType
 {
@@ -35,4 +36,5 @@ public class Tower : ScriptableObject
     public int spawnCooldown;
 
     public RuntimeAnimatorController animatorController;
+    public List<Exhence> exhenceList = new List<Exhence>();
 }

@@ -45,7 +45,11 @@ public class InstallZone : MonoBehaviour, IDroppable
     public GameObject levelupUI;
 
     public List<Exhence> exhenceList = new List<Exhence>();
+    
     public GameManager gameManager;
+
+
+    public Tower towerData;
     
 
     void Start()
@@ -122,6 +126,7 @@ public class InstallZone : MonoBehaviour, IDroppable
         unitSprite = towerData.unitSprite;
         level = 1;
         GameManager.instance.SpendGold(towerData.goldCost);
+        this.towerData = towerData;
 
 
 
@@ -129,6 +134,12 @@ public class InstallZone : MonoBehaviour, IDroppable
 
         // 유닛 데이터 저장
         installedUnit = towerData;
+        // 업그레이드 데이터 로드 (타워의 업그레이드 테이블을 설치존에 복사)
+        if (towerData.exhenceList != null)
+        {
+            exhenceList = new List<Exhence>();
+        }
+       
         this.unitPrefab = unitPrefab;
         isInstallable = false;
 
@@ -204,8 +215,11 @@ public class InstallZone : MonoBehaviour, IDroppable
         // 정보 초기화
         InstalledUnit newUnitScript = installedObject.GetComponent<InstalledUnit>();
         if (newUnitScript != null)
+
+
         {
             newUnitScript.Initialize(towerData, false); // 실제 설치 모드로 초기화
+            
 
 
 
@@ -356,13 +370,13 @@ public class InstallZone : MonoBehaviour, IDroppable
         InstallUnit(uiUnit.towerData, uiUnit.unitPrefab);
 
     }
-    void levelup(Exhence e)
+    public void levelup(Exhence e)
     {
         level++;
         attackRange += e.attackRangeBonus;
         attackSpeed += e.attackSpeedBonus;
         hp += e.hpBonus;
-        attack += e.damageBonus;
+        attack += e.attackBonus;
     }
 
     public void SetUnitInfo(InstallZone unit)

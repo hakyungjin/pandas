@@ -109,6 +109,7 @@ public class SpawnedEnemy : MonoBehaviour
                 hpBarComponent.SetHp(currentHp);
             }
         }
+        IgnoreUnitCollisions();
     }
 
     public void TakeDamage(int damageAmount)
@@ -301,6 +302,24 @@ public class SpawnedEnemy : MonoBehaviour
         if (animator != null)
         {
             animator.SetBool("isAttacking", isAttacking);
+        }
+    }
+     void IgnoreUnitCollisions()
+    {
+        // 모든 Unit 태그 오브젝트와의 충돌 무시
+        GameObject[] units = GameObject.FindGameObjectsWithTag("Enemy");
+        Collider2D myCollider = GetComponent<Collider2D>();
+        
+        foreach (GameObject unit in units)  
+        {
+            if (unit != gameObject) // 자기 자신 제외
+            {
+                Collider2D otherCollider = unit.GetComponent<Collider2D>();
+                if (otherCollider != null && myCollider != null)
+                {
+                    Physics2D.IgnoreCollision(myCollider, otherCollider, true);
+                }
+            }
         }
     }
 }

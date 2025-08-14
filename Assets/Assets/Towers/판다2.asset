@@ -26,3 +26,22 @@ MonoBehaviour:
   TowerSprite: {fileID: -7043180767314402695, guid: ea2294206fd3db54f974e795a6cc24b4, type: 3}
   spawnCooldown: 20
   animatorController: {fileID: 9100000, guid: 110713aa2907cd3448011bea40438be7, type: 2}
+  exhenceList:
+  - exhenceName: 1
+    type: 0
+    hpBonus: 10
+    attackBonus: 0
+    moveSpeedBonus: 1
+    attackRangeBonus: 1
+    attackSpeedBonus: 1
+    goldcost: 0
+    abilityKey: 
+  - exhenceName: 2
+    type: 0
+    hpBonus: 10
+    attackBonus: 0
+    moveSpeedBonus: 1
+    attackRangeBonus: 1
+    attackSpeedBonus: 1
+    goldcost: 0
+    abilityKey: 

@@ -57,6 +57,7 @@ public class click : MonoBehaviour
             if (loadingComponent != null && !loadingComponent.IsUpgrading())
             {
                 loadingComponent.StartUpgrade();
+               
                 Debug.Log("강화 시작!");
                 GameManager.instance.PlaySFX(2,0.5f,1f);
             }
