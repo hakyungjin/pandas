@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class SpawnedEnemy : MonoBehaviour
 {
     public Enemy enemyData;
-    
+
     private hpbar hpBarComponent;
     private Transform hpBarTransform;
     private float currentHp;
@@ -25,6 +25,11 @@ public class SpawnedEnemy : MonoBehaviour
     private bool isAnimationUpdating = false; // 애니메이션 업데이트 중인지 체크
     private float animationTransitionDelay = 0.1f; // 애니메이션 전환 딜레이
     private bool isAttacking = false; // 공격 중인지 체크
+
+    // 데미지 효과 관련 변수들
+    private Color originalColor; // 원래 색상 저장
+    private float damageFlashDuration = 0.2f; // 데미지 플래시 지속 시간
+    private bool isFlashing = false; // 현재 플래시 효과 중인지 체크
 
     void Start()
     {
@@ -73,7 +78,7 @@ public class SpawnedEnemy : MonoBehaviour
 
         // Enemy 태그 설정
         gameObject.tag = "Enemy";
-        
+
         // 애니메이션 컴포넌트 가져오기
         animator = GetComponent<Animator>();
         if (animator == null)
@@ -81,7 +86,7 @@ public class SpawnedEnemy : MonoBehaviour
             animator = gameObject.AddComponent<Animator>();
         }
         animator.runtimeAnimatorController = enemyData.animatorController;
-        
+
         this.spriteRenderer = spriteRenderer;
 
         // HP바 생성 (Enemy 데이터에서 가져오기)
@@ -115,7 +120,7 @@ public class SpawnedEnemy : MonoBehaviour
     public void TakeDamage(int damageAmount)
     {
         Debug.Log($"[SpawnedEnemy] {gameObject.name}이(가) {damageAmount} 데미지를 받았습니다. 현재 HP: {currentHp} -> {currentHp - damageAmount}");
-        
+
         if (hpBarComponent != null)
         {
             hpBarComponent.decreaseHp(damageAmount);
@@ -135,6 +140,12 @@ public class SpawnedEnemy : MonoBehaviour
         else
         {
             Debug.Log($"[SpawnedEnemy] {gameObject.name}의 남은 HP: {currentHp}");
+        }
+
+        // 데미지 플래시 효과
+        if (!isFlashing)
+        {
+            StartCoroutine(DamageFlash());
         }
     }
 
@@ -174,7 +185,7 @@ public class SpawnedEnemy : MonoBehaviour
                     // 타겟 방향으로 이동
                     Vector2 direction = (currentTarget.position - transform.position).normalized;
                     transform.Translate(direction * moveSpeed * Time.deltaTime);
-                    
+
                     // 애니메이션 업데이트
                     UpdateAnimation(direction * moveSpeed);
                 }
@@ -201,12 +212,12 @@ public class SpawnedEnemy : MonoBehaviour
     System.Collections.IEnumerator SmoothAnimationTransition(Vector2 newDirection)
     {
         isAnimationUpdating = true;
-        
+
         // 딜레이 후 애니메이션 업데이트
         yield return new WaitForSeconds(animationTransitionDelay);
-        
+
         lastAnimationDirection = newDirection;
-        
+
         if (animator != null)
         {
             animator.SetFloat("MoveX", newDirection.x > 0 ? newDirection.x : -newDirection.x); // 항상 양수로
@@ -215,7 +226,7 @@ public class SpawnedEnemy : MonoBehaviour
 
         if (Mathf.Abs(newDirection.x) > 0.01f && spriteRenderer != null)
             spriteRenderer.flipX = newDirection.x < 0;
-            
+
         isAnimationUpdating = false;
     }
 
@@ -224,7 +235,7 @@ public class SpawnedEnemy : MonoBehaviour
         // "Tower"와 "Unit" 태그를 가진 오브젝트 탐색
         GameObject[] towerTargets = GameObject.FindGameObjectsWithTag("Tower");
         GameObject[] unitTargets = GameObject.FindGameObjectsWithTag("Unit");
-        
+
         float shortestDistance = Mathf.Infinity;
         Transform nearestTarget = null;
 
@@ -258,14 +269,14 @@ public class SpawnedEnemy : MonoBehaviour
         if (Time.time - lastAttackTime < attackCooldown) return;
 
         lastAttackTime = Time.time;
-        
+
         // 공격 애니메이션 시작
         isAttacking = true;
         if (animator != null)
         {
             animator.SetBool("isAttacking", isAttacking);
         }
-        
+
         // 타겟의 태그에 따라 다른 공격 로직 실행
         if (currentTarget.CompareTag("Tower"))
         {
@@ -287,16 +298,16 @@ public class SpawnedEnemy : MonoBehaviour
                 Debug.Log($"[SpawnedEnemy] 유닛 {currentTarget.name}에 {attackDamage} 데미지를 가했습니다.");
             }
         }
-        
+
         // 공격 애니메이션 종료 (공격 쿨다운 후)
         StartCoroutine(EndAttackAnimation());
     }
-    
+
     System.Collections.IEnumerator EndAttackAnimation()
     {
         // 공격 애니메이션 지속 시간 (공격 쿨다운과 동일하게 설정)
         yield return new WaitForSeconds(attackCooldown);
-        
+
         // 공격 애니메이션 종료
         isAttacking = false;
         if (animator != null)
@@ -304,13 +315,13 @@ public class SpawnedEnemy : MonoBehaviour
             animator.SetBool("isAttacking", isAttacking);
         }
     }
-     void IgnoreUnitCollisions()
+    void IgnoreUnitCollisions()
     {
         // 모든 Unit 태그 오브젝트와의 충돌 무시
         GameObject[] units = GameObject.FindGameObjectsWithTag("Enemy");
         Collider2D myCollider = GetComponent<Collider2D>();
-        
-        foreach (GameObject unit in units)  
+
+        foreach (GameObject unit in units)
         {
             if (unit != gameObject) // 자기 자신 제외
             {
@@ -321,5 +332,28 @@ public class SpawnedEnemy : MonoBehaviour
                 }
             }
         }
+    }
+    
+    // 데미지 플래시 효과 코루틴
+    System.Collections.IEnumerator DamageFlash()
+    {
+        isFlashing = true;
+        
+        // 스프라이트 렌더러에 빨간색 적용 (RGB: 255, 0, 0)
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.color = new Color(1f, 0.5f, 0.5f);    // 0.5키우면 덜 자극적임
+        }
+        
+        // 지정된 시간만큼 대기
+        yield return new WaitForSeconds(damageFlashDuration);
+        
+        // 원래 색상으로 복원
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.color = originalColor;
+        }
+        
+        isFlashing = false;
     }
 }

@@ -15,7 +15,7 @@ public class InstalledUnit : MonoBehaviour
 
     [Header("공격 관련")]
     // Enemy 태그를 사용하므로 enemyLayer는 더 이상 필요하지 않음
-    
+
     [Header("이동 관련")]
     public float moveSpeed = 2f; // 이동 속도
 
@@ -34,21 +34,24 @@ public class InstalledUnit : MonoBehaviour
 
     private bool isAttacking = false;
 
+    // 데미지 효과 관련 변수들
+    private Color originalColor; // 원래 색상 저장
+    private float damageFlashDuration = 0.2f; // 데미지 플래시 지속 시간
+    private bool isFlashing = false; // 현재 플래시 효과 중인지 체크
 
-    
-    
+
     private bool isPreview = false; // 프리뷰 모드 여부
     private bool isMovingByCommand = false; // moveUnit 명령으로 이동 중인지 여부
 
     private Rigidbody2D rigidbody;
-    
+
     private Vector3 moveTargetPosition;
-    
+
 
     public List<Exhence> exhence = new List<Exhence>();
 
     private int attack;
-    
+
     private float attackSpeed;
 
 
@@ -79,17 +82,23 @@ public class InstalledUnit : MonoBehaviour
     public void Initialize(Tower data, bool preview = false)
     {
         unitData = data;
-       
+
         isPreview = preview;
         rigidbody = GetComponent<Rigidbody2D>();
 
         currentHealth = unitData.hp;
-         attack = unitData.attack;
-         moveSpeed = unitData.moveSpeed;
-         attackSpeed = unitData.attackSpeed;
-         animator = GetComponent<Animator>();
-         spriteRenderer = GetComponent<SpriteRenderer>();
-        
+        attack = unitData.attack;
+        moveSpeed = unitData.moveSpeed;
+        attackSpeed = unitData.attackSpeed;
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        // 원래 색상 저장
+        if (spriteRenderer != null)
+        {
+            originalColor = spriteRenderer.color;
+        }
+
 
         // 유닛별 애니메이션 컨트롤러 설정
         if (animator != null && unitData.animatorController != null)
@@ -125,19 +134,19 @@ public class InstalledUnit : MonoBehaviour
             }
 
             // 공격 범위 표시용 LineRenderer 생성 (프리뷰가 아닐 때만)
-            
+
         }
 
         // 공격 타이머 초기화
         attackTimer = 0f;
-        
+
         // 이동을 위한 Rigidbody2D 설정 (프리뷰가 아닐 때만)
         if (!isPreview)
         {
             SetupMovementComponents();
         }
         exhence = unitData.exhenceList;
-       
+
     }
 
     void SetupMovementComponents()
@@ -147,17 +156,17 @@ public class InstalledUnit : MonoBehaviour
         {
             gameObject.tag = "Unit";
         }
-        
+
         // 같은 유닛끼리 충돌 무시
         IgnoreUnitCollisions();
     }
-    
+
     void IgnoreUnitCollisions()
     {
         // 모든 Unit 태그 오브젝트와의 충돌 무시
         GameObject[] units = GameObject.FindGameObjectsWithTag("Unit");
         Collider2D myCollider = GetComponent<Collider2D>();
-        
+
         foreach (GameObject unit in units)
         {
             if (unit != gameObject) // 자기 자신 제외
@@ -193,7 +202,7 @@ public class InstalledUnit : MonoBehaviour
         {
             float radius = unitData.attackRange;
             Vector3 center = transform.position;
-            
+
             for (int i = 0; i < rangeRenderer.positionCount; i++)
             {
                 float angle = i * 2f * Mathf.PI / rangeRenderer.positionCount;
@@ -203,8 +212,8 @@ public class InstalledUnit : MonoBehaviour
             }
         }
     }
-  
-    
+
+
 
     public void TakeDamage(int damageAmount)
     {
@@ -220,6 +229,12 @@ public class InstalledUnit : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        // 데미지 플래시 효과 시작
+        if (!isFlashing)
+        {
+            StartCoroutine(DamageFlash());
+        }
     }
 
     void Update()
@@ -227,7 +242,7 @@ public class InstalledUnit : MonoBehaviour
         // 프리뷰 모드가 아닐 때만 실행
         if (isPreview) return;
 
-        
+
 
 
         // Make the HP bar always face the camera (optional)
@@ -277,7 +292,7 @@ public class InstalledUnit : MonoBehaviour
         // 공격 속도에 따라 공격 가능한지 확인
         if (attackTimer >= 1f / attackSpeed)
         {
-            
+
             // 범위 내 적 탐지
             currentTarget = FindNearestTarget();
             Debug.Log($"[InstalledUnit] 탐지된 적: {(currentTarget != null ? currentTarget.name : "없음")}");
@@ -286,11 +301,11 @@ public class InstalledUnit : MonoBehaviour
             {
                 // 공격 중일 때는 이동 중지
                 StopMovement();
-                
+
                 // 적을 향해 총알 발사
-                
+
                 attackstart();
-                
+
                 attackTimer = 0f; // 타이머 리셋
             }
             else
@@ -309,7 +324,7 @@ public class InstalledUnit : MonoBehaviour
         // 범위 내의 모든 콜라이더 찾기 (레이어 제한 없이)
         Collider2D[] allCollidersInRange = Physics2D.OverlapCircleAll(transform.position, unitData.attackRange);
         Debug.Log($"[InstalledUnit] 범위 내 콜라이더 수: {allCollidersInRange.Length}");
-        
+
         Transform nearestTarget = null;
         float nearestDistance = float.MaxValue;
 
@@ -336,11 +351,11 @@ public class InstalledUnit : MonoBehaviour
         isAttacking = true;
         animator.SetBool("isAttacking", isAttacking);
         UpdateAnimation(Vector2.zero);
-        if(unitData.towerType==TowerType.Sniper)
+        if (unitData.towerType == TowerType.Sniper)
         {
             FireBullet();
         }
-        else if(unitData.towerType==TowerType.Normal)
+        else if (unitData.towerType == TowerType.Normal)
         {
             normalattack();
         }
@@ -349,7 +364,7 @@ public class InstalledUnit : MonoBehaviour
     void normalattack()
     {
         Debug.Log($"[InstalledUnit] normalattack 호출됨");
-        if(currentTarget!=null)
+        if (currentTarget != null)
         {
             // 적인지 확인
             SpawnedEnemy enemy = currentTarget.GetComponent<SpawnedEnemy>();
@@ -363,9 +378,9 @@ public class InstalledUnit : MonoBehaviour
                 // 적 타워인지 확인
                 if (currentTarget.CompareTag("EnemyTower"))
                 {
-                    
+
                     EnemyTower enemyTower = currentTarget.GetComponent<EnemyTower>();
-                     if (enemyTower != null)
+                    if (enemyTower != null)
                     {
                         enemyTower.TakeDamage(attack);
                     }
@@ -378,25 +393,25 @@ public class InstalledUnit : MonoBehaviour
     void FireBullet()
     {
         Debug.Log($"[InstalledUnit] FireBullet 호출됨 - bulletPrefab: {(unitData.bulletPrefab != null ? "있음" : "없음")}, currentTarget: {(currentTarget != null ? "있음" : "없음")}");
-        
+
         if (unitData.bulletPrefab != null && currentTarget != null)
         {
             // 타워 정중앙에서 총알 생성
             Vector3 firePosition = transform.position;
             GameObject bulletObj = Instantiate(unitData.bulletPrefab, firePosition, Quaternion.identity);
             Debug.Log($"[InstalledUnit] 총알 오브젝트 생성됨: {bulletObj.name} at {firePosition}");
-            
+
             Bullet bullet = bulletObj.GetComponent<Bullet>();
             Debug.Log($"[InstalledUnit] Bullet 컴포넌트: {(bullet != null ? "찾음" : "없음")}");
-            
+
             if (bullet != null)
             {
                 // 적을 향하는 방향 계산
                 Vector3 direction = (currentTarget.position - firePosition).normalized;
-                
+
                 // 총알 초기화 (방향, 속도, 데미지)
                 bullet.Initialize(direction, unitData.bulletSpeed, attack);
-                
+
                 Debug.Log($"[InstalledUnit] 타워가 적을 향해 총알을 발사했습니다. 데미지: {unitData.attack}, 속도: {unitData.bulletSpeed}, 방향: {direction}");
             }
             else
@@ -417,15 +432,15 @@ public class InstalledUnit : MonoBehaviour
     void MoveToTarget()
     {
         Transform moveTarget = FindMoveTarget();
-        
-        
+
+
         if (moveTarget != null && rigidbody != null)
         {
             // 목표 위치로 이동 (Rigidbody2D 사용으로 부드러운 물리 이동)
             Vector2 direction = (moveTarget.position - transform.position).normalized;
             rigidbody.linearVelocity = direction * moveSpeed;
             UpdateAnimation(rigidbody.linearVelocity);
-            
+
             Debug.Log($"[InstalledUnit] {moveTarget.name}을(를) 향해 이동 중");
         }
         else
@@ -439,7 +454,7 @@ public class InstalledUnit : MonoBehaviour
             Debug.Log($"[InstalledUnit] 이동할 목표를 찾을 수 없습니다.");
         }
     }
-    
+
 
 
 
@@ -453,14 +468,14 @@ public class InstalledUnit : MonoBehaviour
     }
 
     void CheckMoveCompletion()
-{
-    float distance = Vector2.Distance(transform.position, moveTargetPosition);
-    if (distance <= 0.05f) // 너무 작은 값이면 멈추지 않음
     {
-        isMovingByCommand = false;
-        StopMovement();
+        float distance = Vector2.Distance(transform.position, moveTargetPosition);
+        if (distance <= 0.05f) // 너무 작은 값이면 멈추지 않음
+        {
+            isMovingByCommand = false;
+            StopMovement();
+        }
     }
-}
 
 
     // 이동 중지
@@ -473,7 +488,7 @@ public class InstalledUnit : MonoBehaviour
         // moveUnit 명령에 의한 이동도 중단
         isMovingByCommand = false;
     }
-    
+
     // 이동할 목표 찾기 (적 우선, 없으면 적 기지)
     Transform FindMoveTarget()
     {
@@ -483,19 +498,19 @@ public class InstalledUnit : MonoBehaviour
         {
             return nearestEnemy.transform;
         }
-        
+
         // 2. 적이 없으면 가장 가까운 적 기지(Tower) 찾기
         Transform nearestEnemyBase = FindNearestEnemyBase();
         return nearestEnemyBase;
     }
-    
+
     // 공격 범위와 관계없이 가장 가까운 적 찾기
     SpawnedEnemy FindNearestEnemyAnywhere()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         SpawnedEnemy nearestEnemy = null;
         float nearestDistance = float.MaxValue;
-        
+
         foreach (GameObject enemyObj in enemies)
         {
             SpawnedEnemy enemy = enemyObj.GetComponent<SpawnedEnemy>();
@@ -509,17 +524,17 @@ public class InstalledUnit : MonoBehaviour
                 }
             }
         }
-        
+
         return nearestEnemy;
     }
-    
+
     // 가장 가까운 적 기지(Tower 태그) 찾기
     Transform FindNearestEnemyBase()
     {
         GameObject[] enemyBases = GameObject.FindGameObjectsWithTag("EnemyTower");
         Transform nearestBase = null;
         float nearestDistance = float.MaxValue;
-        
+
         foreach (GameObject baseObj in enemyBases)
         {
             float distance = Vector2.Distance(transform.position, baseObj.transform.position);
@@ -529,7 +544,7 @@ public class InstalledUnit : MonoBehaviour
                 nearestBase = baseObj.transform;
             }
         }
-        
+
         return nearestBase;
     }
 
@@ -542,67 +557,90 @@ public class InstalledUnit : MonoBehaviour
             Gizmos.DrawWireSphere(transform.position, unitData.attackRange);
         }
     }
-    public void Levleup(Exhence e) {
+    public void Levleup(Exhence e)
+    {
         exhence.Add(e);
         currentHealth = unitData.hp + exhence.Sum(x => x.hpBonus);
         attack = unitData.attack + exhence.Sum(x => x.attackBonus);
         moveSpeed = unitData.moveSpeed + exhence.Sum(x => x.moveSpeedBonus);
         attackSpeed = unitData.attackSpeed + exhence.Sum(x => x.attackSpeedBonus);
     }
-   
 
 
-void UpdateAnimation(Vector2 velocity)
+
+    void UpdateAnimation(Vector2 velocity)
+    {
+        // 이동 중일 때만 방향 업데이트
+        if (velocity.sqrMagnitude > 0.01f)
+        {
+            lastDirection = velocity.normalized;
+        }
+
+        // 방향이 실제로 변경되었을 때만 애니메이션 업데이트 (애니메이션 업데이트 중이 아닐 때)
+        float directionThreshold = 0.3f; // 방향 변화 임계값
+        if (Vector2.Distance(lastDirection, lastAnimationDirection) > directionThreshold && !isAnimationUpdating)
+        {
+            StartCoroutine(SmoothAnimationTransition(lastDirection));
+        }
+    }
+
+    IEnumerator SmoothAnimationTransition(Vector2 newDirection)
+    {
+        isAnimationUpdating = true;
+
+        // 딜레이 후 애니메이션 업데이트
+        yield return new WaitForSeconds(animationTransitionDelay);
+
+        lastAnimationDirection = newDirection;
+
+        animator.SetFloat("MoveX", newDirection.x > 0 ? newDirection.x : -newDirection.x); // 항상 양수로
+        animator.SetFloat("MoveY", newDirection.y);
+
+        if (Mathf.Abs(newDirection.x) > 0.01f)
+            spriteRenderer.flipX = newDirection.x < 0;
+
+        isAnimationUpdating = false;
+    }
+
+
+
+
+
+
+    void UpdateFlip(Vector2 direction)
+    {
+        if (direction.x > 0)
+        {
+            spriteRenderer.flipX = false;
+        }
+        else if (direction.x < 0)
+        {
+            spriteRenderer.flipX = true;
+        }
+    }
+
+// 데미지 플래시 효과 코루틴
+System.Collections.IEnumerator DamageFlash()
 {
-    // 이동 중일 때만 방향 업데이트
-    if (velocity.sqrMagnitude > 0.01f)
-    {
-        lastDirection = velocity.normalized;
-    }
-
-    // 방향이 실제로 변경되었을 때만 애니메이션 업데이트 (애니메이션 업데이트 중이 아닐 때)
-    float directionThreshold = 0.3f; // 방향 변화 임계값
-    if (Vector2.Distance(lastDirection, lastAnimationDirection) > directionThreshold && !isAnimationUpdating)
-    {
-        StartCoroutine(SmoothAnimationTransition(lastDirection));
-    }
-}
-
-IEnumerator SmoothAnimationTransition(Vector2 newDirection)
-{
-    isAnimationUpdating = true;
+    isFlashing = true;
     
-    // 딜레이 후 애니메이션 업데이트
-    yield return new WaitForSeconds(animationTransitionDelay);
-    
-    lastAnimationDirection = newDirection;
-    
-    animator.SetFloat("MoveX", newDirection.x > 0 ? newDirection.x : -newDirection.x); // 항상 양수로
-    animator.SetFloat("MoveY", newDirection.y);
-
-    if (Mathf.Abs(newDirection.x) > 0.01f)
-        spriteRenderer.flipX = newDirection.x < 0;
-        
-    isAnimationUpdating = false;
-}
-
-
-
-
-
-
-void UpdateFlip(Vector2 direction)
-{
-    if (direction.x > 0)
+    // 스프라이트 렌더러에 빨간색 적용 (RGB: 255, 0, 0)
+    if (spriteRenderer != null)
     {
-        spriteRenderer.flipX = false;
+        spriteRenderer.color = new Color(1f, 0.5f, 0.5f);
     }
-    else if (direction.x < 0)
+    
+    // 지정된 시간만큼 대기
+    yield return new WaitForSeconds(damageFlashDuration);
+    
+    // 원래 색상으로 복원
+    if (spriteRenderer != null)
     {
-        spriteRenderer.flipX = true;
+        spriteRenderer.color = originalColor;
     }
+    
+    isFlashing = false;
 }
-
 
 
 

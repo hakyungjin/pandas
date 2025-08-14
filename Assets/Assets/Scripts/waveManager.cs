@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using TMPro;
+using System.Collections.Generic; // Added for List
 
 public class waveManager : MonoBehaviour
 {
@@ -8,6 +10,15 @@ public class waveManager : MonoBehaviour
     public Image hp;
     public float maxFillTime = 240f; // 4분 (240초)
     private float currentTime = 0f;
+
+    [Header("경고 바 설정")]
+    public Image warningBar;
+    public TextMeshProUGUI warningText; // WARNING 텍스트 컴포넌트
+    
+    [Header("텍스트 클론 설정")]
+    public float cloneMoveSpeed = 60f; // 클론 이동 속도 (픽셀/초)
+    public float cloneLifetime = 3f; // 클론 생존 시간 (초)
+    public float cloneSpawnInterval = 0.5f; // 클론 생성 간격 (초)
 
     [Header("이펙트 및 오브젝트")]
     public GameObject targetObject;
@@ -27,6 +38,34 @@ public class waveManager : MonoBehaviour
     private bool firedAt60 = false;
     private bool firedAt240 = false;
     private bool isAlertPlaying = false;
+    
+    // 텍스트 애니메이션 관련 변수들
+    private bool isWarningTextActive = false;
+    private float textAnimationTime = 0f;
+    private float lastCloneSpawnTime = 0f;
+    
+    // 텍스트 클론 관리
+    private List<TextClone> activeClones = new List<TextClone>();
+    
+    // 텍스트 클론 클래스
+    [System.Serializable]
+    public class TextClone
+    {
+        public GameObject cloneObject;
+        public TextMeshProUGUI cloneText;
+        public RectTransform cloneRectTransform;
+        public float spawnTime;
+        public Vector2 startPosition;
+        
+        public TextClone(GameObject obj, TextMeshProUGUI text, RectTransform rect, Vector2 startPos)
+        {
+            cloneObject = obj;
+            cloneText = text;
+            cloneRectTransform = rect;
+            spawnTime = Time.time;
+            startPosition = startPos;
+        }
+    }
 
     [Header("경고 UI 이동 설정")]
     public float alertMoveDistance = 100f;      // 위로 이동 거리 (UI 좌표)
@@ -39,6 +78,12 @@ public class waveManager : MonoBehaviour
         alert.SetActive(false);
         hp.fillAmount = 0f;
         currentTime = 0f;
+        
+        // 워닝바 초기화
+        if (warningBar != null)
+        {
+            warningBar.gameObject.SetActive(false);
+        }
         
         // Transform 컴포넌트 가져오기
         if (moveObject != null)
@@ -62,15 +107,44 @@ public class waveManager : MonoBehaviour
             // 타겟 오브젝트 이동
             MoveTargetObject();
         }
-        
-        if(!firedAt60 && currentTime >= 60f)
+
+        // WARNING 텍스트 업데이트
+        if (isWarningTextActive)
+        {
+            UpdateWarningText();
+            UpdateTextClones();
+        }
+
+        if (!firedAt60 && currentTime >= 50f)
+        {
+            warningBar.gameObject.SetActive(true);
+            isWarningTextActive = true;
+            textAnimationTime = 0f;
+        }
+
+        if (!firedAt60 && currentTime >= 60f)
         {
             firedAt60 = true;
+            warningBar.gameObject.SetActive(false);
+            isWarningTextActive = false;
+            ClearAllTextClones();
             TriggerWaveEffect();
         }
+        
+        // 두 번째 웨이브 (240초) 워닝바 처리
+        if (!firedAt240 && currentTime >= 230f)
+        {
+            warningBar.gameObject.SetActive(true);
+            isWarningTextActive = true;
+            textAnimationTime = 0f;
+        }
+        
         if(!firedAt240 && currentTime >= 240f)
         {
             firedAt240 = true;
+            warningBar.gameObject.SetActive(false);
+            isWarningTextActive = false;
+            ClearAllTextClones();
             TriggerWaveEffect();
         }
     }
@@ -84,6 +158,96 @@ public class waveManager : MonoBehaviour
             Vector3 newPosition = Vector3.Lerp(startPosition, endPosition, progress);
             moveTransform.localPosition = newPosition;
         }
+    }
+
+    // WARNING 텍스트 업데이트
+    void UpdateWarningText()
+    {
+        if (warningText != null && isWarningTextActive)
+        {
+            textAnimationTime += Time.deltaTime;
+            
+            // 일정 간격으로 클론 생성
+            if (Time.time - lastCloneSpawnTime >= cloneSpawnInterval)
+            {
+                CreateTextClone();
+                lastCloneSpawnTime = Time.time;
+            }
+        }
+    }
+
+    // 텍스트 클론 생성
+    void CreateTextClone()
+    {
+        if (warningText == null) return;
+        
+        // 원본 텍스트의 위치에서 클론 생성
+        Vector2 spawnPosition = warningText.GetComponent<RectTransform>().anchoredPosition;
+        
+        // 클론 오브젝트 생성
+        GameObject cloneObj = Instantiate(warningText.gameObject, warningText.transform.parent);
+        TextMeshProUGUI cloneText = cloneObj.GetComponent<TextMeshProUGUI>();
+        RectTransform cloneRect = cloneObj.GetComponent<RectTransform>();
+        
+        if (cloneText != null && cloneRect != null)
+        {
+            // 클론 설정
+            cloneText.text = "WARNING";
+            cloneRect.anchoredPosition = spawnPosition;
+            
+            // 클론 정보 저장
+            TextClone textClone = new TextClone(cloneObj, cloneText, cloneRect, spawnPosition);
+            activeClones.Add(textClone);
+            
+
+        }
+    }
+
+    // 텍스트 클론 업데이트
+    void UpdateTextClones()
+    {
+        // 오래된 클론들 제거
+        for (int i = activeClones.Count - 1; i >= 0; i--)
+        {
+            TextClone clone = activeClones[i];
+            
+            // 생존 시간 체크
+            if (Time.time - clone.spawnTime >= cloneLifetime)
+            {
+                Destroy(clone.cloneObject);
+                activeClones.RemoveAt(i);
+                continue;
+            }
+            
+            // 클론 이동
+            MoveTextClone(clone);
+        }
+    }
+
+    // 텍스트 클론 이동
+    void MoveTextClone(TextClone clone)
+    {
+        if (clone.cloneRectTransform != null)
+        {
+            // X좌표만 이동
+            float elapsedTime = Time.time - clone.spawnTime;
+            float xOffset = elapsedTime * cloneMoveSpeed;
+            
+            Vector2 newPosition = clone.startPosition;
+            newPosition.x += xOffset;
+            
+            clone.cloneRectTransform.anchoredPosition = newPosition;
+        }
+    }
+
+    // 모든 텍스트 클론 정리
+    void ClearAllTextClones()
+    {
+        foreach (TextClone clone in activeClones)
+        {
+            Destroy(clone.cloneObject);
+        }
+        activeClones.Clear();
     }
 
     public void TriggerWaveEffect()
