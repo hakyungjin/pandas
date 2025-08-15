@@ -2,8 +2,8 @@ using UnityEngine;
 
 public enum ExhenceType
 {
-    StatBoost,     // 능력치 강화
-    NewAbility     // 새로운 능력 부여
+    unitTower,
+    goldTower,
 }
 
 [System.Serializable]
@@ -22,8 +22,10 @@ public class Exhence
     public float attackSpeedBonus = 0f;
 
     public int goldcost = 0;
-    
-   
+
+    public int additionalGold = 0;
+
+
     public string abilityKey;  // ex: "FireBreath", "Dash", "FreezeAura"
     
     

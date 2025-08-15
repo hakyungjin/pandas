@@ -46,10 +46,13 @@ public class InstallZone : MonoBehaviour, IDroppable
 
     public List<Exhence> exhenceList = new List<Exhence>();
     
-    public GameManager gameManager;
+
 
 
     public Tower towerData;
+
+    private bool isGoldTower = false;
+    public int additionalGold = 1;
     
 
     void Start()
@@ -118,15 +121,15 @@ public class InstallZone : MonoBehaviour, IDroppable
 
         TowerPrefab2 = Instantiate(TowerPrefab, transform.position, Quaternion.identity);
         TowerPrefab2.transform.localPosition += new Vector3(-0.2f, 0.7f, 0);
-        TowerPrefab2.GetComponent<SpriteRenderer>().sprite = towerData.TowerSprite;
-        attackRange = towerData.attackRange;
-        attackSpeed = towerData.attackSpeed;
+        TowerPrefab2.GetComponent<SpriteRenderer>().sprite = towerData.TowerSprite;//타워 생성성
+        attackSpeed = towerData.attackSpeed;//공격속도
         hp = towerData.hp;
         attack = towerData.attack;
         unitSprite = towerData.unitSprite;
         level = 1;
         GameManager.instance.SpendGold(towerData.goldCost);
         this.towerData = towerData;
+        isGoldTower = towerData.isGoldTower;
 
 
 
@@ -171,7 +174,16 @@ public class InstallZone : MonoBehaviour, IDroppable
         // 생성 프로세스 시작
         if (!isSpawning)
         {
-            StartCoroutine(SpawnUnitsWithCooldown());
+            if (!isGoldTower)
+            {
+                StartCoroutine(SpawnUnitsWithCooldown());
+
+            }else{
+                GameManager.instance.GoldIncrease(additionalGold);
+            }
+            
+            
+          
         }
     }
 
@@ -372,11 +384,19 @@ public class InstallZone : MonoBehaviour, IDroppable
     }
     public void levelup(Exhence e)
     {
-        level++;
-        attackRange += e.attackRangeBonus;
-        attackSpeed += e.attackSpeedBonus;
-        hp += e.hpBonus;
-        attack += e.attackBonus;
+        if (e.type == ExhenceType.unitTower)
+        {
+            level++;
+            attackRange += e.attackRangeBonus;
+            attackSpeed += e.attackSpeedBonus;
+            hp += e.hpBonus;
+            attack += e.attackBonus;
+        }
+        else if (e.type == ExhenceType.goldTower)
+        {
+            additionalGold += e.additionalGold;
+             GameManager.instance.GoldIncrease(additionalGold);
+        }
     }
 
     public void SetUnitInfo(InstallZone unit)

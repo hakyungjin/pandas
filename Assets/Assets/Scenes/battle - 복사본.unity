@@ -34508,7 +34508,7 @@ MonoBehaviour:
   towerObjects:
   - {fileID: 11400000, guid: ed4896aef8ae8074181f6a69d53e0236, type: 2}
   - {fileID: 11400000, guid: 876016f187d148d498f8d58d8efbccc6, type: 2}
-  - {fileID: 11400000, guid: 876016f187d148d498f8d58d8efbccc6, type: 2}
+  - {fileID: 11400000, guid: 730c6e80a9f92a5439fb9436cf7b31cd, type: 2}
 --- !u!1001 &2015571921
 PrefabInstance:
   m_ObjectHideFlags: 0

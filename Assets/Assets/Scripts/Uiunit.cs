@@ -77,9 +77,6 @@ public class Uiunit : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 
         if (hit.collider != null)
         {
-            // 여기에 드롭 성공 시 처리
-            Debug.Log("드롭된 대상: " + hit.collider.name);
-
             // null 체크 추가
             if (towerData == null)
             {

@@ -72,7 +72,7 @@ public class loading : MonoBehaviour
                 ResetFill();
                 
                 // 유효한 업그레이드인지 확인
-                if (installZone != null && installZone.level<2)
+                if (installZone != null && installZone.level<3)
                 {
                     // 강화 완료 시 골드 차감
                     GameManager.instance.SpendGold(upgradeCost);
@@ -98,7 +98,7 @@ public class loading : MonoBehaviour
 
         // 골드 체크만 (차감은 완료 후에)
         // 업그레이드 가능 여부 확인
-        bool canUpgrade = installZone != null &&installZone.level<2;
+        bool canUpgrade = installZone != null && installZone.level < 3;
         if (!canUpgrade)
         {
             Debug.LogWarning("업그레이드 불가: 최대 레벨이거나 데이터가 없습니다.");

@@ -140,11 +140,15 @@ public class GameManager : MonoBehaviour
             enemySpawner.StartSpawning();
         }
     }
-    
-    
-    
-    
+
+
+
+
     // 골드 시스템 메서드들
+    public void GoldIncrease(int amount)
+    {
+        goldPerSecond += amount;
+    }
     
     // 1초마다 골드 증가시키는 코루틴
     private IEnumerator GoldIncreaseCoroutine()
@@ -159,7 +163,7 @@ public class GameManager : MonoBehaviour
     // 골드 추가
     public void AddGold(int amount)
     {
-        currentGold += amount;
+        currentGold += (int)amount;
         UpdateGoldUI();
         Debug.Log($"[GameManager] 골드 +{amount}, 현재 골드: {currentGold}");
     }

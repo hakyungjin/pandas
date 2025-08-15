@@ -35,6 +35,8 @@ public class Tower : ScriptableObject
     public Sprite TowerSprite;
     public int spawnCooldown;
 
+    public bool isGoldTower = false;
+
     public RuntimeAnimatorController animatorController;
     public List<Exhence> exhenceList = new List<Exhence>();
 }

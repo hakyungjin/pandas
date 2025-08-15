@@ -42,14 +42,14 @@ public class pandaslot : MonoBehaviour
         }
         else if (unit.level == 2)
         {
-            levelup[0].gameObject.SetActive(false);
+            levelup[0].gameObject.SetActive(true);
             levelup[1].gameObject.SetActive(true);
             levelup[2].gameObject.SetActive(false);
         }
         else if (unit.level == 3)
         {
-            levelup[0].gameObject.SetActive(false);
-            levelup[1].gameObject.SetActive(false);
+            levelup[0].gameObject.SetActive(true);
+            levelup[1].gameObject.SetActive(true);
             levelup[2].gameObject.SetActive(true);
         }
     }
