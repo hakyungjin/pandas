@@ -128,7 +128,7 @@ public class Uiunit : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
             Debug.LogWarning("SetTowerInfo: unitPrefab이 설정되지 않았습니다.");
         }
        
-        unitImage.sprite = tower.unitSprite;
+        unitImage.sprite = tower.iconSprite;
         GoldcostText.text = tower.goldCost.ToString();
         
         Debug.Log($"SetTowerInfo: {tower.name} 설정 완료, unitPrefab: {(unitPrefab != null ? unitPrefab.name : "null")}");

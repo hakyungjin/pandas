@@ -116,30 +116,12 @@ public class UnitSelector : MonoBehaviour
             endMousePos = Vector2.zero;
             UpdateSelectionBox(startMousePos, endMousePos);
         }
-        // 우클릭으로 선택된 유닛들 이동
-        if(Input.GetMouseButtonDown(1))
-        {
-            // 선택된 유닛이 있는지 확인
-            List<SelectedUnit> currentlySelectedUnits = GetSelectedUnits();
-            if (currentlySelectedUnits.Count > 0)
-            {
-                // 마우스 위치를 월드 좌표로 변환
-                Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                worldPos.z = 0;
+        
                 
-                // 선택된 모든 유닛에게 이동 명령
-                foreach (SelectedUnit unit in currentlySelectedUnits)
-                {
-                    InstalledUnit installedUnit = unit.GetComponent<InstalledUnit>();
-                    if (installedUnit != null)
-                    {
-                        installedUnit.moveUnit(worldPos);
-                       
-                    }
+               
                 }
-            }
-        }
-    }
+        
+    
 
     void UpdateSelectionBox(Vector2 start, Vector2 endpos)
     {

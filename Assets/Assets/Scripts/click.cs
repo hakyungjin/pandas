@@ -11,6 +11,12 @@ public class click : MonoBehaviour
     
     public GameObject levelupUI2;
     public GameObject levelupUI2_1;
+
+
+    void Update()
+    {
+       
+    }
     
 
     void Start()
@@ -61,6 +67,15 @@ public class click : MonoBehaviour
                 Debug.Log("강화 시작!");
                 GameManager.instance.PlaySFX(2,0.5f,1f);
             }
+        }
+    }
+
+    void OnDestroy()
+    {
+        // 이 오브젝트가 파괴될 때 생성된 프리팹도 함께 파괴
+        if (levelupUI2_1 != null)
+        {
+            Destroy(levelupUI2_1);
         }
     }
 }

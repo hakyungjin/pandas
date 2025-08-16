@@ -46,6 +46,10 @@ public class InstalledUnit : MonoBehaviour
     private Rigidbody2D rigidbody;
 
     private Vector3 moveTargetPosition;
+    
+    // 충돌 무시 체크를 위한 변수들
+    private float collisionCheckTimer = 0f;
+    private float collisionCheckInterval = 1f; // 1초마다 충돌 무시 체크
 
 
     public List<Exhence> exhence = new List<Exhence>();
@@ -53,6 +57,8 @@ public class InstalledUnit : MonoBehaviour
     private int attack;
 
     private float attackSpeed;
+    private float attackableRange;
+    private float searchRange;
 
 
     void OnMouseEnter()
@@ -90,6 +96,8 @@ public class InstalledUnit : MonoBehaviour
         attack = unitData.attack;
         moveSpeed = unitData.moveSpeed;
         attackSpeed = unitData.attackSpeed;
+        attackableRange = unitData.attackRange;
+        searchRange = 6;
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -97,6 +105,7 @@ public class InstalledUnit : MonoBehaviour
         if (spriteRenderer != null)
         {
             originalColor = spriteRenderer.color;
+            spriteRenderer.sprite= unitData.unitSprite;
         }
 
 
@@ -146,6 +155,7 @@ public class InstalledUnit : MonoBehaviour
             SetupMovementComponents();
         }
         exhence = unitData.exhenceList;
+        animator.SetBool("isMoving", false);
 
     }
 
@@ -163,20 +173,55 @@ public class InstalledUnit : MonoBehaviour
 
     void IgnoreUnitCollisions()
     {
+        Collider2D myCollider = GetComponent<Collider2D>();
+        if (myCollider == null) return;
+
         // 모든 Unit 태그 오브젝트와의 충돌 무시
         GameObject[] units = GameObject.FindGameObjectsWithTag("Unit");
-        Collider2D myCollider = GetComponent<Collider2D>();
-
         foreach (GameObject unit in units)
         {
             if (unit != gameObject) // 자기 자신 제외
             {
                 Collider2D otherCollider = unit.GetComponent<Collider2D>();
-                if (otherCollider != null && myCollider != null)
+                if (otherCollider != null)
                 {
                     Physics2D.IgnoreCollision(myCollider, otherCollider, true);
                 }
             }
+        }
+
+        // 모든 Enemy 태그 오브젝트와의 충돌 무시
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in enemies)
+        {
+            Collider2D enemyCollider = enemy.GetComponent<Collider2D>();
+            if (enemyCollider != null)
+            {
+                Physics2D.IgnoreCollision(myCollider, enemyCollider, true);
+            }
+        }
+
+        // 모든 EnemyTower 태그 오브젝트와의 충돌 무시
+        GameObject[] enemyTowers = GameObject.FindGameObjectsWithTag("EnemyTower");
+        foreach (GameObject enemyTower in enemyTowers)
+        {
+            Collider2D towerCollider = enemyTower.GetComponent<Collider2D>();
+            if (towerCollider != null)
+            {
+                Physics2D.IgnoreCollision(myCollider, towerCollider, true);
+            }
+        }
+    }
+    
+    // 주기적으로 충돌 무시를 체크하고 업데이트하는 메서드
+    void UpdateCollisionIgnore()
+    {
+        collisionCheckTimer += Time.deltaTime;
+        
+        if (collisionCheckTimer >= collisionCheckInterval)
+        {
+            collisionCheckTimer = 0f;
+            IgnoreUnitCollisions();
         }
     }
 
@@ -242,19 +287,11 @@ public class InstalledUnit : MonoBehaviour
         // 프리뷰 모드가 아닐 때만 실행
         if (isPreview) return;
 
-
-
-
+        DrawRangeCircle();
         // Make the HP bar always face the camera (optional)
         if (hpBarTransform != null)
         {
             hpBarTransform.rotation = Camera.main.transform.rotation;
-        }
-
-        // 공격 범위 원 업데이트 (타워가 이동할 경우를 대비)
-        if (rangeRenderer != null)
-        {
-            DrawRangeCircle();
         }
 
         // moveUnit 명령으로 이동 중일 때 프레임별 이동 처리
@@ -274,47 +311,50 @@ public class InstalledUnit : MonoBehaviour
         {
             AttackLogic();
         }
-        UpdateAnimation(rigidbody.linearVelocity);
-
+        
+        if (!isAttacking && !isMovingByCommand)
+        {
+            MoveToTarget();
+        }
+        
+        // 주기적으로 충돌 무시 체크 및 업데이트
+        UpdateCollisionIgnore();
+        
+        // 애니메이션 업데이트 (rigidbody가 있을 때만)
+        if (rigidbody != null)
+        {
+            UpdateAnimation(rigidbody.linearVelocity);
+        }
     }
 
     void AttackLogic()
     {
-        // moveUnit 명령으로 이동 중일 때는 타겟을 찾지 않음
-        if (isMovingByCommand)
-        {
-            return;
-        }
-
         // 공격 타이머 업데이트
         attackTimer += Time.deltaTime;
 
         // 공격 속도에 따라 공격 가능한지 확인
         if (attackTimer >= 1f / attackSpeed)
         {
-
             // 범위 내 적 탐지
             currentTarget = FindNearestTarget();
             Debug.Log($"[InstalledUnit] 탐지된 적: {(currentTarget != null ? currentTarget.name : "없음")}");
 
             if (currentTarget != null)
             {
-                // 공격 중일 때는 이동 중지
+                // 공격 중일 때는 자동 이동 중지 (플레이어가 선택해서 이동할 때만 이동 가능)
                 StopMovement();
-
+               
                 // 적을 향해 총알 발사
-
                 attackstart();
-
                 attackTimer = 0f; // 타이머 리셋
             }
             else
             {
                 Debug.Log($"[InstalledUnit] 공격 범위 내에 적이 없습니다. 범위: {unitData.attackRange}");
                 isAttacking = false;
-                animator.SetBool("isAttacking", isAttacking);
-                // 공격 범위에 적이 없으면 이동 로직 실행
-                MoveToTarget();
+                animator.SetBool("isAttacking", false);
+                // 공격 범위에 적이 없을 때는 자동 이동하지 않음 (플레이어가 선택해서 이동할 때만 이동 가능)
+                // MoveToTarget() 호출 제거
             }
         }
     }
@@ -322,9 +362,8 @@ public class InstalledUnit : MonoBehaviour
     Transform FindNearestTarget()
     {
         // 범위 내의 모든 콜라이더 찾기 (레이어 제한 없이)
-        Collider2D[] allCollidersInRange = Physics2D.OverlapCircleAll(transform.position, unitData.attackRange);
-        Debug.Log($"[InstalledUnit] 범위 내 콜라이더 수: {allCollidersInRange.Length}");
-
+        Collider2D[] allCollidersInRange = Physics2D.OverlapCircleAll(transform.position, attackableRange);
+        
         Transform nearestTarget = null;
         float nearestDistance = float.MaxValue;
 
@@ -334,7 +373,7 @@ public class InstalledUnit : MonoBehaviour
             if (collider.CompareTag("Enemy") || collider.CompareTag("EnemyTower"))
             {
                 float distance = Vector2.Distance(transform.position, collider.transform.position);
-                Debug.Log($"[InstalledUnit] 적 발견: {collider.name}, 태그: {collider.tag}, 거리: {distance}");
+               
                 if (distance < nearestDistance)
                 {
                     nearestDistance = distance;
@@ -350,7 +389,7 @@ public class InstalledUnit : MonoBehaviour
     {
         isAttacking = true;
         animator.SetBool("isAttacking", isAttacking);
-        UpdateAnimation(Vector2.zero);
+        UpdateAnimation(currentTarget.position-transform.position);
         if (unitData.towerType == TowerType.Sniper)
         {
             FireBullet();
@@ -433,15 +472,12 @@ public class InstalledUnit : MonoBehaviour
     {
         Transform moveTarget = FindMoveTarget();
 
-
         if (moveTarget != null && rigidbody != null)
         {
             // 목표 위치로 이동 (Rigidbody2D 사용으로 부드러운 물리 이동)
             Vector2 direction = (moveTarget.position - transform.position).normalized;
             rigidbody.linearVelocity = direction * moveSpeed;
             UpdateAnimation(rigidbody.linearVelocity);
-
-            Debug.Log($"[InstalledUnit] {moveTarget.name}을(를) 향해 이동 중");
         }
         else
         {
@@ -463,6 +499,10 @@ public class InstalledUnit : MonoBehaviour
     {
         moveTargetPosition = target;
         isMovingByCommand = true;
+        // 공격 중이어도 플레이어가 선택한 이동은 실행
+        isAttacking = false;
+        animator.SetBool("isAttacking", isAttacking);
+        animator.SetBool("isMoving", true);
         // 이동은 Update에서 프레임 단위로 처리
         Debug.Log($"[InstalledUnit] moveUnit 시작 - 목표 위치: {target}, 프레임별 이동 진행");
     }
@@ -470,7 +510,7 @@ public class InstalledUnit : MonoBehaviour
     void CheckMoveCompletion()
     {
         float distance = Vector2.Distance(transform.position, moveTargetPosition);
-        if (distance <= 0.05f) // 너무 작은 값이면 멈추지 않음
+        if (distance <= 2f) // 너무 작은 값이면 멈추지 않음
         {
             isMovingByCommand = false;
             StopMovement();
@@ -481,72 +521,59 @@ public class InstalledUnit : MonoBehaviour
     // 이동 중지
     void StopMovement()
     {
+        // 애니메이션 상태 초기화
+        animator.SetBool("isMoving", false);
+       
         if (rigidbody != null)
         {
             rigidbody.linearVelocity = Vector2.zero;
+            rigidbody.angularVelocity = 0f; // 회전도 중지
         }
+        
         // moveUnit 명령에 의한 이동도 중단
         isMovingByCommand = false;
+        
+        Debug.Log("[InstalledUnit] 이동이 중지되었습니다.");
     }
 
     // 이동할 목표 찾기 (적 우선, 없으면 적 기지)
     Transform FindMoveTarget()
     {
         // 1. 가장 가까운 적 찾기 (공격 범위와 관계없이)
-        SpawnedEnemy nearestEnemy = FindNearestEnemyAnywhere();
+        Transform nearestEnemy = FindSearchEnemyAnywhere();
         if (nearestEnemy != null)
         {
-            return nearestEnemy.transform;
+            return nearestEnemy;
         }
 
-        // 2. 적이 없으면 가장 가까운 적 기지(Tower) 찾기
-        Transform nearestEnemyBase = FindNearestEnemyBase();
-        return nearestEnemyBase;
+        return null;
     }
 
     // 공격 범위와 관계없이 가장 가까운 적 찾기
-    SpawnedEnemy FindNearestEnemyAnywhere()
+  Transform FindSearchEnemyAnywhere()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        SpawnedEnemy nearestEnemy = null;
+        Collider2D[] allCollidersInRange = Physics2D.OverlapCircleAll(transform.position, searchRange);
+
+        Transform nearestEnemy = null;
         float nearestDistance = float.MaxValue;
 
-        foreach (GameObject enemyObj in enemies)
+        foreach (Collider2D collider in allCollidersInRange)
         {
-            SpawnedEnemy enemy = enemyObj.GetComponent<SpawnedEnemy>();
-            if (enemy != null)
+            if (collider.CompareTag("Enemy") || collider.CompareTag("EnemyTower"))
             {
-                float distance = Vector2.Distance(transform.position, enemy.transform.position);
+                float distance = Vector2.Distance(transform.position, collider.transform.position);
                 if (distance < nearestDistance)
                 {
                     nearestDistance = distance;
-                    nearestEnemy = enemy;
+                    nearestEnemy = collider.transform;
                 }
             }
         }
-
         return nearestEnemy;
     }
 
-    // 가장 가까운 적 기지(Tower 태그) 찾기
-    Transform FindNearestEnemyBase()
-    {
-        GameObject[] enemyBases = GameObject.FindGameObjectsWithTag("EnemyTower");
-        Transform nearestBase = null;
-        float nearestDistance = float.MaxValue;
 
-        foreach (GameObject baseObj in enemyBases)
-        {
-            float distance = Vector2.Distance(transform.position, baseObj.transform.position);
-            if (distance < nearestDistance)
-            {
-                nearestDistance = distance;
-                nearestBase = baseObj.transform;
-            }
-        }
 
-        return nearestBase;
-    }
 
     // 공격 범위를 시각적으로 표시
     void OnDrawGizmos()
@@ -568,12 +595,23 @@ public class InstalledUnit : MonoBehaviour
 
 
 
-    void UpdateAnimation(Vector2 velocity)
+        void UpdateAnimation(Vector2 velocity)
     {
         // 이동 중일 때만 방향 업데이트
         if (velocity.sqrMagnitude > 0.01f)
         {
             lastDirection = velocity.normalized;
+            animator.SetBool("isMoving", true);
+        }
+        else
+        {
+            animator.SetBool("isMoving", false);
+            // 이동이 멈췄을 때 Idle 애니메이션 재생
+            if (!isAttacking)
+            {
+                animator.SetFloat("MoveX", 0f);
+                animator.SetFloat("MoveY", 0f);
+            }
         }
 
         // 방향이 실제로 변경되었을 때만 애니메이션 업데이트 (애니메이션 업데이트 중이 아닐 때)

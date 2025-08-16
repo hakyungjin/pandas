@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 90
   attack: 6
-  moveSpeed: 2
+  moveSpeed: 5
   attackRange: 1
   attackSpeed: 3
   bulletPrefab: {fileID: 6786711891071428037, guid: a68a0b78b2168ea4090b99924301ddd1, type: 3}
@@ -24,6 +24,9 @@ MonoBehaviour:
   unitColor: {r: 1, g: 1, b: 1, a: 1}
   goldCost: 2
   TowerSprite: {fileID: -8204113297144451231, guid: f478b396ce3a25d41bd7624dff668f1f, type: 3}
+  TowerSprite2: {fileID: 0}
+  TowerSprite3: {fileID: 0}
+  iconSprite: {fileID: 1712853350, guid: 19b91ddfbd15fc74ebaf5068cce47e9b, type: 3}
   spawnCooldown: 20
   isGoldTower: 0
   animatorController: {fileID: 9100000, guid: 8f74f791ed25464479fd3e9afd3763b8, type: 2}

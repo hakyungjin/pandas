@@ -317,7 +317,11 @@ public class InstallZone : MonoBehaviour, IDroppable
         }
         
         Debug.Log("설치구역이 파괴되었습니다.");
-        
+        click C=GetComponent<click>();
+        if (C.levelupUI2_1 != null)
+        {
+            C.levelupUI2_1.SetActive(false);
+        }
         // 마지막에 자기 자신 파괴
         Destroy(gameObject);
     }
@@ -391,9 +395,16 @@ public class InstallZone : MonoBehaviour, IDroppable
             attackSpeed += e.attackSpeedBonus;
             hp += e.hpBonus;
             attack += e.attackBonus;
+            if (level == 2)
+            TowerPrefab2.GetComponent<SpriteRenderer>().sprite = towerData.TowerSprite2;
+            if (level == 3)
+            TowerPrefab2.GetComponent<SpriteRenderer>().sprite = towerData.TowerSprite3;
         }
         else if (e.type == ExhenceType.goldTower)
+
         {
+            
+            level++;
             additionalGold += e.additionalGold;
              GameManager.instance.GoldIncrease(additionalGold);
         }

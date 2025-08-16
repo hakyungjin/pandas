@@ -81,19 +81,8 @@ public class GameManager : MonoBehaviour
         InitializeInstallZones();
         
         
-        // 몬스터 스폰 시스템 초기화
-        if (enemySpawner != null)
-        {
-            enemySpawner.StartSpawning();
-            Debug.Log("[GameManager] 몬스터 스폰 시스템 시작됨");
-        }
-        else
-        {
-            Debug.LogWarning("[GameManager] EnemySpawner가 연결되지 않았습니다!");
-        }
-        
-        Debug.Log("[GameManager] 모든 초기화 완료!");
-
+       
+       
         
         
     }
@@ -132,14 +121,7 @@ public class GameManager : MonoBehaviour
         
     }
     
-    // 게임 시작
-    public void StartGame()
-    {
-        if (enemySpawner != null)
-        {
-            enemySpawner.StartSpawning();
-        }
-    }
+    
 
 
 

@@ -33,7 +33,13 @@ public class Tower : ScriptableObject
 
     public int goldCost;
     public Sprite TowerSprite;
-    public int spawnCooldown;
+    public Sprite TowerSprite2;
+    public Sprite TowerSprite3;
+
+
+
+    public Sprite iconSprite;
+        public int spawnCooldown;
 
     public bool isGoldTower = false;
 

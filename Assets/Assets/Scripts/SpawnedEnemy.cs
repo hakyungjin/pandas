@@ -7,12 +7,12 @@ public class SpawnedEnemy : MonoBehaviour
 
     private hpbar hpBarComponent;
     private Transform hpBarTransform;
-    private float currentHp;
-    public float moveSpeed = 1.5f;
-    public float detectionRange = 5f;
-    public float attackRange = 1f;
-    public float attackCooldown = 1f;
-    public int attackDamage = 10;
+    public float currentHp;
+    public float moveSpeed;
+    public float detectionRange;
+    public float attackRange;
+    public float attackSpeed;
+    public int attackDamage;
 
     private float lastAttackTime = 0f;
     private Transform currentTarget;
@@ -31,15 +31,13 @@ public class SpawnedEnemy : MonoBehaviour
     private float damageFlashDuration = 0.2f; // 데미지 플래시 지속 시간
     private bool isFlashing = false; // 현재 플래시 효과 중인지 체크
 
-    void Start()
-    {
-        if (enemyData != null)
-        {
-            InitializeEnemy();
-        }
-    }
+    
 
-    void InitializeEnemy()
+  
+
+
+    
+    public void InitializeEnemy()
     {
         currentHp = enemyData.hp;
 
@@ -114,7 +112,13 @@ public class SpawnedEnemy : MonoBehaviour
                 hpBarComponent.SetHp(currentHp);
             }
         }
+        moveSpeed = enemyData.moveSpeed;
+       
+        attackRange = enemyData.attackRange;
+        attackSpeed = enemyData.attackSpeed;
+        attackDamage = enemyData.attack;
         IgnoreUnitCollisions();
+        Debug.Log($"[SpawnedEnemy] {attackDamage} 공격력으로 초기화되었습니다.");
     }
 
     public void TakeDamage(int damageAmount)
@@ -156,52 +160,69 @@ public class SpawnedEnemy : MonoBehaviour
             hpBarTransform.rotation = Camera.main.transform.rotation;
         }
 
-        if (currentTarget == null)
+        // 1. 타겟이 없거나 파괴되었으면 탐색
+        if (currentTarget == null || currentTarget.gameObject == null)
         {
-            FindTarget();
-        }
-        else
-        {
-            float distance = Vector2.Distance(transform.position, currentTarget.position);
-
-            // 타겟이 너무 멀어졌으면 다시 탐색
-            if (distance > detectionRange * 1.5f)
+            // 공격 중이었다면 공격 상태 초기화
+            if (isAttacking)
             {
-                currentTarget = null;
-                return;
-            }
-
-            // 공격 사거리 이내면 공격
-            if (distance <= attackRange)
-            {
-                TryAttack();
-                Debug.Log($"[SpawnedEnemy] {gameObject.name}이(가) {currentTarget.name}을(를) 공격했습니다.");
-            }
-            else
-            {
-                // 공격 중이 아니면 이동
-                if (!isAttacking)
+                isAttacking = false;
+                if (animator != null)
                 {
-                    // 타겟 방향으로 이동
-                    Vector2 direction = (currentTarget.position - transform.position).normalized;
-                    transform.Translate(direction * moveSpeed * Time.deltaTime);
-
-                    // 애니메이션 업데이트
-                    UpdateAnimation(direction * moveSpeed);
+                    animator.SetBool("isAttacking", isAttacking);
                 }
             }
+            FindTarget();
+            return;
         }
+
+        float distance = Vector2.Distance(transform.position, currentTarget.position);
+
+        // 타겟이 너무 멀어졌으면 다시 탐색
+        if (distance > detectionRange)
+        {
+            currentTarget = null;
+            // 공격 중이었다면 공격 상태 초기화
+            if (isAttacking)
+            {
+                isAttacking = false;
+                if (animator != null)
+                {
+                    animator.SetBool("isAttacking", false);
+                }
+            }
+            return;
+        }
+
+        // 2. 공격 범위 안에 있으면 공격
+        if (distance <= attackRange)
+        {
+            TryAttack();
+            Debug.Log($"[SpawnedEnemy] {gameObject.name}이(가) {currentTarget.name}을(를) 공격했습니다.");
+        }
+        // 3. 공격 범위 밖에 있으면 타겟으로 이동
+        else
+        {
+            // 공격 중이 아니면 이동
+            if (!isAttacking)
+            {
+                // 타겟 방향으로 이동
+                Vector2 direction = (currentTarget.position - transform.position).normalized;
+                transform.Translate(direction * moveSpeed * Time.deltaTime);
+
+                // 애니메이션 업데이트
+                UpdateAnimation(direction);
+            }
+        }
+        IgnoreUnitCollisions();
     }
 
     void UpdateAnimation(Vector2 velocity)
     {
-        // 이동 중일 때만 방향 업데이트
-        if (velocity.sqrMagnitude > 0.01f)
-        {
-            lastDirection = velocity.normalized;
-        }
-
-        // 방향이 실제로 변경되었을 때만 애니메이션 업데이트 (애니메이션 업데이트 중이 아닐 때)
+       
+        lastDirection = velocity.normalized;
+        animator.SetBool("isAttacking", isAttacking);
+        
         float directionThreshold = 0.3f; // 방향 변화 임계값
         if (Vector2.Distance(lastDirection, lastAnimationDirection) > directionThreshold && !isAnimationUpdating)
         {
@@ -266,7 +287,19 @@ public class SpawnedEnemy : MonoBehaviour
 
     void TryAttack()
     {
-        if (Time.time - lastAttackTime < attackCooldown) return;
+        if (Time.time - lastAttackTime < attackSpeed) return;
+
+        // 타겟이 유효한지 한 번 더 확인
+        if (currentTarget == null || currentTarget.gameObject == null)
+        {
+            currentTarget = null;
+            isAttacking = false;
+            if (animator != null)
+            {
+                animator.SetBool("isAttacking", false);
+            }
+            return;
+        }
 
         lastAttackTime = Time.time;
 
@@ -274,7 +307,12 @@ public class SpawnedEnemy : MonoBehaviour
         isAttacking = true;
         if (animator != null)
         {
-            animator.SetBool("isAttacking", isAttacking);
+            // 타겟을 향한 방향 벡터 계산
+            Vector2 targetDirection = (currentTarget.position - transform.position).normalized;
+            
+            UpdateAnimation(targetDirection);
+            
+           
         }
 
         // 타겟의 태그에 따라 다른 공격 로직 실행
@@ -298,27 +336,14 @@ public class SpawnedEnemy : MonoBehaviour
                 Debug.Log($"[SpawnedEnemy] 유닛 {currentTarget.name}에 {attackDamage} 데미지를 가했습니다.");
             }
         }
-
-        // 공격 애니메이션 종료 (공격 쿨다운 후)
-        StartCoroutine(EndAttackAnimation());
     }
 
-    System.Collections.IEnumerator EndAttackAnimation()
-    {
-        // 공격 애니메이션 지속 시간 (공격 쿨다운과 동일하게 설정)
-        yield return new WaitForSeconds(attackCooldown);
-
-        // 공격 애니메이션 종료
-        isAttacking = false;
-        if (animator != null)
-        {
-            animator.SetBool("isAttacking", isAttacking);
-        }
-    }
+    
     void IgnoreUnitCollisions()
     {
         // 모든 Unit 태그 오브젝트와의 충돌 무시
         GameObject[] units = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject[] towers = GameObject.FindGameObjectsWithTag("EnemyTower");
         Collider2D myCollider = GetComponent<Collider2D>();
 
         foreach (GameObject unit in units)
@@ -326,6 +351,18 @@ public class SpawnedEnemy : MonoBehaviour
             if (unit != gameObject) // 자기 자신 제외
             {
                 Collider2D otherCollider = unit.GetComponent<Collider2D>();
+                if (otherCollider != null && myCollider != null)
+                {
+                    Physics2D.IgnoreCollision(myCollider, otherCollider, true);
+                }
+            }
+
+        }
+        foreach (GameObject tower in towers)
+        {
+            if (tower != gameObject)
+            {
+                Collider2D otherCollider = tower.GetComponent<Collider2D>();
                 if (otherCollider != null && myCollider != null)
                 {
                     Physics2D.IgnoreCollision(myCollider, otherCollider, true);

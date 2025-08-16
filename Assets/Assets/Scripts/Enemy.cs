@@ -6,6 +6,9 @@ public class Enemy : ScriptableObject
     [Header("유닛 능력치")]
     public int hp;
     public int attack;
+    public float moveSpeed;
+    public float attackSpeed;
+    public float attackRange;
 
     [Header("유닛 외형")]
     public Sprite unitSprite;

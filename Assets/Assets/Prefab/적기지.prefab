@@ -107,6 +107,19 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   EnemySpawner: {fileID: 0}
+  enemyTypes: []
+  enemyPrefab: {fileID: 7412994867158970934, guid: 309a26bed80d77940ae62e51d556492f, type: 3}
+  enhance:
+    name: 
+    enemyhpbonus: 0
+    enemyattackbonus: 0
+    enemymovespeedbonus: 0
+    enemyattackspeedbonus: 0
+    enemyattackrangebonus: 0
+  spawnInterval: 2
+  maxEnemiesAroundBase: 7
+  initialDelay: 2
+  enemyCount: 0
 --- !u!61 &1741827293636874726
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -160,7 +173,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1825413465053216385}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e342bdf7562c0374381c8694c2b91606, type: 3}
   m_Name: 
