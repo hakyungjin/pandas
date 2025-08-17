@@ -31,6 +31,9 @@ public class GameManager : MonoBehaviour
     public GameObject gameClearUI;
     public GameObject gamePauseUI;
 
+    [Header("타일 설치&파괴 시스템")]
+    public int tileCount;
+
     
     private List<InstallZone> installZones = new List<InstallZone>(); // 모든 설치 구역 관리
 
