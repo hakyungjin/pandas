@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: 7a6e69d16c529f24f98854416a9c6d37
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3155229547879580534
+    second: K_Idle NE_0
+  - first:
+      213: 6077973545847210572
+    second: K_Idle NE_1
+  - first:
+      213: 7357885806034096197
+    second: K_Idle NE_2
+  - first:
+      213: -7383690428640572017
+    second: K_Idle NE_3
+  - first:
+      213: -1404842350977349253
+    second: K_Idle NE_4
+  - first:
+      213: 6120259728261313185
+    second: K_Idle NE_5
+  - first:
+      213: -6129754867640312764
+    second: K_Idle NE_6
+  - first:
+      213: 51162273609648417
+    second: K_Idle NE_7
+  - first:
+      213: -1327954661124582639
+    second: K_Idle NE_8
+  - first:
+      213: 4951902814095635119
+    second: K_Idle NE_9
+  - first:
+      213: 1184807869405285407
+    second: K_Idle NE_10
+  - first:
+      213: -5327007878821204138
+    second: K_Idle NE_11
+  - first:
+      213: -598852042754370953
+    second: K_Idle NE_12
+  - first:
+      213: -6769038400797528552
+    second: K_Idle NE_13
+  - first:
+      213: 6665996198061819094
+    second: K_Idle NE_14
+  - first:
+      213: 7129698279821810083
+    second: K_Idle NE_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: K_Idle NE_0
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 1712
+        width: 231
+        height: 209
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 673cd228e80a9cb20800000000000000
+      internalID: 3155229547879580534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Idle NE_1
+      rect:
+        serializedVersion: 2
+        x: 678
+        y: 1713
+        width: 232
+        height: 208
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c42c17accbc495450800000000000000
+      internalID: 6077973545847210572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Idle NE_2
+      rect:
+        serializedVersion: 2
+        x: 1189
+        y: 1714
+        width: 233
+        height: 206
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5401d8628267c1660800000000000000
+      internalID: 7357885806034096197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Idle NE_3
+      rect:
+        serializedVersion: 2
+        x: 1701
+        y: 1715
+        width: 232
+        height: 205
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8d4d65fcacd78990800000000000000
+      internalID: -7383690428640572017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Idle NE_4
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 1204
+        width: 233
+        height: 204
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b790290335ff08ce0800000000000000
+      internalID: -1404842350977349253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Idle NE_5
+      rect:
+        serializedVersion: 2
+        x: 677
+        y: 1206
+        width: 231
+        height: 202
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a2f42cdbc78fe450800000000000000
+      internalID: 6120259728261313185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Idle NE_6
+      rect:
+        serializedVersion: 2
+        x: 1189
+        y: 1207
+        width: 231
+        height: 201
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44cd31abc6cbeeaa0800000000000000
+      internalID: -6129754867640312764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Idle NE_7
+      rect:
+        serializedVersion: 2
+        x: 1702
+        y: 1208
+        width: 229
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 129876811d3c5b000800000000000000
+      internalID: 51162273609648417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Idle NE_8
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 698
+        width: 229
+        height: 198
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11358d18548229de0800000000000000
+      internalID: -1327954661124582639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Idle NE_9
+      rect:
+        serializedVersion: 2
+        x: 679
+        y: 699
+        width: 228
+        height: 197
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa27d648f51b8b440800000000000000
+      internalID: 4951902814095635119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Idle NE_10
+      rect:
+        serializedVersion: 2
+        x: 1192
+        y: 700
+        width: 228
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1c4df6da78417010800000000000000
+      internalID: 1184807869405285407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Idle NE_11
+      rect:
+        serializedVersion: 2
+        x: 1705
+        y: 701
+        width: 227
+        height: 195
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65fa723de8aa216b0800000000000000
+      internalID: -5327007878821204138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Idle NE_12
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 189
+        width: 227
+        height: 195
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 772db9e6d3370b7f0800000000000000
+      internalID: -598852042754370953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Idle NE_13
+      rect:
+        serializedVersion: 2
+        x: 683
+        y: 190
+        width: 226
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81e2c79307b8f02a0800000000000000
+      internalID: -6769038400797528552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Idle NE_14
+      rect:
+        serializedVersion: 2
+        x: 1196
+        y: 190
+        width: 226
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d444936930628c50800000000000000
+      internalID: 6665996198061819094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Idle NE_15
+      rect:
+        serializedVersion: 2
+        x: 1709
+        y: 190
+        width: 225
+        height: 195
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a91e7c8fc6c1f260800000000000000
+      internalID: 7129698279821810083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      K_Idle NE_0: 3155229547879580534
+      K_Idle NE_1: 6077973545847210572
+      K_Idle NE_10: 1184807869405285407
+      K_Idle NE_11: -5327007878821204138
+      K_Idle NE_12: -598852042754370953
+      K_Idle NE_13: -6769038400797528552
+      K_Idle NE_14: 6665996198061819094
+      K_Idle NE_15: 7129698279821810083
+      K_Idle NE_2: 7357885806034096197
+      K_Idle NE_3: -7383690428640572017
+      K_Idle NE_4: -1404842350977349253
+      K_Idle NE_5: 6120259728261313185
+      K_Idle NE_6: -6129754867640312764
+      K_Idle NE_7: 51162273609648417
+      K_Idle NE_8: -1327954661124582639
+      K_Idle NE_9: 4951902814095635119
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

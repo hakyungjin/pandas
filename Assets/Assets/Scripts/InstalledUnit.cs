@@ -49,7 +49,7 @@ public class InstalledUnit : MonoBehaviour
     
     // 충돌 무시 체크를 위한 변수들
     private float collisionCheckTimer = 0f;
-    private float collisionCheckInterval = 1f; // 1초마다 충돌 무시 체크
+    private float collisionCheckInterval = 0.5f;
 
 
     public List<Exhence> exhence = new List<Exhence>();
@@ -155,7 +155,6 @@ public class InstalledUnit : MonoBehaviour
             SetupMovementComponents();
         }
         exhence = unitData.exhenceList;
-        animator.SetBool("isMoving", false);
 
     }
 
@@ -272,7 +271,8 @@ public class InstalledUnit : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            Destroy(gameObject);
+            animator.SetBool("isdie",true);
+            Invoke("DestroyUnit",2f);
         }
 
         // 데미지 플래시 효과 시작
@@ -300,7 +300,7 @@ public class InstalledUnit : MonoBehaviour
             if (rigidbody != null)
             {
                 Vector2 directionToTarget = (moveTargetPosition - transform.position).normalized;
-                rigidbody.linearVelocity = directionToTarget * moveSpeed;
+                rigidbody.linearVelocity = directionToTarget * moveSpeed*3;
                 UpdateAnimation(rigidbody.linearVelocity);
             }
             CheckMoveCompletion();
@@ -476,7 +476,7 @@ public class InstalledUnit : MonoBehaviour
         {
             // 목표 위치로 이동 (Rigidbody2D 사용으로 부드러운 물리 이동)
             Vector2 direction = (moveTarget.position - transform.position).normalized;
-            rigidbody.linearVelocity = direction * moveSpeed;
+            rigidbody.linearVelocity = direction * Mathf.Abs(moveSpeed);
             UpdateAnimation(rigidbody.linearVelocity);
         }
         else
@@ -502,7 +502,7 @@ public class InstalledUnit : MonoBehaviour
         // 공격 중이어도 플레이어가 선택한 이동은 실행
         isAttacking = false;
         animator.SetBool("isAttacking", isAttacking);
-        animator.SetBool("isMoving", true);
+
         // 이동은 Update에서 프레임 단위로 처리
         Debug.Log($"[InstalledUnit] moveUnit 시작 - 목표 위치: {target}, 프레임별 이동 진행");
     }
@@ -510,7 +510,7 @@ public class InstalledUnit : MonoBehaviour
     void CheckMoveCompletion()
     {
         float distance = Vector2.Distance(transform.position, moveTargetPosition);
-        if (distance <= 2f) // 너무 작은 값이면 멈추지 않음
+        if (distance <= 1f) // 너무 작은 값이면 멈추지 않음
         {
             isMovingByCommand = false;
             StopMovement();
@@ -522,12 +522,12 @@ public class InstalledUnit : MonoBehaviour
     void StopMovement()
     {
         // 애니메이션 상태 초기화
-        animator.SetBool("isMoving", false);
        
         if (rigidbody != null)
         {
             rigidbody.linearVelocity = Vector2.zero;
             rigidbody.angularVelocity = 0f; // 회전도 중지
+            animator.SetFloat("speed", 0f);
         }
         
         // moveUnit 명령에 의한 이동도 중단
@@ -589,7 +589,7 @@ public class InstalledUnit : MonoBehaviour
         exhence.Add(e);
         currentHealth = unitData.hp + exhence.Sum(x => x.hpBonus);
         attack = unitData.attack + exhence.Sum(x => x.attackBonus);
-        moveSpeed = unitData.moveSpeed + exhence.Sum(x => x.moveSpeedBonus);
+        moveSpeed = Mathf.Abs(unitData.moveSpeed + exhence.Sum(x => x.moveSpeedBonus));
         attackSpeed = unitData.attackSpeed + exhence.Sum(x => x.attackSpeedBonus);
     }
 
@@ -601,11 +601,11 @@ public class InstalledUnit : MonoBehaviour
         if (velocity.sqrMagnitude > 0.01f)
         {
             lastDirection = velocity.normalized;
-            animator.SetBool("isMoving", true);
+            animator.SetFloat("speed", velocity.magnitude);
+           
         }
         else
         {
-            animator.SetBool("isMoving", false);
             // 이동이 멈췄을 때 Idle 애니메이션 재생
             if (!isAttacking)
             {
@@ -613,6 +613,7 @@ public class InstalledUnit : MonoBehaviour
                 animator.SetFloat("MoveY", 0f);
             }
         }
+         animator.SetFloat("speed", velocity.magnitude);
 
         // 방향이 실제로 변경되었을 때만 애니메이션 업데이트 (애니메이션 업데이트 중이 아닐 때)
         float directionThreshold = 0.3f; // 방향 변화 임계값
@@ -680,7 +681,10 @@ System.Collections.IEnumerator DamageFlash()
     isFlashing = false;
 }
 
-
+    void DestroyUnit()
+    {
+        Destroy(gameObject);
+    }
 
 }
 

@@ -1,0 +1,31 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# https://www.codeandweb.com/texturepacker/unity
+#
+# $TexturePacker:SmartUpdate:9fa6644504e78f00e516e244b722c990:548cee5f52e0f0bfa511b575ccde4e38:787f408fd329d724dc5e7f3f0a5df46c$
+#
+:format=40300
+:texture=Panda 1 Dead Back.png
+:size=2048x2048
+:pivotpoints=enabled
+:borders=disabled
+:alphahandling=ClearTransparentPixels
+
+Panda 1 Dead0000;0;1536;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Dead0002;512;1536;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Dead0004;1024;1536;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Dead0006;1536;1536;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Dead0008;0;1024;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Dead0010;512;1024;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Dead0012;1024;1024;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Dead0014;1536;1024;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Dead0016;0;512;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Dead0018;512;512;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Dead0020;1024;512;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Dead0022;1536;512;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Dead0024;0;0;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Dead0026;512;0;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Dead0028;1024;0;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Dead0030;1536;0;512;512; 0.5;0.5; 0;0;0;0

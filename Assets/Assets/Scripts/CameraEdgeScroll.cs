@@ -10,6 +10,9 @@ public class CameraEdgeScroll : MonoBehaviour
     public float scrollSpeed = 10f;      // 카메라 이동 속도
     public float edgeSize = 20f;         // 감지할 화면 가장자리 범위 (픽셀)
 
+    public Transform hero;
+    public bool isFollowingHero = true;
+
   
 
 
@@ -18,7 +21,19 @@ public class CameraEdgeScroll : MonoBehaviour
 
     void Update()
     {
+        if(!isFollowingHero)
+        {
         scrolldown();
+        }
+        if(Input.GetKeyDown(KeyCode.Y))
+        {
+            isFollowingHero = !isFollowingHero;
+        }
+        if(isFollowingHero)
+        {
+            transform.position = hero.position + new Vector3(0, 0, -10);
+        }
+        
         
     }
    

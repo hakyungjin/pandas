@@ -1,4 +1,5 @@
 using UnityEngine;
+using DG.Tweening;
 
 public class Bullet : MonoBehaviour
 {
@@ -7,7 +8,7 @@ public class Bullet : MonoBehaviour
 
     private Vector3 direction;
     private float timer;
-    private float speed;
+    private float speed=0;
     private int damage;
 
     void Start()
@@ -24,8 +25,8 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
-        // 총알 이동
-        transform.Translate(direction * speed * Time.deltaTime);
+        // 총알 이동 - 회전된 방향으로 이동
+        transform.DOMove(transform.position + direction * speed * Time.deltaTime, 0.1f);
 
         // 수명 체크
         timer += Time.deltaTime;
@@ -39,7 +40,15 @@ public class Bullet : MonoBehaviour
     public void Initialize(Vector3 dir, float bulletSpeed, int bulletDamage)
     {
         Debug.Log($"[Bullet] Initialize 호출됨 - 방향: {dir}, 속도: {bulletSpeed}, 데미지: {bulletDamage}");
+        
+        
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f; 
+        
+        transform.rotation = Quaternion.Euler(0, 0, angle);
+        
+        // 2. 회전이 완료된 후 direction 설정
         direction = dir.normalized;
+        
         speed = bulletSpeed;
         damage = bulletDamage;
         Debug.Log($"[Bullet] 초기화 완료 - 방향: {direction}, 속도: {speed}, 데미지: {damage}");

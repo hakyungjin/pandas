@@ -1,0 +1,31 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# https://www.codeandweb.com/texturepacker/unity
+#
+# $TexturePacker:SmartUpdate:4e431e120fae8ab9218ce3c0e738638a:0de6e380f8d2ffa59b5c7f15bcd6c2ac:eceb89db717751309a1f0772a62f9279$
+#
+:format=40300
+:texture=K_Wak SE.png
+:size=2048x2048
+:pivotpoints=enabled
+:borders=disabled
+:alphahandling=ClearTransparentPixels
+
+K_Walk0032;0;1536;512;512; 0.5;0.5; 0;0;0;0
+K_Walk0034;512;1536;512;512; 0.5;0.5; 0;0;0;0
+K_Walk0036;1024;1536;512;512; 0.5;0.5; 0;0;0;0
+K_Walk0038;1536;1536;512;512; 0.5;0.5; 0;0;0;0
+K_Walk0040;0;1024;512;512; 0.5;0.5; 0;0;0;0
+K_Walk0042;512;1024;512;512; 0.5;0.5; 0;0;0;0
+K_Walk0044;1024;1024;512;512; 0.5;0.5; 0;0;0;0
+K_Walk0046;1536;1024;512;512; 0.5;0.5; 0;0;0;0
+K_Walk0048;0;512;512;512; 0.5;0.5; 0;0;0;0
+K_Walk0050;512;512;512;512; 0.5;0.5; 0;0;0;0
+K_Walk0052;1024;512;512;512; 0.5;0.5; 0;0;0;0
+K_Walk0054;1536;512;512;512; 0.5;0.5; 0;0;0;0
+K_Walk0056;0;0;512;512; 0.5;0.5; 0;0;0;0
+K_Walk0058;512;0;512;512; 0.5;0.5; 0;0;0;0
+K_Walk0060;1024;0;512;512; 0.5;0.5; 0;0;0;0
+K_Walk0062;1536;0;512;512; 0.5;0.5; 0;0;0;0

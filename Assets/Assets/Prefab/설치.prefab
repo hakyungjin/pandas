@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.68654, y: 0.42, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4595098970412161235}
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: -8939307623205134892, guid: 376c31f9a7575754e9f85e4a3127278a, type: 3}
+  m_Sprite: {fileID: 9165148348141893822, guid: b1aa6534179e66c42995633a31d4f6d5, type: 3}
   m_Color: {r: 0.9924528, g: 0.9924528, b: 0.9924528, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -109,6 +109,7 @@ MonoBehaviour:
   currentHealth: 0
   hpBarPrefab: {fileID: 2669600942163248997, guid: 0b288b66d6d49254fa4225016b42d65b, type: 3}
   moveSpeed: 5
+  exhence: []
 --- !u!61 &8149612264604973686
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -139,7 +140,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -147,7 +148,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 6.44, y: 6.94}
+    oldSize: {x: 5.12, y: 5.12}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -252,19 +253,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6888492577052797470, guid: 50ba93916ec96cc44bb78dbf410a907c, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6888492577052797470, guid: 50ba93916ec96cc44bb78dbf410a907c, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6888492577052797470, guid: 50ba93916ec96cc44bb78dbf410a907c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.2
+      value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: 6888492577052797470, guid: 50ba93916ec96cc44bb78dbf410a907c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.1
+      value: 1.46
       objectReference: {fileID: 0}
     - target: {fileID: 6888492577052797470, guid: 50ba93916ec96cc44bb78dbf410a907c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -304,7 +305,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7780415059677988880, guid: 50ba93916ec96cc44bb78dbf410a907c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

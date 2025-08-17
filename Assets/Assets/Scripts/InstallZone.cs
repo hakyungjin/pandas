@@ -221,7 +221,9 @@ public class InstallZone : MonoBehaviour, IDroppable
 
 
         // 새로 설치할 오브젝트 생성
-        installedObject = Instantiate(unitPrefab, transform.position, Quaternion.identity);
+        Vector2 spawnPos = (Vector2)transform.position + Random.insideUnitCircle * 3f;
+        installedObject = Instantiate(unitPrefab, spawnPos, Quaternion.identity);
+
         GameManager.instance.PlaySFX(3,0.5f,1f);
 
         // 정보 초기화

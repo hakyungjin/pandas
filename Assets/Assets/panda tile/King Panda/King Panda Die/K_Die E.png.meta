@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: d750461d2fc40884ebc713a504f7feb0
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5816269090061070528
+    second: K_Die E_0
+  - first:
+      213: -6952856056079254501
+    second: K_Die E_1
+  - first:
+      213: -4132895954907860910
+    second: K_Die E_2
+  - first:
+      213: 3551597167038167257
+    second: K_Die E_3
+  - first:
+      213: -8434363448970566294
+    second: K_Die E_4
+  - first:
+      213: 273918449117278485
+    second: K_Die E_5
+  - first:
+      213: -1068082116607173626
+    second: K_Die E_6
+  - first:
+      213: 527333251965486521
+    second: K_Die E_7
+  - first:
+      213: -2544712412604654136
+    second: K_Die E_8
+  - first:
+      213: 8898373332461151573
+    second: K_Die E_9
+  - first:
+      213: -905191923933464040
+    second: K_Die E_10
+  - first:
+      213: -1923466223418819443
+    second: K_Die E_11
+  - first:
+      213: 8477733465036211833
+    second: K_Die E_12
+  - first:
+      213: 7210109971310539118
+    second: K_Die E_13
+  - first:
+      213: 6782761805439500769
+    second: K_Die E_14
+  - first:
+      213: -2564417948257147507
+    second: K_Die E_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: K_Die E_0
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 1731
+        width: 244
+        height: 153
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04f43d81416784fa0800000000000000
+      internalID: -5816269090061070528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Die E_1
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 1731
+        width: 237
+        height: 153
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1cf8fa314e728f90800000000000000
+      internalID: -6952856056079254501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Die E_2
+      rect:
+        serializedVersion: 2
+        x: 1191
+        y: 1698
+        width: 158
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 250711aa60105a6c0800000000000000
+      internalID: -4132895954907860910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Die E_3
+      rect:
+        serializedVersion: 2
+        x: 1704
+        y: 1726
+        width: 170
+        height: 175
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d8f7966ecec94130800000000000000
+      internalID: 3551597167038167257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Die E_4
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 1213
+        width: 169
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a65229d512f13fa80800000000000000
+      internalID: -8434363448970566294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Die E_5
+      rect:
+        serializedVersion: 2
+        x: 690
+        y: 1213
+        width: 170
+        height: 175
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 511bf01d0672dc300800000000000000
+      internalID: 273918449117278485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Die E_6
+      rect:
+        serializedVersion: 2
+        x: 1209
+        y: 1213
+        width: 178
+        height: 179
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60c9ea059f86d21f0800000000000000
+      internalID: -1068082116607173626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Die E_7
+      rect:
+        serializedVersion: 2
+        x: 1729
+        y: 1213
+        width: 190
+        height: 189
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b587a97cc6715700800000000000000
+      internalID: 527333251965486521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Die E_8
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 699
+        width: 184
+        height: 197
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8cd1c2f0b8d5facd0800000000000000
+      internalID: -2544712412604654136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Die E_9
+      rect:
+        serializedVersion: 2
+        x: 731
+        y: 697
+        width: 182
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 555e728766f5d7b70800000000000000
+      internalID: 8898373332461151573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Die E_10
+      rect:
+        serializedVersion: 2
+        x: 1246
+        y: 697
+        width: 192
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81ab468bdbc1073f0800000000000000
+      internalID: -905191923933464040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Die E_11
+      rect:
+        serializedVersion: 2
+        x: 1771
+        y: 692
+        width: 195
+        height: 202
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8cb8a729a97e45e0800000000000000
+      internalID: -1923466223418819443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Die E_12
+      rect:
+        serializedVersion: 2
+        x: 254
+        y: 176
+        width: 183
+        height: 203
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 976cce36ba5f6a570800000000000000
+      internalID: 8477733465036211833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Die E_13
+      rect:
+        serializedVersion: 2
+        x: 779
+        y: 176
+        width: 170
+        height: 203
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e61777f61d47f0460800000000000000
+      internalID: 7210109971310539118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Die E_14
+      rect:
+        serializedVersion: 2
+        x: 1291
+        y: 176
+        width: 170
+        height: 203
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e10f49ece5312e50800000000000000
+      internalID: 6782761805439500769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Die E_15
+      rect:
+        serializedVersion: 2
+        x: 1803
+        y: 176
+        width: 170
+        height: 203
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d852f72867b596cd0800000000000000
+      internalID: -2564417948257147507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      K_Die E_0: -5816269090061070528
+      K_Die E_1: -6952856056079254501
+      K_Die E_10: -905191923933464040
+      K_Die E_11: -1923466223418819443
+      K_Die E_12: 8477733465036211833
+      K_Die E_13: 7210109971310539118
+      K_Die E_14: 6782761805439500769
+      K_Die E_15: -2564417948257147507
+      K_Die E_2: -4132895954907860910
+      K_Die E_3: 3551597167038167257
+      K_Die E_4: -8434363448970566294
+      K_Die E_5: 273918449117278485
+      K_Die E_6: -1068082116607173626
+      K_Die E_7: 527333251965486521
+      K_Die E_8: -2544712412604654136
+      K_Die E_9: 8898373332461151573
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

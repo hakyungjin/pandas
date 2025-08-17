@@ -1,0 +1,31 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# https://www.codeandweb.com/texturepacker/unity
+#
+# $TexturePacker:SmartUpdate:b5d22409b1fa44c7f867c888979f78f4:6fda6129e37e250df68b22b611aeb6e4:bd9a1c7a6fc593ca9454e615744f35cd$
+#
+:format=40300
+:texture=Panda 1 Walk SouthEast.png
+:size=2048x2048
+:pivotpoints=enabled
+:borders=disabled
+:alphahandling=ClearTransparentPixels
+
+Panda 1 Walk0000;0;1536;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Walk0002;512;1536;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Walk0004;1024;1536;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Walk0006;1536;1536;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Walk0008;0;1024;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Walk0010;512;1024;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Walk0012;1024;1024;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Walk0014;1536;1024;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Walk0016;0;512;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Walk0018;512;512;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Walk0020;1024;512;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Walk0022;1536;512;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Walk0024;0;0;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Walk0026;512;0;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Walk0028;1024;0;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Walk0030;1536;0;512;512; 0.5;0.5; 0;0;0;0

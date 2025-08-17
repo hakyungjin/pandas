@@ -1,0 +1,31 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# https://www.codeandweb.com/texturepacker/unity
+#
+# $TexturePacker:SmartUpdate:ada819ebfd83d8ee5a44b951087cfba8:0f4bb187e5333e1c0c95ac5a07085212:9b48ffdfc1d837b0c087d64afff4bd0c$
+#
+:format=40300
+:texture=K_Idle SE.png
+:size=2048x2048
+:pivotpoints=enabled
+:borders=disabled
+:alphahandling=ClearTransparentPixels
+
+K_Idle0032;0;1536;512;512; 0.5;0.5; 0;0;0;0
+K_Idle0034;512;1536;512;512; 0.5;0.5; 0;0;0;0
+K_Idle0036;1024;1536;512;512; 0.5;0.5; 0;0;0;0
+K_Idle0038;1536;1536;512;512; 0.5;0.5; 0;0;0;0
+K_Idle0040;0;1024;512;512; 0.5;0.5; 0;0;0;0
+K_Idle0042;512;1024;512;512; 0.5;0.5; 0;0;0;0
+K_Idle0044;1024;1024;512;512; 0.5;0.5; 0;0;0;0
+K_Idle0046;1536;1024;512;512; 0.5;0.5; 0;0;0;0
+K_Idle0048;0;512;512;512; 0.5;0.5; 0;0;0;0
+K_Idle0050;512;512;512;512; 0.5;0.5; 0;0;0;0
+K_Idle0052;1024;512;512;512; 0.5;0.5; 0;0;0;0
+K_Idle0054;1536;512;512;512; 0.5;0.5; 0;0;0;0
+K_Idle0056;0;0;512;512; 0.5;0.5; 0;0;0;0
+K_Idle0058;512;0;512;512; 0.5;0.5; 0;0;0;0
+K_Idle0060;1024;0;512;512; 0.5;0.5; 0;0;0;0
+K_Idle0062;1536;0;512;512; 0.5;0.5; 0;0;0;0

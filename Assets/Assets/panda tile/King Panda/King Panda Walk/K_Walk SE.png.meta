@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: b9de7f7731238f04b879085e6f3a9b89
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5214892927812597661
+    second: K_Walk SE_0
+  - first:
+      213: 1281597726466126774
+    second: K_Walk SE_1
+  - first:
+      213: -1657553201865475009
+    second: K_Walk SE_2
+  - first:
+      213: 2006011860214058886
+    second: K_Walk SE_3
+  - first:
+      213: 822801870081008952
+    second: K_Walk SE_4
+  - first:
+      213: 5030120805872075338
+    second: K_Walk SE_5
+  - first:
+      213: -7081811409501013103
+    second: K_Walk SE_6
+  - first:
+      213: -3434972378360244722
+    second: K_Walk SE_7
+  - first:
+      213: 4512708889320120680
+    second: K_Walk SE_8
+  - first:
+      213: -7050051171693166358
+    second: K_Walk SE_9
+  - first:
+      213: 6695730067474528644
+    second: K_Walk SE_10
+  - first:
+      213: -8172221671345957548
+    second: K_Walk SE_11
+  - first:
+      213: -1435024633519637799
+    second: K_Walk SE_12
+  - first:
+      213: -3680814576384921714
+    second: K_Walk SE_13
+  - first:
+      213: 4435323327285298277
+    second: K_Walk SE_14
+  - first:
+      213: -8711255635053682919
+    second: K_Walk SE_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: K_Walk SE_0
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 1693
+        width: 177
+        height: 193
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9777f7fc750f5840800000000000000
+      internalID: 5214892927812597661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Walk SE_1
+      rect:
+        serializedVersion: 2
+        x: 681
+        y: 1696
+        width: 181
+        height: 189
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b336fe875629c110800000000000000
+      internalID: 1281597726466126774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Walk SE_2
+      rect:
+        serializedVersion: 2
+        x: 1193
+        y: 1705
+        width: 188
+        height: 179
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3c3f7e15203ff8e0800000000000000
+      internalID: -1657553201865475009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Walk SE_3
+      rect:
+        serializedVersion: 2
+        x: 1704
+        y: 1719
+        width: 200
+        height: 166
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68f87479829c6db10800000000000000
+      internalID: 2006011860214058886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Walk SE_4
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 1220
+        width: 211
+        height: 152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 835a4b201fd2b6b00800000000000000
+      internalID: 822801870081008952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Walk SE_5
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 1224
+        width: 220
+        height: 147
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a428e43e8349ec540800000000000000
+      internalID: 5030120805872075338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Walk SE_6
+      rect:
+        serializedVersion: 2
+        x: 1192
+        y: 1227
+        width: 224
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19b326a4b0a58bd90800000000000000
+      internalID: -7081811409501013103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Walk SE_7
+      rect:
+        serializedVersion: 2
+        x: 1704
+        y: 1225
+        width: 224
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e061f8632d68450d0800000000000000
+      internalID: -3434972378360244722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Walk SE_8
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 709
+        width: 224
+        height: 147
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8616ca253dc50ae30800000000000000
+      internalID: 4512708889320120680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Walk SE_9
+      rect:
+        serializedVersion: 2
+        x: 681
+        y: 713
+        width: 223
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae007e6efcf292e90800000000000000
+      internalID: -7050051171693166358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Walk SE_10
+      rect:
+        serializedVersion: 2
+        x: 1193
+        y: 715
+        width: 223
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 489b8b755030cec50800000000000000
+      internalID: 6695730067474528644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Walk SE_11
+      rect:
+        serializedVersion: 2
+        x: 1706
+        y: 712
+        width: 218
+        height: 147
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 455dcad20bf669e80800000000000000
+      internalID: -8172221671345957548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Walk SE_12
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 196
+        width: 209
+        height: 152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9da702be2b4c51ce0800000000000000
+      internalID: -1435024633519637799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Walk SE_13
+      rect:
+        serializedVersion: 2
+        x: 682
+        y: 183
+        width: 198
+        height: 166
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8f2f7205ae1becc0800000000000000
+      internalID: -3680814576384921714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Walk SE_14
+      rect:
+        serializedVersion: 2
+        x: 1194
+        y: 169
+        width: 187
+        height: 179
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56408da111f6d8d30800000000000000
+      internalID: 4435323327285298277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_Walk SE_15
+      rect:
+        serializedVersion: 2
+        x: 1706
+        y: 160
+        width: 180
+        height: 189
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91f510577276b1780800000000000000
+      internalID: -8711255635053682919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      K_Walk SE_0: 5214892927812597661
+      K_Walk SE_1: 1281597726466126774
+      K_Walk SE_10: 6695730067474528644
+      K_Walk SE_11: -8172221671345957548
+      K_Walk SE_12: -1435024633519637799
+      K_Walk SE_13: -3680814576384921714
+      K_Walk SE_14: 4435323327285298277
+      K_Walk SE_15: -8711255635053682919
+      K_Walk SE_2: -1657553201865475009
+      K_Walk SE_3: 2006011860214058886
+      K_Walk SE_4: 822801870081008952
+      K_Walk SE_5: 5030120805872075338
+      K_Walk SE_6: -7081811409501013103
+      K_Walk SE_7: -3434972378360244722
+      K_Walk SE_8: 4512708889320120680
+      K_Walk SE_9: -7050051171693166358
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

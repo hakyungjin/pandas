@@ -1,0 +1,31 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# https://www.codeandweb.com/texturepacker/unity
+#
+# $TexturePacker:SmartUpdate:ca52f1aea5cd36de2c163d470a73a998:5ccdf5dda9d327f96aef316fe2cbc859:b0d87fef281128a1a36552dfb693b2ae$
+#
+:format=40300
+:texture=K_Die NE.png
+:size=2048x2048
+:pivotpoints=enabled
+:borders=disabled
+:alphahandling=ClearTransparentPixels
+
+K_Die0032;0;1536;512;512; 0.5;0.5; 0;0;0;0
+K_Die0034;512;1536;512;512; 0.5;0.5; 0;0;0;0
+K_Die0036;1024;1536;512;512; 0.5;0.5; 0;0;0;0
+K_Die0038;1536;1536;512;512; 0.5;0.5; 0;0;0;0
+K_Die0040;0;1024;512;512; 0.5;0.5; 0;0;0;0
+K_Die0042;512;1024;512;512; 0.5;0.5; 0;0;0;0
+K_Die0044;1024;1024;512;512; 0.5;0.5; 0;0;0;0
+K_Die0046;1536;1024;512;512; 0.5;0.5; 0;0;0;0
+K_Die0048;0;512;512;512; 0.5;0.5; 0;0;0;0
+K_Die0050;512;512;512;512; 0.5;0.5; 0;0;0;0
+K_Die0052;1024;512;512;512; 0.5;0.5; 0;0;0;0
+K_Die0054;1536;512;512;512; 0.5;0.5; 0;0;0;0
+K_Die0056;0;0;512;512; 0.5;0.5; 0;0;0;0
+K_Die0058;512;0;512;512; 0.5;0.5; 0;0;0;0
+K_Die0060;1024;0;512;512; 0.5;0.5; 0;0;0;0
+K_Die0062;1536;0;512;512; 0.5;0.5; 0;0;0;0

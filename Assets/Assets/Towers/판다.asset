@@ -20,7 +20,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 6786711891071428037, guid: a68a0b78b2168ea4090b99924301ddd1, type: 3}
   bulletSpeed: 5
   towerType: 0
-  unitSprite: {fileID: -871298302707299131, guid: 3533ca6c6124daa4385584576bfe6eb4, type: 3}
+  unitSprite: {fileID: 9165148348141893822, guid: b1aa6534179e66c42995633a31d4f6d5, type: 3}
   unitColor: {r: 1, g: 1, b: 1, a: 1}
   goldCost: 2
   TowerSprite: {fileID: -8204113297144451231, guid: f478b396ce3a25d41bd7624dff668f1f, type: 3}

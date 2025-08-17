@@ -1,0 +1,31 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# https://www.codeandweb.com/texturepacker/unity
+#
+# $TexturePacker:SmartUpdate:140a556d6d0cd4a92730664efd507e1f:f73901e189ef1d2050731c72ed7ccd51:11999c1d648f3110ea50626c423e8421$
+#
+:format=40300
+:texture=K_Attack_E.png
+:size=2048x2048
+:pivotpoints=enabled
+:borders=disabled
+:alphahandling=ClearTransparentPixels
+
+K_N_Attack0032;0;1536;512;512; 0.5;0.5; 0;0;0;0
+K_N_Attack0034;512;1536;512;512; 0.5;0.5; 0;0;0;0
+K_N_Attack0036;1024;1536;512;512; 0.5;0.5; 0;0;0;0
+K_N_Attack0038;1536;1536;512;512; 0.5;0.5; 0;0;0;0
+K_N_Attack0040;0;1024;512;512; 0.5;0.5; 0;0;0;0
+K_N_Attack0042;512;1024;512;512; 0.5;0.5; 0;0;0;0
+K_N_Attack0044;1024;1024;512;512; 0.5;0.5; 0;0;0;0
+K_N_Attack0046;1536;1024;512;512; 0.5;0.5; 0;0;0;0
+K_N_Attack0048;0;512;512;512; 0.5;0.5; 0;0;0;0
+K_N_Attack0050;512;512;512;512; 0.5;0.5; 0;0;0;0
+K_N_Attack0052;1024;512;512;512; 0.5;0.5; 0;0;0;0
+K_N_Attack0054;1536;512;512;512; 0.5;0.5; 0;0;0;0
+K_N_Attack0056;0;0;512;512; 0.5;0.5; 0;0;0;0
+K_N_Attack0058;512;0;512;512; 0.5;0.5; 0;0;0;0
+K_N_Attack0060;1024;0;512;512; 0.5;0.5; 0;0;0;0
+K_N_Attack0062;1536;0;512;512; 0.5;0.5; 0;0;0;0

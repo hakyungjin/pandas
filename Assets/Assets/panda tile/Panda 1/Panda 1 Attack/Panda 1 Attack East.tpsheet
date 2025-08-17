@@ -1,0 +1,31 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# https://www.codeandweb.com/texturepacker/unity
+#
+# $TexturePacker:SmartUpdate:1959c0f531b5f36eac9b3fcf69a3c8d7:08e2d8686518a6ef3a63850268e15d06:c963f903b7baeb1fcb7af88863a9b4c1$
+#
+:format=40300
+:texture=Panda 1 Attack East.png
+:size=2048x2048
+:pivotpoints=enabled
+:borders=disabled
+:alphahandling=ClearTransparentPixels
+
+Panda 1 Attack0000;0;1536;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Attack0002;512;1536;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Attack0004;1024;1536;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Attack0006;1536;1536;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Attack0008;0;1024;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Attack0010;512;1024;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Attack0012;1024;1024;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Attack0014;1536;1024;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Attack0016;0;512;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Attack0018;512;512;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Attack0020;1024;512;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Attack0022;1536;512;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Attack0024;0;0;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Attack0026;512;0;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Attack0028;1024;0;512;512; 0.5;0.5; 0;0;0;0
+Panda 1 Attack0030;1536;0;512;512; 0.5;0.5; 0;0;0;0

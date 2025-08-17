@@ -139,7 +139,9 @@ public class SpawnedEnemy : MonoBehaviour
         if (currentHp <= 0)
         {
             Debug.Log($"[SpawnedEnemy] {gameObject.name}이(가) 파괴되었습니다!");
-            Destroy(gameObject);
+           //animator.SetBool("isdie",true);
+            Invoke("DestroyEnemy",2f);
+            
         }
         else
         {
@@ -392,5 +394,9 @@ public class SpawnedEnemy : MonoBehaviour
         }
         
         isFlashing = false;
+    }
+    void DestroyEnemy()
+    {
+        Destroy(gameObject);
     }
 }
