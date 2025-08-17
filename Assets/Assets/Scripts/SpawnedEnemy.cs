@@ -14,6 +14,10 @@ public class SpawnedEnemy : MonoBehaviour
     public float attackSpeed;
     public int attackDamage;
 
+    private float exp;
+
+
+
     private float lastAttackTime = 0f;
     private Transform currentTarget;
 
@@ -117,6 +121,7 @@ public class SpawnedEnemy : MonoBehaviour
         attackRange = enemyData.attackRange;
         attackSpeed = enemyData.attackSpeed;
         attackDamage = enemyData.attack;
+        exp = enemyData.exp;
         IgnoreUnitCollisions();
         Debug.Log($"[SpawnedEnemy] {attackDamage} 공격력으로 초기화되었습니다.");
     }
@@ -140,7 +145,8 @@ public class SpawnedEnemy : MonoBehaviour
         {
             Debug.Log($"[SpawnedEnemy] {gameObject.name}이(가) 파괴되었습니다!");
            //animator.SetBool("isdie",true);
-            Invoke("DestroyEnemy",2f);
+            Invoke("DestroyEnemy",1f);
+            HeroPanda.instance.Takeexp(exp);
             
         }
         else

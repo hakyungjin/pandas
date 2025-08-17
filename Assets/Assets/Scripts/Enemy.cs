@@ -16,4 +16,5 @@ public class Enemy : ScriptableObject
     public GameObject hpBarPrefab; // HP바 프리팹
 
     public RuntimeAnimatorController animatorController;
+    public float exp;
 }

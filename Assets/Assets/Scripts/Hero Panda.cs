@@ -1,5 +1,5 @@
 using UnityEngine;
-using DG.Tweening; 
+using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Collections;
 
@@ -33,11 +33,13 @@ public class HeroPanda : MonoBehaviour
     private bool isAnimationUpdating = false; // 애니메이션 업데이트 중인지 체크
     private float animationTransitionDelay = 0.1f; // 애니메이션 전환 딜레이
 
-    private List<Collider2D> targetEnemies = new List<Collider2D>();
-    private float clearTime = 0;
-
+    
     public GameObject slash;
     public GameObject hpbar;
+    
+    private hpbar hpBarComponent;
+
+    public static HeroPanda instance;
 
     void Start()
     {
@@ -45,6 +47,11 @@ public class HeroPanda : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        if (hpbar != null)
+        {
+            hpBarComponent = hpbar.GetComponent<hpbar>();
+        }
+        instance = this;
     }
 
     void Update()
@@ -59,15 +66,8 @@ public class HeroPanda : MonoBehaviour
         // --- 상태 체크 ---
         CheckLevelUp();
         CheckDeath();
-        clearTime=Time.time;
-        if(clearTime>5){
-            clearTime=0;
-            targetEnemies.Clear();
-        }
-        if(targetEnemies.Count>0){
-            expcheck();
-        }
-
+        
+       
     }
 
     void FixedUpdate()
@@ -224,7 +224,23 @@ public class HeroPanda : MonoBehaviour
         // 여기에 죽음 애니메이션, 게임 오버 처리 등 추가
     }
 
-   
+    public void TakeDamage(int damageAmount)
+    {
+        hp -= damageAmount;
+        if (hp < 0) hp = 0;
+
+        if (hpBarComponent != null)
+        {
+            hpBarComponent.SetHp(hp);
+        }
+
+        if (hp <= 0)
+        {
+            animator.SetBool("isdie",true);
+            Invoke("De",2f);
+        }
+    }
+
     public void PerformAttackCheck()
     {
         if (isDie) return;
@@ -256,7 +272,7 @@ public class HeroPanda : MonoBehaviour
         {
             Debug.Log($"가장 가까운 적 [{closestEnemy.name}]을(를) 공격!");
             // Enemy 스크립트의 TakeDamage 함수를 호출
-            targetEnemies.Add(closestEnemy.GetComponent<Collider2D>());
+            
             if(closestEnemy.GetComponent<SpawnedEnemy>()!=null){
                 closestEnemy.GetComponent<SpawnedEnemy>().TakeDamage(attackDamage);
             }
@@ -272,18 +288,13 @@ public class HeroPanda : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
-    void expcheck(){
-        foreach(Collider2D enemy in targetEnemies){
-            if(enemy==null){
-                targetEnemies.Remove(enemy);
-                exp+=10;
-            }
-            
-        }
-    }
+
+    
+
     void slashActive(){
         slash.SetActive(true);
     }
+
     void slashInactive(){
         slash.SetActive(false);
     }
@@ -291,5 +302,12 @@ public class HeroPanda : MonoBehaviour
     void De() {
         Destroy(gameObject);
     }
-}   
+
+    public void Takeexp(float exp){
+        this.exp+=exp;
+        if(this.exp>=requetExp){
+            LevelUp();
+        }
+    }
+}
 
