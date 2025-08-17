@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.UI;
+using TMPro;
 
 public class HeroPanda : MonoBehaviour
 {
@@ -17,12 +19,15 @@ public class HeroPanda : MonoBehaviour
     public int level = 1;
     public float exp = 0;
     public float requetExp = 100;
+    public TextMeshProUGUI levelText;
 
     // --- 내부 변수 ---
     private Rigidbody2D rb;
     private Vector2 moveInput;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+
+    private bool isSkill2 = false;
 
     private bool isAttacking = false;
     private bool isDie = false;
@@ -36,8 +41,11 @@ public class HeroPanda : MonoBehaviour
     
     public GameObject slash;
     public GameObject hpbar;
+    public GameObject expbar;
+    public GameObject skill2Effect; // 스킬2 이펙트 (인스펙터에서 할당)
     
     private hpbar hpBarComponent;
+    private hpbar expBarComponent;
 
     public static HeroPanda instance;
 
@@ -51,7 +59,13 @@ public class HeroPanda : MonoBehaviour
         {
             hpBarComponent = hpbar.GetComponent<hpbar>();
         }
+        if (expbar != null)
+        {
+            expBarComponent = expbar.GetComponent<hpbar>();
+        }
         instance = this;
+
+    
     }
 
     void Update()
@@ -59,6 +73,7 @@ public class HeroPanda : MonoBehaviour
         // --- 입력 처리 ---
         HandleMovementInput();
         HandleAttackInput();
+        HandleSkill2Input();
 
         // --- 애니메이션 업데이트 ---
         UpdateAnimation(rb.linearVelocity);
@@ -67,7 +82,23 @@ public class HeroPanda : MonoBehaviour
         CheckLevelUp();
         CheckDeath();
         
-       
+        // --- UI 업데이트 ---
+        UpdateUI();
+    }
+
+    void UpdateUI()
+    {
+        // HP 바 업데이트
+        if (hpBarComponent != null)
+        {
+            hpBarComponent.SetHp(hp);
+        }
+        
+        // EXP 바 업데이트
+        if (expBarComponent != null)
+        {
+            expBarComponent.SetHp(exp);
+        }
     }
 
     void FixedUpdate()
@@ -170,6 +201,95 @@ public class HeroPanda : MonoBehaviour
         animator.SetBool("isAttacking", false);
     }
 
+    private void HandleSkill2Input()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && !isDie && !isAttacking)
+        {
+            StartSkill2();
+        }
+    }
+
+    private void StartSkill2()
+    {
+        isSkill2 = true;
+        animator.SetBool("isSkill2", true);
+        
+        // 스킬2 시작 시 즉시 공격
+        PerformSkill2Attack();
+        
+        // 스킬2 지속 시간 동안 주기적으로 공격 (0.5초마다)
+        InvokeRepeating("PerformSkill2Attack", 0.5f, 0.5f);
+        
+        // 스킬2 이펙트 활성화
+        Invoke("skill2EffectActive", 0.2f);
+        
+        // 스킬2 종료 (3초 후)
+        Invoke("EndSkill2", 2f);
+    }
+
+    private void EndSkill2()
+    {
+        isSkill2 = false;
+        animator.SetBool("isSkill2", false);
+        
+        // 주기적 공격 중지
+        CancelInvoke("PerformSkill2Attack");
+        
+        // 스킬2 이펙트 비활성화
+        skill2EffectInactive();
+    }
+
+    // 스킬2 공격 수행
+    private void PerformSkill2Attack()
+    {
+        if (isDie || !isSkill2) return;
+        
+        Debug.Log("스킬2 공격 실행!");
+        
+        // 스킬2는 더 넓은 범위와 강한 데미지
+        float skill2Range = attackRange * 2f; // 공격 범위 2배
+        int skill2Damage = attackDamage * 3;  // 데미지 3배
+        
+        // 스킬2 범위 내 모든 적 찾기
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, skill2Range);
+        
+        foreach (Collider2D enemyCollider in hitEnemies)
+        {
+            if (enemyCollider.CompareTag("Enemy") || enemyCollider.CompareTag("EnemyTower"))
+            {
+                Debug.Log($"스킬2로 {enemyCollider.name} 공격! 데미지: {skill2Damage}");
+                
+                if (enemyCollider.GetComponent<SpawnedEnemy>() != null)
+                {
+                    enemyCollider.GetComponent<SpawnedEnemy>().TakeDamage(skill2Damage);
+                }
+                else if (enemyCollider.GetComponent<EnemyTower>() != null)
+                {
+                    enemyCollider.GetComponent<EnemyTower>().TakeDamage(skill2Damage);
+                }
+            }
+        }
+    }
+
+    // 스킬2 이펙트 활성화
+    void skill2EffectActive()
+    {
+        if (skill2Effect != null)
+        {
+            skill2Effect.SetActive(true);
+        }
+    }
+
+    // 스킬2 이펙트 비활성화
+    void skill2EffectInactive()
+    {
+        if (skill2Effect != null)
+        {
+            skill2Effect.SetActive(false);
+        }
+    }
+
+
     // --- 상태 및 로직 함수들 ---
     private void Move()
     {
@@ -211,7 +331,7 @@ public class HeroPanda : MonoBehaviour
         attackDamage += 2;
         hp += 10;
 
-        Debug.Log($"LEVEL UP! 현재 레벨: {level}");
+        levelText.text = "LV" + level.ToString();
         // 여기에 레벨업 이펙트나 사운드 추가
     }
 
@@ -219,7 +339,7 @@ public class HeroPanda : MonoBehaviour
     {
         isDie = true;
         animator.SetBool("isdie", true);
-        Invoke("De",1f);
+        Invoke("Destroy",1f);
         Debug.Log("Hero is dead");
         // 여기에 죽음 애니메이션, 게임 오버 처리 등 추가
     }
@@ -229,15 +349,10 @@ public class HeroPanda : MonoBehaviour
         hp -= damageAmount;
         if (hp < 0) hp = 0;
 
-        if (hpBarComponent != null)
-        {
-            hpBarComponent.SetHp(hp);
-        }
-
         if (hp <= 0)
         {
             animator.SetBool("isdie",true);
-            Invoke("De",2f);
+            Invoke("Destroy",2f);
         }
     }
 
@@ -299,7 +414,7 @@ public class HeroPanda : MonoBehaviour
         slash.SetActive(false);
     }
 
-    void De() {
+    void Destroy() {
         Destroy(gameObject);
     }
 

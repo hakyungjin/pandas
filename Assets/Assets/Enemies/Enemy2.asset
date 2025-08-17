@@ -14,6 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 50
   attack: 10
+  moveSpeed: 0
+  attackSpeed: 0
+  attackRange: 0
   unitSprite: {fileID: -9114844809166226048, guid: 2315cc0495cb2054ea5dd392c1cff51e, type: 3}
   unitColor: {r: 1, g: 1, b: 1, a: 1}
   hpBarPrefab: {fileID: 2669600942163248997, guid: 0b288b66d6d49254fa4225016b42d65b, type: 3}
+  animatorController: {fileID: 0}
+  exp: 10

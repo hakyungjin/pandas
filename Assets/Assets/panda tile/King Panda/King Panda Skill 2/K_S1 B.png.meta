@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: 576abe608e38e7b48983e170a939d20f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7317123096997616445
+    second: K_S1 B_0
+  - first:
+      213: -6839493964291163595
+    second: K_S1 B_1
+  - first:
+      213: -2056422464988063256
+    second: K_S1 B_2
+  - first:
+      213: -1930025916411706575
+    second: K_S1 B_3
+  - first:
+      213: 8929572420598711033
+    second: K_S1 B_4
+  - first:
+      213: -8246746881671391315
+    second: K_S1 B_5
+  - first:
+      213: 4755010964740975481
+    second: K_S1 B_6
+  - first:
+      213: -2626589570190782925
+    second: K_S1 B_7
+  - first:
+      213: -6895480669006969808
+    second: K_S1 B_8
+  - first:
+      213: -4827020862269625724
+    second: K_S1 B_9
+  - first:
+      213: -2873989476130277002
+    second: K_S1 B_10
+  - first:
+      213: -3108196827093012843
+    second: K_S1 B_11
+  - first:
+      213: 7915931803778662197
+    second: K_S1 B_12
+  - first:
+      213: 6631478041224162142
+    second: K_S1 B_13
+  - first:
+      213: 3332855998686247129
+    second: K_S1 B_14
+  - first:
+      213: 3495173993268623839
+    second: K_S1 B_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: K_S1 B_0
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 1679
+        width: 162
+        height: 248
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c4a6a1af4b547a90800000000000000
+      internalID: -7317123096997616445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_S1 B_1
+      rect:
+        serializedVersion: 2
+        x: 690
+        y: 1682
+        width: 172
+        height: 245
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53a3ff60a7c3511a0800000000000000
+      internalID: -6839493964291163595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_S1 B_2
+      rect:
+        serializedVersion: 2
+        x: 1179
+        y: 1703
+        width: 217
+        height: 214
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e9d04ad9ae1673e0800000000000000
+      internalID: -2056422464988063256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_S1 B_3
+      rect:
+        serializedVersion: 2
+        x: 1656
+        y: 1728
+        width: 281
+        height: 165
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1338bfc97ab2735e0800000000000000
+      internalID: -1930025916411706575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_S1 B_4
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 1216
+        width: 310
+        height: 177
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f249ed3ec63ceb70800000000000000
+      internalID: 8929572420598711033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_S1 B_5
+      rect:
+        serializedVersion: 2
+        x: 625
+        y: 1218
+        width: 280
+        height: 175
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da79a6d776bad8d80800000000000000
+      internalID: -8246746881671391315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_S1 B_6
+      rect:
+        serializedVersion: 2
+        x: 1170
+        y: 1222
+        width: 211
+        height: 168
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97b297087413df140800000000000000
+      internalID: 4755010964740975481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_S1 B_7
+      rect:
+        serializedVersion: 2
+        x: 1710
+        y: 1205
+        width: 157
+        height: 181
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33e4802c3ba7c8bd0800000000000000
+      internalID: -2626589570190782925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_S1 B_8
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 681
+        width: 163
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03444488dd45e40a0800000000000000
+      internalID: -6895480669006969808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_S1 B_9
+      rect:
+        serializedVersion: 2
+        x: 667
+        y: 685
+        width: 190
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48ae405b91af20db0800000000000000
+      internalID: -4827020862269625724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_S1 B_10
+      rect:
+        serializedVersion: 2
+        x: 1151
+        y: 704
+        width: 247
+        height: 139
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6793b0b6cc98d18d0800000000000000
+      internalID: -2873989476130277002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_S1 B_11
+      rect:
+        serializedVersion: 2
+        x: 1644
+        y: 704
+        width: 289
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59eef1524777dd4d0800000000000000
+      internalID: -3108196827093012843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_S1 B_12
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 183
+        width: 310
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53fb17ef80a0bdd60800000000000000
+      internalID: 7915931803778662197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_S1 B_13
+      rect:
+        serializedVersion: 2
+        x: 637
+        y: 168
+        width: 269
+        height: 175
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5b28f6b42eb70c50800000000000000
+      internalID: 6631478041224162142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_S1 B_14
+      rect:
+        serializedVersion: 2
+        x: 1183
+        y: 148
+        width: 183
+        height: 224
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d839316fdea04e20800000000000000
+      internalID: 3332855998686247129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_S1 B_15
+      rect:
+        serializedVersion: 2
+        x: 1717
+        y: 141
+        width: 159
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd9b5f88a3a518030800000000000000
+      internalID: 3495173993268623839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      K_S1 B_0: -7317123096997616445
+      K_S1 B_1: -6839493964291163595
+      K_S1 B_10: -2873989476130277002
+      K_S1 B_11: -3108196827093012843
+      K_S1 B_12: 7915931803778662197
+      K_S1 B_13: 6631478041224162142
+      K_S1 B_14: 3332855998686247129
+      K_S1 B_15: 3495173993268623839
+      K_S1 B_2: -2056422464988063256
+      K_S1 B_3: -1930025916411706575
+      K_S1 B_4: 8929572420598711033
+      K_S1 B_5: -8246746881671391315
+      K_S1 B_6: 4755010964740975481
+      K_S1 B_7: -2626589570190782925
+      K_S1 B_8: -6895480669006969808
+      K_S1 B_9: -4827020862269625724
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
