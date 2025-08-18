@@ -121,7 +121,8 @@ MonoBehaviour:
   level: 1
   levelupUI: {fileID: 0}
   exhenceList: []
-  gameManager: {fileID: 0}
+  towerData: {fileID: 0}
+  additionalGold: 1
 --- !u!61 &8020656127840020597
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -180,7 +181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e998ef269b27d9a44ae84980f0ac7260, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiPrefab1: {fileID: 0}
+  uiParent: {fileID: 0}
+  uislot: {fileID: 6998192080652811541, guid: 526e9eb784402ad4b9b2a60ce72b8b2c, type: 3}
   installZone: {fileID: 0}
   levelupUI2: {fileID: 1109882549031366782, guid: 0833ced722b8b4a4d81177db2e606cf4, type: 3}
   levelupUI2_1: {fileID: 0}

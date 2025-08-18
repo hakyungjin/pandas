@@ -18,8 +18,12 @@ public class loading : MonoBehaviour
     public Canvas canvas;
     public Color upcolor;
 
+    public bool isinstall=false;
+
+    public int installCost=10;
 
 
+   
     void Start()
     {
         // Canvas 컴포넌트가 있는지 확인 후 설정
@@ -45,6 +49,7 @@ public class loading : MonoBehaviour
         {
             fillImage.fillAmount = 0f;
         }
+        fillImage.color=Color.green;
     }
 
 
@@ -79,13 +84,20 @@ public class loading : MonoBehaviour
                     
                     installZone.levelup(installZone.towerData.exhenceList[installZone.level-1]);
                     RecalculateUpgradeCost();
+                     Invoke("DestroyObject", 0.5f);
                 }
+                if (isinstall) {
+                    GameManager.instance.SpendGold(installCost);
+                    HeroPanda.instance.installManager.InstallUnit(HeroPanda.instance.transform);
+                    gameObject.SetActive(false);
+                }
+
+                
                 else
                 {
                     Debug.LogWarning("더 이상 강화할 수 없습니다. 최대 레벨입니다.");
                 }
-                //1.5초뒤
-                Invoke("DestroyObject", 0.5f);
+               
                 
             }
         }
@@ -116,6 +128,21 @@ public class loading : MonoBehaviour
         {
             Debug.Log("upgradeCost: " + upgradeCost);
             // 골드 부족 시 프리팹 색깔을 빨간색으로 변경
+            SetRedColor();
+        }
+    }
+    public void StartInstall()
+    {
+        if (GameManager.instance.GetCurrentGold() >= installCost) {
+        isinstall=true;
+        timer = 0f;
+        isUpgrading = true;
+        fillImage.fillAmount = 0f;
+        fillImage.color=Color.green;
+        }
+        else
+        {
+            Debug.Log("installCost: " + installCost);
             SetRedColor();
         }
     }
@@ -166,6 +193,10 @@ public class loading : MonoBehaviour
         {
             upgradeCost = 0;
         }
+    }
+    public void green()
+    {
+        background.color=Color.green;
     }
     
 }

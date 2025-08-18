@@ -37,6 +37,7 @@ public class InstallZone : MonoBehaviour, IDroppable
     public GameObject TowerPrefab2;
     // 캐릭터창에서 사용할 속성들
     public Sprite unitSprite;
+    public Sprite iconSprite;
     public int hp;
     public int attack;
     public float attackRange;
@@ -45,6 +46,7 @@ public class InstallZone : MonoBehaviour, IDroppable
     public GameObject levelupUI;
 
     public List<Exhence> exhenceList = new List<Exhence>();
+
     
 
 
@@ -130,6 +132,7 @@ public class InstallZone : MonoBehaviour, IDroppable
         GameManager.instance.SpendGold(towerData.goldCost);
         this.towerData = towerData;
         isGoldTower = towerData.isGoldTower;
+        iconSprite=towerData.iconSprite;
 
 
 
@@ -414,7 +417,14 @@ public class InstallZone : MonoBehaviour, IDroppable
 
     public void SetUnitInfo(InstallZone unit)
     {
-        pandaslot.instance.SetUnitInfo(unit);
+        if (pandaslot.instance != null)
+        {
+            pandaslot.instance.SetUnitInfo(unit);
+        }
+        else
+        {
+            Debug.LogWarning("[InstallZone] pandaslot.instance가 null입니다. UI 업데이트를 건너뜁니다.");
+        }
     }
 
   /// <summary>

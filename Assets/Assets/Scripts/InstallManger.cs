@@ -7,12 +7,7 @@ using UnityEngine.EventSystems;
 
 public class InstallManager : MonoBehaviour
 {
-    [Header("설치할 유닛 데이터 및 프리팹")]
-    public Tower unitData;          // ScriptableObject 데이터
-    public GameObject unitPrefab;   // 프리팹 (스프라이트 출력 포함)
-
-    [Header("레이어 마스크")]
-    public LayerMask installLayer;  // 설치 가능한 영역만 클릭되도록
+    
 
     [Header("타일 설치 설정")]
     public GameObject tilePrefab;
@@ -36,15 +31,8 @@ public class InstallManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)) // 마우스 왼쪽 클릭
-        {
-            if (Time.time - lastClickTime < doubleClickDelay)
-            {
-                InstallUnit();
-            }
+        
 
-            lastClickTime = Time.time;
-        }
 
         // 마우스 우클릭으로 타일 삭제
         if (Input.GetMouseButtonDown(1))
@@ -107,7 +95,7 @@ public class InstallManager : MonoBehaviour
         }
     }
 
-    void InstallUnit()
+    public void InstallUnit(Transform transform)
     {
         // 프리팹이 할당되지 않았으면 리턴
         if (tilePrefab == null)
@@ -116,19 +104,17 @@ public class InstallManager : MonoBehaviour
             return;
         }
 
-        // 마우스 위치를 월드 좌표로 변환
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePos.z = 0f; // 2D 게임이므로 Z축은 0으로 고정
+        
 
         // 겹침 검사
-        if (IsPositionOccupied(mousePos))
+        if (IsPositionOccupied(transform.position))
         {
             Debug.Log("이미 타일이 설치된 위치입니다!");
             return;
         }
 
         // InstallManager 하위에 프리팹 생성
-        GameObject newUnit = Instantiate(tilePrefab, mousePos, Quaternion.identity, transform);
+        GameObject newUnit = Instantiate(tilePrefab, transform.position, Quaternion.identity, this.transform);
 
         // 장판 개수 업데이트
         UpdateTileCount();

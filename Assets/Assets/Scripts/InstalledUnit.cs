@@ -685,6 +685,7 @@ System.Collections.IEnumerator DamageFlash()
     {
         Destroy(gameObject);
     }
+    
 
 }
 

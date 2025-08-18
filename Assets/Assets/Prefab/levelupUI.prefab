@@ -161,7 +161,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &6562968464231483764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,6 +198,8 @@ MonoBehaviour:
   installZone: {fileID: 0}
   canvas: {fileID: 0}
   upcolor: {r: 0, g: 0.6745098, b: 1, a: 1}
+  isinstall: 0
+  installCost: 10
 --- !u!1 &1312014377346734390
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,7 +8,9 @@ using TMPro;
 public class HeroPanda : MonoBehaviour
 {
     [Header("플레이어 스탯")]
-    public int hp = 100;
+    public int hp;
+    public int maxhp = 100;
+    public float hprate;
     public float moveSpeed = 10f;
     public float attackRange = 1.5f;
     public int attackDamage = 1;
@@ -20,6 +22,7 @@ public class HeroPanda : MonoBehaviour
     public float exp = 0;
     public float requetExp = 100;
     public TextMeshProUGUI levelText;
+    public float exprate;
 
     // --- 내부 변수 ---
     private Rigidbody2D rb;
@@ -31,6 +34,10 @@ public class HeroPanda : MonoBehaviour
 
     private bool isAttacking = false;
     private bool isDie = false;
+
+    // 자동 공격을 위한 변수들 (InstalledUnit과 동일한 흐름)
+    private float attackTimer = 0f;
+    private Transform currentTarget;
 
     // 애니메이션 관련 변수들 (InstalledUnit과 동일)
     private Vector2 lastDirection = Vector2.down; // 기본 아래 방향
@@ -49,6 +56,12 @@ public class HeroPanda : MonoBehaviour
 
     public static HeroPanda instance;
 
+    public InstallManager installManager;
+    public GameObject loading;
+
+    public Herostate herostate;
+    public bool stop=false;
+
     void Start()
     {
         // 필수 컴포넌트들을 시작 시 한 번만 가져와 변수에 저장 (캐싱)
@@ -66,14 +79,21 @@ public class HeroPanda : MonoBehaviour
         instance = this;
 
     
+        hp=maxhp;
+        herostate.Setstate(1,0,1);
     }
 
     void Update()
     {
+        if(!stop){
+            HandleMovementInput();
+            HandleAttackInput();
+        }
         // --- 입력 처리 ---
         HandleMovementInput();
         HandleAttackInput();
         HandleSkill2Input();
+        
 
         // --- 애니메이션 업데이트 ---
         UpdateAnimation(rb.linearVelocity);
@@ -82,23 +102,14 @@ public class HeroPanda : MonoBehaviour
         CheckLevelUp();
         CheckDeath();
         
-        // --- UI 업데이트 ---
-        UpdateUI();
-    }
-
-    void UpdateUI()
-    {
-        // HP 바 업데이트
-        if (hpBarComponent != null)
-        {
-            hpBarComponent.SetHp(hp);
-        }
+        // --- 자동 공격 로직 ---
+        AutoAttack();
+        hprate=(float)hp/maxhp;
+        if(exp>=requetExp) {LevelUp() ;}
+        exprate=exp/requetExp;
         
-        // EXP 바 업데이트
-        if (expBarComponent != null)
-        {
-            expBarComponent.SetHp(exp);
-        }
+       
+       
     }
 
     void FixedUpdate()
@@ -175,10 +186,10 @@ public class HeroPanda : MonoBehaviour
 
     private void HandleAttackInput()
     {
-        // 스페이스바를 누르면 공격 시작
+       // 스페이스바를 누르면 공격 시작
         if (Input.GetKeyDown(KeyCode.Space) && !isDie && !isAttacking)
         {
-            StartAttack();
+         // StartAttack();
         }
     }
 
@@ -295,6 +306,7 @@ public class HeroPanda : MonoBehaviour
     {
         if (!isDie)
         {
+            
             rb.linearVelocity = moveInput * moveSpeed;
         }
         else
@@ -333,6 +345,7 @@ public class HeroPanda : MonoBehaviour
 
         levelText.text = "LV" + level.ToString();
         // 여기에 레벨업 이펙트나 사운드 추가
+         herostate.Setstate(hprate,exprate,level);
     }
 
     void Die()
@@ -349,11 +362,14 @@ public class HeroPanda : MonoBehaviour
         hp -= damageAmount;
         if (hp < 0) hp = 0;
 
+
+
         if (hp <= 0)
         {
             animator.SetBool("isdie",true);
             Invoke("Destroy",2f);
         }
+         herostate.Setstate(hprate,exprate,level);
     }
 
     public void PerformAttackCheck()
@@ -397,6 +413,95 @@ public class HeroPanda : MonoBehaviour
         }
     }
 
+    // InstalledUnit과 유사한 자동 공격 루틴
+    private void AutoAttack()
+    {
+        if (isDie) return;
+
+        attackTimer += Time.deltaTime;
+        if (attackTimer >= 1f / Mathf.Max(attackSpeed, 0.001f))
+        {
+            currentTarget = FindNearestTarget();
+
+            if (currentTarget != null)
+            {
+                // 공격 시작 상태
+                isAttacking = true;
+                if (animator != null)
+                {
+                    animator.SetBool("isAttacking", true);
+                }
+
+                // 타겟 방향으로 바라보도록 애니메이션 방향 업데이트
+                Vector2 direction = (currentTarget.position - transform.position).normalized;
+                UpdateAnimation(direction);
+
+                // 근접 공격 데미지 적용 (총알 사용 없음)
+                var enemy = currentTarget.GetComponent<SpawnedEnemy>();
+                if (enemy != null)
+                {
+                    enemy.TakeDamage(attackDamage);
+                }
+                else
+                {
+                    var enemyTower = currentTarget.GetComponent<EnemyTower>();
+                    if (enemyTower != null)
+                    {
+                        enemyTower.TakeDamage(attackDamage);
+                    }
+                }
+
+                // 슬래시 이펙트를 짧게 표시
+                if (slash != null)
+                {
+                    StartCoroutine(ShowSlashBriefly(0.2f));
+                }
+            }
+            else
+            {
+                // 타겟이 없으면 공격 상태 해제
+                isAttacking = false;
+                if (animator != null)
+                {
+                    animator.SetBool("isAttacking", false);
+                }
+            }
+
+            attackTimer = 0f;
+        }
+    }
+
+    private IEnumerator ShowSlashBriefly(float duration)
+    {
+        slash.SetActive(true);
+        yield return new WaitForSeconds(duration);
+        slash.SetActive(false);
+    }
+
+    // InstalledUnit.FindNearestTarget과 동일한 방식
+    private Transform FindNearestTarget()
+    {
+        Collider2D[] allCollidersInRange = Physics2D.OverlapCircleAll(transform.position, attackRange);
+
+        Transform nearestTarget = null;
+        float nearestDistance = float.MaxValue;
+
+        foreach (Collider2D collider in allCollidersInRange)
+        {
+            if (collider.CompareTag("Enemy") || collider.CompareTag("EnemyTower"))
+            {
+                float distance = Vector2.Distance(transform.position, collider.transform.position);
+                if (distance < nearestDistance)
+                {
+                    nearestDistance = distance;
+                    nearestTarget = collider.transform;
+                }
+            }
+        }
+
+        return nearestTarget;
+    }
+
     // 공격 범위를 에디터 Scene 뷰에서 시각적으로 보여주는 기능
     private void OnDrawGizmosSelected()
     {
@@ -418,10 +523,53 @@ public class HeroPanda : MonoBehaviour
         Destroy(gameObject);
     }
 
+    void OnDestroy()
+    {
+        if (instance == this)
+        {
+            instance = null;
+        }
+    }
+
     public void Takeexp(float exp){
         this.exp+=exp;
-        if(this.exp>=requetExp){
-            LevelUp();
+        Debug.Log("exp: "+this.exp);
+        herostate.Setexp(exprate);
+       
+    }
+
+    public void OnMouseDown()
+
+    {
+        stop=true;
+        rb.linearVelocity=Vector2.zero;
+        if (loading == null)
+        {
+            Debug.LogWarning("loading UI가 할당되지 않았습니다.");
+            return;
+        }
+        loading.SetActive(true);
+        var loadingComponent = loading.GetComponent<loading>();
+        if (loadingComponent != null)
+        {
+            loadingComponent.green();
+            loadingComponent.StartInstall();
+        }
+    }
+    public void OnMouseUp()
+    {
+        stop=false;
+        var loadingComponent = loading != null ? loading.GetComponent<loading>() : null;
+        if (loadingComponent != null && loadingComponent.IsUpgrading())
+        {
+            // 설치/업그레이드 진행 중에는 끄지 않음
+            return;
+        }
+        if (loading != null)
+        {
+            loadingComponent.green();
+            loading.SetActive(false);
+            
         }
     }
 }

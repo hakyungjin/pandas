@@ -96,6 +96,7 @@ public class SpawnedEnemy : MonoBehaviour
         {
             GameObject hpBarInstance = Instantiate(enemyData.hpBarPrefab, transform);
             hpBarInstance.transform.localPosition = new Vector3(0, 0.55f, 0);
+            hpBarInstance.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
 
             hpBarTransform = hpBarInstance.transform;
             hpBarComponent = hpBarInstance.GetComponentInChildren<hpbar>();
@@ -146,7 +147,11 @@ public class SpawnedEnemy : MonoBehaviour
             Debug.Log($"[SpawnedEnemy] {gameObject.name}이(가) 파괴되었습니다!");
            //animator.SetBool("isdie",true);
             Invoke("DestroyEnemy",1f);
-            HeroPanda.instance.Takeexp(exp);
+            if (HeroPanda.instance != null && HeroPanda.instance.gameObject != null)
+            {
+                HeroPanda.instance.Takeexp(exp);
+            }
+        
             
         }
         else
@@ -264,6 +269,7 @@ public class SpawnedEnemy : MonoBehaviour
         // "Tower"와 "Unit" 태그를 가진 오브젝트 탐색
         GameObject[] towerTargets = GameObject.FindGameObjectsWithTag("Tower");
         GameObject[] unitTargets = GameObject.FindGameObjectsWithTag("Unit");
+        
 
         float shortestDistance = Mathf.Infinity;
         Transform nearestTarget = null;
@@ -289,6 +295,17 @@ public class SpawnedEnemy : MonoBehaviour
                 nearestTarget = target.transform;
             }
         }
+      
+            if (HeroPanda.instance != null && HeroPanda.instance.gameObject != null)
+            {
+                float herodistance = Vector2.Distance(transform.position, HeroPanda.instance.transform.position);
+                if (herodistance < detectionRange && herodistance < shortestDistance)
+                {
+                    shortestDistance = herodistance;
+                    nearestTarget = HeroPanda.instance.transform;
+                }
+            }
+
 
         currentTarget = nearestTarget;
     }
@@ -342,6 +359,14 @@ public class SpawnedEnemy : MonoBehaviour
             {
                 installedUnit.TakeDamage(attackDamage);
                 Debug.Log($"[SpawnedEnemy] 유닛 {currentTarget.name}에 {attackDamage} 데미지를 가했습니다.");
+            }
+        }
+        else if (currentTarget.CompareTag("Hero"))
+        
+        {
+            if (HeroPanda.instance != null && HeroPanda.instance.gameObject != null){
+                HeroPanda.instance.TakeDamage(attackDamage);
+                Debug.Log($"[SpawnedEnemy] 히어로 {currentTarget.name}에 {attackDamage} 데미지를 가했습니다.");
             }
         }
     }

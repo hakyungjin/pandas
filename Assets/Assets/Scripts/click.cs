@@ -4,7 +4,6 @@ using UnityEngine.EventSystems;
 
 public class click : MonoBehaviour
 {
-    public GameObject uiPrefab1;    // 띄울 UI 프리팹 1
     public InstallZone installZone; // InstallZone 컴포넌트 참조
 
     
@@ -22,34 +21,48 @@ public class click : MonoBehaviour
     void Start()
     {
         // InstallZone 컴포넌트 가져오기
-        
         installZone = GetComponent<InstallZone>();
-        uiPrefab1.SetActive(false);
+        var ps = pandaslot.GetOrFind();
+        if (ps != null)
+        {
+            ps.gameObject.SetActive(false);
+        }
     }
 
     void OnMouseEnter()
     {
 
         // installed unit이 있는지 체크
-        if (installZone.installedUnit != null)
+        if (installZone != null && installZone.installedUnit != null)
         {
             Vector3 spawnPosition = transform.position + new Vector3(0, 1, 0);
             levelupUI2_1 = Instantiate(levelupUI2, spawnPosition, Quaternion.identity);
             Debug.Log($"생성된 levelupUI 위치: {levelupUI2_1.transform.position}");
             
             levelupUI2_1.GetComponent<loading>().up(installZone);
-            uiPrefab1.SetActive(true);
+            var ps = pandaslot.GetOrFind();
+            if (ps != null)
+            {
+                ps.gameObject.SetActive(true);
+            }
+            else
+            {
+                Debug.LogWarning("pandaslot UI를 찾을 수 없습니다.");
+            }
             GameManager.instance.PlaySFX(1,0.5f,1f);
 
             installZone.SetUnitInfo(installZone);
-            Debug.Log("uiPrefab1.SetActive(true)");
+           
         }
         Debug.Log("OnMouseEnter");
     }
 
     void OnMouseExit()
     {
-        uiPrefab1.SetActive(false);
+        if (pandaslot.GetOrFind() != null)
+        {
+            pandaslot.GetOrFind().gameObject.SetActive(false);
+        }
         Destroy(levelupUI2_1);
     }
 
