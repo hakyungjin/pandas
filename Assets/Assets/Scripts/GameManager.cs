@@ -257,7 +257,7 @@ public class GameManager : MonoBehaviour
             TriggerGameOver();
         }
     }
-    private void TriggerGameClear()
+    public void TriggerGameClear()
     {
         Time.timeScale = 0;
         gameClearUI.SetActive(true);

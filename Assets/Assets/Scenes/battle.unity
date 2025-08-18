@@ -25781,21 +25781,41 @@ MonoBehaviour:
     enemyCount: 5
     enemyTowerCount: 10
     canProceed: 1
+    activeWaves: 02000000
   - name: 2
     center: {x: 4, y: 0}
     size: {x: 65, y: 30}
     enemyCount: 5
     enemyTowerCount: 15
     canProceed: 1
+    activeWaves: 03000000
+  - name: 0
+    center: {x: 4, y: 0}
+    size: {x: 65, y: 30}
+    enemyCount: 3
+    enemyTowerCount: 5
+    canProceed: 1
+    activeWaves: 03000000
+  - name: 0
+    center: {x: 4, y: 0}
+    size: {x: 65, y: 30}
+    enemyCount: 3
+    enemyTowerCount: 5
+    canProceed: 1
+    activeWaves: 01000000
   spawnPoints: []
   enemyBasePrefab: {fileID: 1825413465053216385, guid: 420df2eec3295d7408139d7414dd6c1d, type: 3}
   enemyTypes:
   - {fileID: 11400000, guid: b99e4dbe844fe214290b59268570f2ae, type: 2}
-  waveCooldown: 120
-  initialDelay: 2
+  initialDelay: 0
   autoSpawn: 1
   canStartNextWave: 1
   waitForAllAreasClear: 1
+  useTimeSchedule: 1
+  waveStartTimes:
+  - 2
+  - 60
+  - 240
   enemyEnhances:
   - name: 1
     enemyhpbonus: 20
@@ -26376,7 +26396,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &802149744
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -27174,12 +27194,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2585560891765538839}
     - target: {fileID: 4603639165739600860, guid: 4812fe18b2c7f9143af0f8627211328f, type: 3}
+      propertyPath: attackRange
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4603639165739600860, guid: 4812fe18b2c7f9143af0f8627211328f, type: 3}
       propertyPath: attackSpeed
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4603639165739600860, guid: 4812fe18b2c7f9143af0f8627211328f, type: 3}
       propertyPath: attackDamage
-      value: 5
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4603639165739600860, guid: 4812fe18b2c7f9143af0f8627211328f, type: 3}
       propertyPath: installManager

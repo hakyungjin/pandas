@@ -147,7 +147,7 @@ public class SpawnedEnemy : MonoBehaviour
             Debug.Log($"[SpawnedEnemy] {gameObject.name}이(가) 파괴되었습니다!");
            //animator.SetBool("isdie",true);
             Invoke("DestroyEnemy",1f);
-            if (HeroPanda.instance != null && HeroPanda.instance.gameObject != null)
+            if (HeroPanda.instance != null)
             {
                 HeroPanda.instance.Takeexp(exp);
             }
@@ -174,7 +174,7 @@ public class SpawnedEnemy : MonoBehaviour
         }
 
         // 1. 타겟이 없거나 파괴되었으면 탐색
-        if (currentTarget == null || currentTarget.gameObject == null)
+        if (currentTarget == null)
         {
             // 공격 중이었다면 공격 상태 초기화
             if (isAttacking)
@@ -296,13 +296,14 @@ public class SpawnedEnemy : MonoBehaviour
             }
         }
       
-            if (HeroPanda.instance != null && HeroPanda.instance.gameObject != null)
+            GameObject heroGo = GameObject.FindWithTag("Hero");
+            if (heroGo != null&&HeroPanda.instance.isDie==false)
             {
-                float herodistance = Vector2.Distance(transform.position, HeroPanda.instance.transform.position);
+                float herodistance = Vector2.Distance(transform.position, heroGo.transform.position);
                 if (herodistance < detectionRange && herodistance < shortestDistance)
                 {
                     shortestDistance = herodistance;
-                    nearestTarget = HeroPanda.instance.transform;
+                    nearestTarget = heroGo.transform;
                 }
             }
 
@@ -315,7 +316,7 @@ public class SpawnedEnemy : MonoBehaviour
         if (Time.time - lastAttackTime < attackSpeed) return;
 
         // 타겟이 유효한지 한 번 더 확인
-        if (currentTarget == null || currentTarget.gameObject == null)
+        if (currentTarget == null)
         {
             currentTarget = null;
             isAttacking = false;
@@ -330,6 +331,12 @@ public class SpawnedEnemy : MonoBehaviour
 
         // 공격 애니메이션 시작
         isAttacking = true;
+        if(currentTarget.CompareTag("Hero")&&HeroPanda.instance.isDie==true)
+        {
+            currentTarget=null;
+            isAttacking=false;
+            return;
+        }
         if (animator != null)
         {
             // 타겟을 향한 방향 벡터 계산
@@ -361,11 +368,12 @@ public class SpawnedEnemy : MonoBehaviour
                 Debug.Log($"[SpawnedEnemy] 유닛 {currentTarget.name}에 {attackDamage} 데미지를 가했습니다.");
             }
         }
-        else if (currentTarget.CompareTag("Hero"))
-        
+        else if (currentTarget.CompareTag("Hero")&&HeroPanda.instance.isDie==false)
         {
-            if (HeroPanda.instance != null && HeroPanda.instance.gameObject != null){
-                HeroPanda.instance.TakeDamage(attackDamage);
+            var hero = currentTarget.GetComponent<HeroPanda>();
+            if (hero != null)
+            {
+                hero.TakeDamage(attackDamage);
                 Debug.Log($"[SpawnedEnemy] 히어로 {currentTarget.name}에 {attackDamage} 데미지를 가했습니다.");
             }
         }

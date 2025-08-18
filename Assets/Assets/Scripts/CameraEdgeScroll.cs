@@ -13,6 +13,9 @@ public class CameraEdgeScroll : MonoBehaviour
     public Transform hero;
     public bool isFollowingHero = true;
 
+    
+
+
   
 
 
@@ -31,7 +34,11 @@ public class CameraEdgeScroll : MonoBehaviour
         }
         if(isFollowingHero)
         {
-            transform.position = hero.position + new Vector3(0, 0, -10);
+            if(hero!=null)
+            {
+                transform.position = hero.position + new Vector3(0, 0, -10);
+            }
+            else {isFollowingHero=false;}
         }
         
         

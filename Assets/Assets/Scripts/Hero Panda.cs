@@ -29,11 +29,12 @@ public class HeroPanda : MonoBehaviour
     private Vector2 moveInput;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+    private Collider2D heroCollider;
 
     private bool isSkill2 = false;
 
     private bool isAttacking = false;
-    private bool isDie = false;
+    public bool isDie = false;
 
     // 자동 공격을 위한 변수들 (InstalledUnit과 동일한 흐름)
     private float attackTimer = 0f;
@@ -61,6 +62,12 @@ public class HeroPanda : MonoBehaviour
 
     public Herostate herostate;
     public bool stop=false;
+    
+    [Header("부활 설정")]
+    public float reviveDelay = 3f; // 부활 대기 시간
+    [Range(0f,1f)] public float reviveHpRatio = 0.5f; // 부활 시 회복 비율
+    public Transform respawnPoint; // 지정 시 해당 위치로 부활
+    private Vector3 initialSpawnPosition; // 미지정 시 시작 위치로 부활
 
     void Start()
     {
@@ -68,6 +75,7 @@ public class HeroPanda : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        heroCollider = GetComponent<Collider2D>();
         if (hpbar != null)
         {
             hpBarComponent = hpbar.GetComponent<hpbar>();
@@ -81,19 +89,20 @@ public class HeroPanda : MonoBehaviour
     
         hp=maxhp;
         herostate.Setstate(1,0,1);
+        initialSpawnPosition = transform.position;
     }
 
     void Update()
     {
-        if(!stop){
+        if(!stop&&!isDie){
             HandleMovementInput();
             HandleAttackInput();
         }
         // --- 입력 처리 ---
-        HandleMovementInput();
-        HandleAttackInput();
-        HandleSkill2Input();
         
+        
+        HandleSkill2Input();
+        if(exp>=requetExp) {LevelUp() ;}
 
         // --- 애니메이션 업데이트 ---
         UpdateAnimation(rb.linearVelocity);
@@ -105,8 +114,8 @@ public class HeroPanda : MonoBehaviour
         // --- 자동 공격 로직 ---
         AutoAttack();
         hprate=(float)hp/maxhp;
-        if(exp>=requetExp) {LevelUp() ;}
         exprate=exp/requetExp;
+        
         
        
        
@@ -342,39 +351,41 @@ public class HeroPanda : MonoBehaviour
         attackRange += 0.1f;
         attackDamage += 2;
         hp += 10;
+        maxhp += 10;
 
-        levelText.text = "LV" + level.ToString();
-        // 여기에 레벨업 이펙트나 사운드 추가
+        
          herostate.Setstate(hprate,exprate,level);
     }
 
     void Die()
     {
+        if (isDie) return;
         isDie = true;
         animator.SetBool("isdie", true);
-        Invoke("Destroy",1f);
+        CancelInvoke();
+        rb.linearVelocity = Vector2.zero;
+        
         Debug.Log("Hero is dead");
-        // 여기에 죽음 애니메이션, 게임 오버 처리 등 추가
     }
 
     public void TakeDamage(int damageAmount)
     {
         hp -= damageAmount;
-        if (hp < 0) hp = 0;
+        
+        OnMouseUp();
+        if (hp < 0) { hp = 0; }
+        herostate.Setstate(hprate,exprate,level);
 
-
-
-        if (hp <= 0)
+        if (hp <= 0 && !isDie)
         {
-            animator.SetBool("isdie",true);
-            Invoke("Destroy",2f);
+            Die();
         }
-         herostate.Setstate(hprate,exprate,level);
     }
 
     public void PerformAttackCheck()
     {
-        if (isDie) return;
+        if (isDie&&stop) return;
+
         
         Debug.Log("Animation Event: Attack Check!");
 
@@ -520,7 +531,7 @@ public class HeroPanda : MonoBehaviour
     }
 
     void Destroy() {
-        Destroy(gameObject);
+        // 부활 시스템 도입으로 비활성화는 하지 않음 (호환 유지용)
     }
 
     void OnDestroy()
@@ -541,6 +552,10 @@ public class HeroPanda : MonoBehaviour
     public void OnMouseDown()
 
     {
+        if(rb.linearVelocity.magnitude>0.1f)
+        {
+            return;
+        }
         stop=true;
         rb.linearVelocity=Vector2.zero;
         if (loading == null)
@@ -560,16 +575,76 @@ public class HeroPanda : MonoBehaviour
     {
         stop=false;
         var loadingComponent = loading != null ? loading.GetComponent<loading>() : null;
-        if (loadingComponent != null && loadingComponent.IsUpgrading())
-        {
-            // 설치/업그레이드 진행 중에는 끄지 않음
-            return;
-        }
+       
         if (loading != null)
         {
             loadingComponent.green();
             loading.SetActive(false);
             
+        }
+    }
+    public void heroActive(){
+        gameObject.SetActive(true);
+    }
+
+    // --- 부활 루틴 ---
+    private IEnumerator HandleDeathAndRevive()
+    {
+        // 사망 연출 대기
+        yield return new WaitForSeconds(1f);
+
+        // 사망 상태에서 잠시 숨김/충돌 비활성화
+        if (spriteRenderer != null) spriteRenderer.enabled = false;
+        if (heroCollider != null) heroCollider.enabled = false;
+
+       if(isDie){
+        StartCoroutine(HandleDeathAndRevive());
+       }
+        Revive();
+    }
+
+    private void Revive()
+    {
+        // 위치 복귀
+        if (respawnPoint != null)
+        {
+            transform.position = respawnPoint.position;
+        }
+        else
+        {
+            transform.position = initialSpawnPosition;
+        }
+
+        // 체력 복구 (레벨/경험치/스탯 유지)
+        hp = Mathf.Max(1, Mathf.RoundToInt(maxhp * Mathf.Clamp01(reviveHpRatio)));
+        isDie = false;
+        animator.SetBool("isdie", false);
+
+        // 보이기/충돌 복원
+        if (spriteRenderer != null) spriteRenderer.enabled = true;
+        if (heroCollider != null) heroCollider.enabled = true;
+
+        // UI 갱신
+        hprate = (float)hp / Mathf.Max(1, maxhp);
+        exprate = requetExp > 0 ? exp / requetExp : 0f;
+        herostate.Setstate(hprate, exprate, level);
+    }
+
+    // 외부에서 즉시 부활 시키고 싶을 때 호출
+    public void ReviveNow(bool fullHeal = false)
+    {
+        if (!isDie)
+        {
+            return;
+        }
+        StopAllCoroutines();
+        Revive();
+        if (fullHeal)
+        {
+            hp = maxhp;
+            hprate = (float)hp / Mathf.Max(1, maxhp);
+            exprate = requetExp > 0 ? exp / requetExp : 0f;
+            herostate.Setstate(hprate, exprate, level);
         }
     }
 }

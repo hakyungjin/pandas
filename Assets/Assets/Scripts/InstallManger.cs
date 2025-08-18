@@ -20,6 +20,8 @@ public class InstallManager : MonoBehaviour
     private float lastClickTime = 0f;
     private float doubleClickDelay = 0.4f; // 더블클릭 간격(초)
 
+    private bool isshow=false;
+
     void Start()
     {
         mainCamera = Camera.main;
@@ -48,6 +50,22 @@ public class InstallManager : MonoBehaviour
                 ShowMenu();
             }
         }
+        if(Input.GetMouseButtonDown(0))
+        { var pos=new PointerEventData(EventSystem.current);
+          pos.position=Input.mousePosition;
+          List<RaycastResult> results=new List<RaycastResult>();
+          EventSystem.current.RaycastAll(pos,results);
+          foreach(RaycastResult result in results)
+          {
+            if(result.gameObject==currentDeleteButton)
+            {return;}
+          }
+          if(currentDeleteButton!=null)
+          { 
+            Destroy(currentDeleteButton);
+            currentDeleteButton=null;
+          }
+        }
     }
 
     // 우클릭 시 컨텍스트 메뉴 표시
@@ -64,7 +82,7 @@ public class InstallManager : MonoBehaviour
             Debug.LogWarning("targetCanvas가 할당되지 않았습니다!");
             return;
         }
-
+        isshow=true;
         // 기존 버튼이 있으면 제거
         if (currentDeleteButton != null)
         {
@@ -88,6 +106,7 @@ public class InstallManager : MonoBehaviour
     // UI 숨기기 (다른 곳 클릭 시)
     public void HideMenu()
     {
+        isshow=false;
         if (currentDeleteButton != null)
         {
             Destroy(currentDeleteButton);
