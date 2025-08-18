@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: e07130dcdfa87a648963e7116b460e8a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8628689427675532317
+    second: K_A SE_0
+  - first:
+      213: -6906677026377264088
+    second: K_A SE_1
+  - first:
+      213: -1900882641862470156
+    second: K_A SE_2
+  - first:
+      213: -4541222285099136553
+    second: K_A SE_3
+  - first:
+      213: -2588892576455984372
+    second: K_A SE_4
+  - first:
+      213: 4221811750639850553
+    second: K_A SE_5
+  - first:
+      213: -2504891720744713087
+    second: K_A SE_6
+  - first:
+      213: -6619312552752071952
+    second: K_A SE_7
+  - first:
+      213: -2063254666641067347
+    second: K_A SE_8
+  - first:
+      213: -3993754664433084114
+    second: K_A SE_9
+  - first:
+      213: -870878553347207435
+    second: K_A SE_10
+  - first:
+      213: -6792683362385240797
+    second: K_A SE_11
+  - first:
+      213: -3255467489359038418
+    second: K_A SE_12
+  - first:
+      213: 2383591876770922944
+    second: K_A SE_13
+  - first:
+      213: -3090526793441793224
+    second: K_A SE_14
+  - first:
+      213: 3187618880199658919
+    second: K_A SE_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: K_A SE_0
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 1734
+        width: 239
+        height: 189
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e33b3aaeacb04880800000000000000
+      internalID: -8628689427675532317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_A SE_1
+      rect:
+        serializedVersion: 2
+        x: 654
+        y: 1734
+        width: 239
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8249e6076dd8620a0800000000000000
+      internalID: -6906677026377264088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_A SE_2
+      rect:
+        serializedVersion: 2
+        x: 1177
+        y: 1733
+        width: 233
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f5d41cfe45be95e0800000000000000
+      internalID: -1900882641862470156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_A SE_3
+      rect:
+        serializedVersion: 2
+        x: 1723
+        y: 1731
+        width: 207
+        height: 187
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d9049264665af0c0800000000000000
+      internalID: -4541222285099136553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_A SE_4
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 1216
+        width: 181
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0bf1b21be7621cd0800000000000000
+      internalID: -2588892576455984372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_A SE_5
+      rect:
+        serializedVersion: 2
+        x: 733
+        y: 1214
+        width: 189
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93455794b63e69a30800000000000000
+      internalID: 4221811750639850553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_A SE_6
+      rect:
+        serializedVersion: 2
+        x: 1244
+        y: 1213
+        width: 196
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 184c1306046dc3dd0800000000000000
+      internalID: -2504891720744713087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_A SE_7
+      rect:
+        serializedVersion: 2
+        x: 1754
+        y: 1209
+        width: 201
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0fabdebcd4a7324a0800000000000000
+      internalID: -6619312552752071952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_A SE_8
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 694
+        width: 201
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da231b1ffc8dd53e0800000000000000
+      internalID: -2063254666641067347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_A SE_9
+      rect:
+        serializedVersion: 2
+        x: 731
+        y: 697
+        width: 200
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e291862ea455398c0800000000000000
+      internalID: -3993754664433084114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_A SE_10
+      rect:
+        serializedVersion: 2
+        x: 1243
+        y: 701
+        width: 197
+        height: 155
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5fecb31e1940ae3f0800000000000000
+      internalID: -870878553347207435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_A SE_11
+      rect:
+        serializedVersion: 2
+        x: 1755
+        y: 702
+        width: 191
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32d5259987a8bb1a0800000000000000
+      internalID: -6792683362385240797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_A SE_12
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 192
+        width: 182
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e28fbee019142d2d0800000000000000
+      internalID: -3255467489359038418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_A SE_13
+      rect:
+        serializedVersion: 2
+        x: 699
+        y: 195
+        width: 207
+        height: 187
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c10070ee28341120800000000000000
+      internalID: 2383591876770922944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_A SE_14
+      rect:
+        serializedVersion: 2
+        x: 1177
+        y: 197
+        width: 233
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83b2314714e3c15d0800000000000000
+      internalID: -3090526793441793224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_A SE_15
+      rect:
+        serializedVersion: 2
+        x: 1678
+        y: 198
+        width: 239
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ad01a99b72bc3c20800000000000000
+      internalID: 3187618880199658919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      K_A SE_0: -8628689427675532317
+      K_A SE_1: -6906677026377264088
+      K_A SE_10: -870878553347207435
+      K_A SE_11: -6792683362385240797
+      K_A SE_12: -3255467489359038418
+      K_A SE_13: 2383591876770922944
+      K_A SE_14: -3090526793441793224
+      K_A SE_15: 3187618880199658919
+      K_A SE_2: -1900882641862470156
+      K_A SE_3: -4541222285099136553
+      K_A SE_4: -2588892576455984372
+      K_A SE_5: 4221811750639850553
+      K_A SE_6: -2504891720744713087
+      K_A SE_7: -6619312552752071952
+      K_A SE_8: -2063254666641067347
+      K_A SE_9: -3993754664433084114
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

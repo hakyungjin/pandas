@@ -122,7 +122,7 @@ public class InstalledUnit : MonoBehaviour
         if (!isPreview)
         {
             GameObject hpBarInstance = Instantiate(hpBarPrefab, transform);
-            hpBarInstance.transform.localPosition = new Vector3(0, 3.8f, 0); // Position above the unit
+            hpBarInstance.transform.localPosition = new Vector3(0, 1f, 0); // Position above the unit
 
             hpBarTransform = hpBarInstance.transform;
             hpBarComponent = hpBarInstance.GetComponent<hpbar>();

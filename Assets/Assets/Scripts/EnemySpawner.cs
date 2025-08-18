@@ -55,6 +55,18 @@ public class EnemySpawner : MonoBehaviour
     {
         StartCoroutine(WaveSystemCoroutine());
     }
+    void Update()
+    {
+        // 컬렉션을 순회하면서 수정하지 않도록 한 번에 정리
+        if (spawnPoints.Count > 0)
+        {
+            spawnPoints.RemoveAll(p => p == null);
+        }
+        if(spawnPoints.Count==0&&currentWave-1==waveStartTimes.Count)
+        {
+            GameManager.instance.OnAllSpawnPointsDestroyed();
+        }
+    }
 
     private IEnumerator WaveSystemCoroutine()
     {
@@ -72,13 +84,17 @@ public class EnemySpawner : MonoBehaviour
             if (useTimeSchedule)
             {
                 int waveIndex = currentWave - 1;
-                if (waveIndex >= 0 && waveIndex < waveStartTimes.Count)
+                // 스케줄 범위를 초과하면 스폰 종료
+                if (waveIndex < 0 || waveIndex >= waveStartTimes.Count)
                 {
-                    float targetTime = waveStartTimes[waveIndex];
-                    yield return new WaitUntil(() => 
-                        GameManager.instance != null && GameManager.instance.GetGameTime() >= targetTime
-                    );
+                    Debug.Log("[EnemySpawner] 모든 스케줄된 웨이브가 완료되어 자동 스폰을 종료합니다.");
+                    autoSpawn = false;
+                    yield break;
                 }
+                float targetTime = waveStartTimes[waveIndex];
+                yield return new WaitUntil(() => 
+                    GameManager.instance != null && GameManager.instance.GetGameTime() >= targetTime
+                );
             }
 
             EnemyEnhance enhance = GetEnhanceForWave(currentWave);
@@ -147,10 +163,12 @@ public class EnemySpawner : MonoBehaviour
     {
         spawnPoints.RemoveAll(p => p == null || p == destroyedSpawnPoint);
 
-        if (spawnPoints.Count == 0)
+        if (spawnPoints.Count==0)
         {
             Debug.Log("[EnemySpawner] 스폰 포인트가 모두 파괴됨 - 웨이브 종료");
-            if (currentWave == waveStartTimes.Count) // 마지막 웨이브라면 클리어
+            // 마지막 웨이브 클리어 판정 (오프바이원 보정)
+            int lastWaveNumber = useTimeSchedule ? waveStartTimes.Count : enemyEnhances.Count;
+            if (lastWaveNumber > 0 && (currentWave - 1) >= lastWaveNumber)
                 GameManager.instance.TriggerGameClear();
         }
     }

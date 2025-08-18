@@ -24680,6 +24680,11 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &310511372 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1728374139891542680, guid: 9900b420f19680e48a55f4e442628f29, type: 3}
+  m_PrefabInstance: {fileID: 6804099859479616632}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &311369197
 GameObject:
   m_ObjectHideFlags: 0
@@ -25740,6 +25745,7 @@ MonoBehaviour:
   gameClearUI: {fileID: 2098176874}
   gamePauseUI: {fileID: 1436801169}
   tileCount: 0
+  installZones: []
   bgmSource: {fileID: 567725029}
   sfxSource: {fileID: 567725029}
   bgmMap: []
@@ -25779,30 +25785,23 @@ MonoBehaviour:
     center: {x: 0, y: 0}
     size: {x: 30, y: 20}
     enemyCount: 5
-    enemyTowerCount: 10
+    enemyTowerCount: 5
     canProceed: 1
-    activeWaves: 02000000
+    activeWaves: 01000000
   - name: 2
     center: {x: 4, y: 0}
     size: {x: 65, y: 30}
     enemyCount: 5
-    enemyTowerCount: 15
+    enemyTowerCount: 10
     canProceed: 1
-    activeWaves: 03000000
+    activeWaves: 02000000
   - name: 0
     center: {x: 4, y: 0}
     size: {x: 65, y: 30}
-    enemyCount: 3
-    enemyTowerCount: 5
+    enemyCount: 1
+    enemyTowerCount: 1
     canProceed: 1
     activeWaves: 03000000
-  - name: 0
-    center: {x: 4, y: 0}
-    size: {x: 65, y: 30}
-    enemyCount: 3
-    enemyTowerCount: 5
-    canProceed: 1
-    activeWaves: 01000000
   spawnPoints: []
   enemyBasePrefab: {fileID: 1825413465053216385, guid: 420df2eec3295d7408139d7414dd6c1d, type: 3}
   enemyTypes:
@@ -25813,7 +25812,7 @@ MonoBehaviour:
   waitForAllAreasClear: 1
   useTimeSchedule: 1
   waveStartTimes:
-  - 2
+  - 1
   - 60
   - 240
   enemyEnhances:
@@ -25824,6 +25823,12 @@ MonoBehaviour:
     enemyattackspeedbonus: 0
     enemyattackrangebonus: 0
   - name: 2
+    enemyhpbonus: 20
+    enemyattackbonus: 2
+    enemymovespeedbonus: 0
+    enemyattackspeedbonus: 0
+    enemyattackrangebonus: 0
+  - name: 3
     enemyhpbonus: 20
     enemyattackbonus: 2
     enemymovespeedbonus: 0
@@ -26370,6 +26375,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8143737358186958464, guid: 4812fe18b2c7f9143af0f8627211328f, type: 3}
   m_PrefabInstance: {fileID: 1064760584}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &700894806 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4603639165739600860, guid: 4812fe18b2c7f9143af0f8627211328f, type: 3}
+  m_PrefabInstance: {fileID: 1064760584}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cce8d7e984cc0d43bfd114fc99e7406, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &735591921 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2862928829149056222, guid: 420df2eec3295d7408139d7414dd6c1d, type: 3}
@@ -35444,12 +35460,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d91d1dbd85ca4224e84940524d6e9cd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  icon: {fileID: 8675153859314277572}
   levelText: {fileID: 7987731906357869143}
   hpbar: {fileID: 335363235}
   expbar: {fileID: 574892606}
   skill1: {fileID: 7580288771925045509}
   skill2: {fileID: 4772174095241706022}
   skill3: {fileID: 5082611399337359070}
+  Reviveicon: {fileID: 13910288, guid: 9294385d963cc14439cbd5f854c88ee1, type: 3}
+  normalicon: {fileID: 7778529597509175358, guid: 719e7df5704f4ef4e8efd799c4acf1da, type: 3}
 --- !u!114 &4772174095241706022 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4027772584345187645, guid: 9900b420f19680e48a55f4e442628f29, type: 3}
@@ -35610,6 +35629,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2976400897283644350, guid: 9900b420f19680e48a55f4e442628f29, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2585560891765538839}
+    - targetCorrespondingSourceObject: {fileID: 1728374139891542680, guid: 9900b420f19680e48a55f4e442628f29, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8675153859314277570}
   m_SourcePrefab: {fileID: 100100000, guid: 9900b420f19680e48a55f4e442628f29, type: 3}
 --- !u!1001 &6818210913900883900
 PrefabInstance:
@@ -35719,6 +35741,73 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5101106665683457218, guid: 9900b420f19680e48a55f4e442628f29, type: 3}
   m_PrefabInstance: {fileID: 6804099859479616632}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8675153859314277570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 310511372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 8675153859314277572}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 700894806}
+        m_TargetAssemblyTypeName: HeroPanda, Assembly-CSharp
+        m_MethodName: Revive
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &8675153859314277572 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7305187818050052983, guid: 9900b420f19680e48a55f4e442628f29, type: 3}
+  m_PrefabInstance: {fileID: 6804099859479616632}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 310511372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

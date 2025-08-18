@@ -94,7 +94,8 @@ public class HeroPanda : MonoBehaviour
 
     void Update()
     {
-        if(!stop&&!isDie){
+        if(isDie) return;
+        if(!stop){
             HandleMovementInput();
             HandleAttackInput();
         }
@@ -361,9 +362,11 @@ public class HeroPanda : MonoBehaviour
     {
         if (isDie) return;
         isDie = true;
+        herostate.Setstate(0,exprate,level);
         animator.SetBool("isdie", true);
-        CancelInvoke();
+        animator.SetBool("isAttacking", false);
         rb.linearVelocity = Vector2.zero;
+        herostate.SetReviveIcon();
         
         Debug.Log("Hero is dead");
     }
@@ -603,30 +606,27 @@ public class HeroPanda : MonoBehaviour
         Revive();
     }
 
-    private void Revive()
+    public void Revive()
     {
-        // 위치 복귀
-        if (respawnPoint != null)
+        if(!isDie) return;
+        if(GameManager.instance.GetGold()<20)
         {
-            transform.position = respawnPoint.position;
+            return;
         }
-        else
-        {
-            transform.position = initialSpawnPosition;
-        }
+        herostate.SetNormalIcon();
+        GameManager.instance.SpendGold(20);
 
         // 체력 복구 (레벨/경험치/스탯 유지)
-        hp = Mathf.Max(1, Mathf.RoundToInt(maxhp * Mathf.Clamp01(reviveHpRatio)));
+        hp = maxhp;
         isDie = false;
+        animator.Rebind();
         animator.SetBool("isdie", false);
 
-        // 보이기/충돌 복원
-        if (spriteRenderer != null) spriteRenderer.enabled = true;
+       
         if (heroCollider != null) heroCollider.enabled = true;
 
         // UI 갱신
-        hprate = (float)hp / Mathf.Max(1, maxhp);
-        exprate = requetExp > 0 ? exp / requetExp : 0f;
+        hprate = (float)hp / maxhp;
         herostate.Setstate(hprate, exprate, level);
     }
 

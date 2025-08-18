@@ -1,0 +1,31 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# https://www.codeandweb.com/texturepacker/unity
+#
+# $TexturePacker:SmartUpdate:f49bd6d99ea0fbcb412bd52f9863b88e:c1d5f738fc46f8a5a39c3f244ff2a563:e7bfd3e89195c0e0f17def34f84bb407$
+#
+:format=40300
+:texture=K_A f.png
+:size=2048x2048
+:pivotpoints=enabled
+:borders=disabled
+:alphahandling=ClearTransparentPixels
+
+K_A0032;0;1536;512;512; 0.5;0.5; 0;0;0;0
+K_A0034;512;1536;512;512; 0.5;0.5; 0;0;0;0
+K_A0036;1024;1536;512;512; 0.5;0.5; 0;0;0;0
+K_A0038;1536;1536;512;512; 0.5;0.5; 0;0;0;0
+K_A0040;0;1024;512;512; 0.5;0.5; 0;0;0;0
+K_A0042;512;1024;512;512; 0.5;0.5; 0;0;0;0
+K_A0044;1024;1024;512;512; 0.5;0.5; 0;0;0;0
+K_A0046;1536;1024;512;512; 0.5;0.5; 0;0;0;0
+K_A0048;0;512;512;512; 0.5;0.5; 0;0;0;0
+K_A0050;512;512;512;512; 0.5;0.5; 0;0;0;0
+K_A0052;1024;512;512;512; 0.5;0.5; 0;0;0;0
+K_A0054;1536;512;512;512; 0.5;0.5; 0;0;0;0
+K_A0056;0;0;512;512; 0.5;0.5; 0;0;0;0
+K_A0058;512;0;512;512; 0.5;0.5; 0;0;0;0
+K_A0060;1024;0;512;512; 0.5;0.5; 0;0;0;0
+K_A0062;1536;0;512;512; 0.5;0.5; 0;0;0;0

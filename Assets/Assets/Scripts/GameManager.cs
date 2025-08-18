@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     public int tileCount;
 
     
-    private List<InstallZone> installZones = new List<InstallZone>(); // 모든 설치 구역 관리
+    public List<InstallZone> installZones = new List<InstallZone>(); // 모든 설치 구역 관리
 
     public static GameManager instance;
     public static GameManager Instance => instance;
@@ -80,8 +80,6 @@ public class GameManager : MonoBehaviour
         UpdateTimerUI();
         Debug.Log("[GameManager] 타이머 시스템 초기화 완료");
         
-        // InstallZone 찾기 및 등록
-        InitializeInstallZones();
         
         
        
@@ -296,7 +294,10 @@ public class GameManager : MonoBehaviour
         TriggerGameClear();
     }
 
-    
+    public int GetGold()
+    {
+        return currentGold;
+    }
 
     public void PlayBGM(int key, float volume = 1f, bool loop = true)
     {

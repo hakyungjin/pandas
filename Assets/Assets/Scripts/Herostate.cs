@@ -4,13 +4,16 @@ using UnityEngine.UI;
 
 public class Herostate : MonoBehaviour
 {
+    public Image icon;
     public TextMeshProUGUI levelText;
     public Image hpbar;
     public Image expbar;
     public Image skill1;
     public Image skill2;
     public Image skill3;
-    
+
+    public Sprite Reviveicon;
+    public Sprite normalicon;
     
 
     // Update is called once per frame
@@ -42,5 +45,15 @@ public class Herostate : MonoBehaviour
         else if (skill==3) {
             skill3.fillAmount=1;
         }
+    }
+    public void SetReviveIcon() {
+        icon.sprite=Reviveicon;
+        icon.transform.GetChild(0).gameObject.SetActive(false);
+        icon.transform.GetChild(1).gameObject.SetActive(false);
+    }
+    public void SetNormalIcon() {
+        icon.sprite=normalicon;
+        icon.transform.GetChild(0).gameObject.SetActive(true);
+        icon.transform.GetChild(1).gameObject.SetActive(true);
     }
 }

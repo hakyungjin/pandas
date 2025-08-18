@@ -211,7 +211,6 @@ public class SpawnedEnemy : MonoBehaviour
         if (distance <= attackRange)
         {
             TryAttack();
-            Debug.Log($"[SpawnedEnemy] {gameObject.name}이(가) {currentTarget.name}을(를) 공격했습니다.");
         }
         // 3. 공격 범위 밖에 있으면 타겟으로 이동
         else
@@ -316,14 +315,10 @@ public class SpawnedEnemy : MonoBehaviour
         if (Time.time - lastAttackTime < attackSpeed) return;
 
         // 타겟이 유효한지 한 번 더 확인
-        if (currentTarget == null)
+        if (currentTarget == null||currentTarget.CompareTag("Hero")&&HeroPanda.instance.isDie==true)
         {
             currentTarget = null;
-            isAttacking = false;
-            if (animator != null)
-            {
-                animator.SetBool("isAttacking", false);
-            }
+            
             return;
         }
 

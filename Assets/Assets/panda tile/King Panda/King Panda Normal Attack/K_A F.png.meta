@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: 3f5280e1568f72e458f90e2ad090ee1b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8507652913254822082
+    second: K_A F_0
+  - first:
+      213: 3078254015867354027
+    second: K_A F_1
+  - first:
+      213: -1295153568832422097
+    second: K_A F_2
+  - first:
+      213: -1980376927168134483
+    second: K_A F_3
+  - first:
+      213: 6899084604548998979
+    second: K_A F_4
+  - first:
+      213: 6302710384776023825
+    second: K_A F_5
+  - first:
+      213: 7453406978649264177
+    second: K_A F_6
+  - first:
+      213: 1199537758551081834
+    second: K_A F_7
+  - first:
+      213: -8629760398825802923
+    second: K_A F_8
+  - first:
+      213: 2700693313311320497
+    second: K_A F_9
+  - first:
+      213: 7874236145209812190
+    second: K_A F_10
+  - first:
+      213: 5517255393603044455
+    second: K_A F_11
+  - first:
+      213: -6413171974643847170
+    second: K_A F_12
+  - first:
+      213: -7628773466689261684
+    second: K_A F_13
+  - first:
+      213: 5765906929819414745
+    second: K_A F_14
+  - first:
+      213: -874962901019638856
+    second: K_A F_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: K_A F_0
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 1725
+        width: 107
+        height: 234
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3f012930cebee980800000000000000
+      internalID: -8507652913254822082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_A F_1
+      rect:
+        serializedVersion: 2
+        x: 725
+        y: 1722
+        width: 108
+        height: 241
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bab7138d7b728ba20800000000000000
+      internalID: 3078254015867354027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_A F_2
+      rect:
+        serializedVersion: 2
+        x: 1234
+        y: 1716
+        width: 108
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2ff920f0b0b60ee0800000000000000
+      internalID: -1295153568832422097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_A F_3
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 1707
+        width: 115
+        height: 241
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da283ce5da94484e0800000000000000
+      internalID: -1980376927168134483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_A F_4
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 1186
+        width: 114
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 347628915e87ebf50800000000000000
+      internalID: 6899084604548998979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_A F_5
+      rect:
+        serializedVersion: 2
+        x: 732
+        y: 1177
+        width: 111
+        height: 183
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11f8db6a3b9b77750800000000000000
+      internalID: 6302710384776023825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_A F_6
+      rect:
+        serializedVersion: 2
+        x: 1244
+        y: 1171
+        width: 119
+        height: 187
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1309ec04822df6760800000000000000
+      internalID: 7453406978649264177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_A F_7
+      rect:
+        serializedVersion: 2
+        x: 1753
+        y: 1167
+        width: 128
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a630b196c3d95a010800000000000000
+      internalID: 1199537758551081834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_A F_8
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 653
+        width: 132
+        height: 191
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5533143c3aeec3880800000000000000
+      internalID: -8629760398825802923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_A F_9
+      rect:
+        serializedVersion: 2
+        x: 729
+        y: 655
+        width: 128
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b9a133724aca7520800000000000000
+      internalID: 2700693313311320497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_A F_10
+      rect:
+        serializedVersion: 2
+        x: 1240
+        y: 659
+        width: 123
+        height: 187
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed4a5c8fd08e64d60800000000000000
+      internalID: 7874236145209812190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_A F_11
+      rect:
+        serializedVersion: 2
+        x: 1752
+        y: 665
+        width: 115
+        height: 183
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76441de7c8a319c40800000000000000
+      internalID: 5517255393603044455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_A F_12
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 162
+        width: 114
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: effecd74116dff6a0800000000000000
+      internalID: -6413171974643847170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_A F_13
+      rect:
+        serializedVersion: 2
+        x: 719
+        y: 171
+        width: 115
+        height: 241
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8faf0673f6212690800000000000000
+      internalID: -7628773466689261684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_A F_14
+      rect:
+        serializedVersion: 2
+        x: 1234
+        y: 180
+        width: 108
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d079d7bdcd940050800000000000000
+      internalID: 5765906929819414745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: K_A F_15
+      rect:
+        serializedVersion: 2
+        x: 1749
+        y: 186
+        width: 108
+        height: 241
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b3441590e18bd3f0800000000000000
+      internalID: -874962901019638856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      K_A F_0: -8507652913254822082
+      K_A F_1: 3078254015867354027
+      K_A F_10: 7874236145209812190
+      K_A F_11: 5517255393603044455
+      K_A F_12: -6413171974643847170
+      K_A F_13: -7628773466689261684
+      K_A F_14: 5765906929819414745
+      K_A F_15: -874962901019638856
+      K_A F_2: -1295153568832422097
+      K_A F_3: -1980376927168134483
+      K_A F_4: 6899084604548998979
+      K_A F_5: 6302710384776023825
+      K_A F_6: 7453406978649264177
+      K_A F_7: 1199537758551081834
+      K_A F_8: -8629760398825802923
+      K_A F_9: 2700693313311320497
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -59,6 +59,7 @@ public class InstallZone : MonoBehaviour, IDroppable
 
     void Start()
     {
+        GameManager.instance.installZones.Add(this);
 
     }
 
