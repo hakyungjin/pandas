@@ -13,6 +13,7 @@ public class CameraEdgeScroll : MonoBehaviour
     public Transform hero;
     public bool isFollowingHero = true;
 
+
     
 
 
@@ -29,7 +30,8 @@ public class CameraEdgeScroll : MonoBehaviour
         scrolldown();
         }
         if(Input.GetKeyDown(KeyCode.Y))
-        {
+
+        {   HeroPanda.instance.isFollowingHerochange();
             isFollowingHero = !isFollowingHero;
         }
         if(isFollowingHero)
@@ -49,19 +51,19 @@ public class CameraEdgeScroll : MonoBehaviour
     Vector3 move = Vector3.zero;
 
         // 화면 왼쪽 감지
-        if (Input.mousePosition.x < edgeSize)
+        if (Input.GetKey(KeyCode.A))
             move.x -= 1f;
 
         // 화면 오른쪽 감지
-        if (Input.mousePosition.x > Screen.width - edgeSize)
+        if (Input.GetKey(KeyCode.D))
             move.x += 1f;
 
         // 화면 아래쪽 감지
-        if (Input.mousePosition.y < edgeSize)
+        if (Input.GetKey(KeyCode.S))
             move.y -= 1f;
 
         // 화면 위쪽 감지
-        if (Input.mousePosition.y > Screen.height - edgeSize)
+        if (Input.GetKey(KeyCode.W))
             move.y += 1f;
 
         // 이동 적용

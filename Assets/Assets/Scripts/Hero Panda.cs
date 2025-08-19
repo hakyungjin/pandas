@@ -46,6 +46,8 @@ public class HeroPanda : MonoBehaviour
     private bool isAnimationUpdating = false; // 애니메이션 업데이트 중인지 체크
     private float animationTransitionDelay = 0.1f; // 애니메이션 전환 딜레이
 
+    public bool isFollowingHero = true;
+
     
     public GameObject slash;
     public GameObject hpbar;
@@ -93,16 +95,20 @@ public class HeroPanda : MonoBehaviour
     }
 
     void Update()
-    {
-        if(isDie) return;
-        if(!stop){
+    {    
+        if(!isDie) {
+        
+        
+        if(!stop&&isFollowingHero){
             HandleMovementInput();
             HandleAttackInput();
-        }
-        // --- 입력 처리 ---
+       HandleSkill2Input();
+
+             }
         
         
-        HandleSkill2Input();
+        
+       
         if(exp>=requetExp) {LevelUp() ;}
 
         // --- 애니메이션 업데이트 ---
@@ -117,7 +123,7 @@ public class HeroPanda : MonoBehaviour
         hprate=(float)hp/maxhp;
         exprate=exp/requetExp;
         
-        
+        }
        
        
     }
@@ -645,6 +651,11 @@ public class HeroPanda : MonoBehaviour
             exprate = requetExp > 0 ? exp / requetExp : 0f;
             herostate.Setstate(hprate, exprate, level);
         }
+    }
+
+    public void isFollowingHerochange()
+    {
+        isFollowingHero = !isFollowingHero;
     }
 }
 
