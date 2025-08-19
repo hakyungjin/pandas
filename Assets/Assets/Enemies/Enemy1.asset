@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 932647ac7ac72d94897f878e6025121b, type: 3}
   m_Name: Enemy1
   m_EditorClassIdentifier: 
-  hp: 40
+  hp: 60
   attack: 20
-  moveSpeed: 5
-  attackSpeed: 5
+  moveSpeed: 2
+  attackSpeed: 4
   attackRange: 2
   unitSprite: {fileID: -5615696279337049406, guid: 82db949e8370447489387f953fa984a2, type: 3}
   unitColor: {r: 1, g: 1, b: 1, a: 1}

@@ -25791,15 +25791,15 @@ MonoBehaviour:
   - name: 2
     center: {x: 4, y: 0}
     size: {x: 65, y: 30}
-    enemyCount: 5
-    enemyTowerCount: 10
+    enemyCount: 100
+    enemyTowerCount: 5
     canProceed: 1
     activeWaves: 02000000
   - name: 0
     center: {x: 4, y: 0}
     size: {x: 65, y: 30}
-    enemyCount: 1
-    enemyTowerCount: 1
+    enemyCount: 100
+    enemyTowerCount: 10
     canProceed: 1
     activeWaves: 03000000
   spawnPoints: []
@@ -25850,9 +25850,9 @@ MonoBehaviour:
   maxFillTime: 240
   warningBar: {fileID: 286720434}
   warningText: {fileID: 1172315518}
-  cloneMoveSpeed: 60
-  cloneLifetime: 3
-  cloneSpawnInterval: 0.5
+  cloneMoveSpeed: 70
+  cloneLifetime: 4
+  cloneSpawnInterval: 0.7
   targetObject: {fileID: 43436259}
   moveObject: {fileID: 27699867}
   alert: {fileID: 1736091233}
@@ -27203,7 +27203,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4603639165739600860, guid: 4812fe18b2c7f9143af0f8627211328f, type: 3}
       propertyPath: hp
-      value: 100
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 4603639165739600860, guid: 4812fe18b2c7f9143af0f8627211328f, type: 3}
+      propertyPath: maxhp
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 4603639165739600860, guid: 4812fe18b2c7f9143af0f8627211328f, type: 3}
       propertyPath: herostate
@@ -27219,7 +27223,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4603639165739600860, guid: 4812fe18b2c7f9143af0f8627211328f, type: 3}
       propertyPath: attackDamage
-      value: 50
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4603639165739600860, guid: 4812fe18b2c7f9143af0f8627211328f, type: 3}
       propertyPath: installManager

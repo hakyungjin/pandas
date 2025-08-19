@@ -111,7 +111,7 @@ MonoBehaviour:
   installedObject: {fileID: 0}
   spawnCooldown: 2
   hpBar: {fileID: 6466904604599127895}
-  hpBar2: {fileID: 2669600942163248997, guid: 0b288b66d6d49254fa4225016b42d65b, type: 3}
+  hpBar2: {fileID: 2669600942163248997, guid: b6d2b8fabb9bed742b76023511d28008, type: 3}
   hpBarInstance2: {fileID: 0}
   TowerPrefab: {fileID: 4151191176589525021, guid: 451e294f0665f874688e8e22e230077b, type: 3}
   TowerPrefab2: {fileID: 0}

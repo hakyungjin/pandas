@@ -268,8 +268,8 @@ public class HeroPanda : MonoBehaviour
         Debug.Log("스킬2 공격 실행!");
         
         // 스킬2는 더 넓은 범위와 강한 데미지
-        float skill2Range = attackRange * 2f; // 공격 범위 2배
-        int skill2Damage = attackDamage * 3;  // 데미지 3배
+        float skill2Range = attackRange * 1.5f; // 공격 범위
+        int skill2Damage = attackDamage + 10;  // 데미지 3배
         
         // 스킬2 범위 내 모든 적 찾기
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, skill2Range);
@@ -278,7 +278,6 @@ public class HeroPanda : MonoBehaviour
         {
             if (enemyCollider.CompareTag("Enemy") || enemyCollider.CompareTag("EnemyTower"))
             {
-                Debug.Log($"스킬2로 {enemyCollider.name} 공격! 데미지: {skill2Damage}");
                 
                 if (enemyCollider.GetComponent<SpawnedEnemy>() != null)
                 {
@@ -609,12 +608,12 @@ public class HeroPanda : MonoBehaviour
     public void Revive()
     {
         if(!isDie) return;
-        if(GameManager.instance.GetGold()<20)
+        if(GameManager.instance.GetGold()<80)
         {
             return;
         }
         herostate.SetNormalIcon();
-        GameManager.instance.SpendGold(20);
+        GameManager.instance.SpendGold(80);
 
         // 체력 복구 (레벨/경험치/스탯 유지)
         hp = maxhp;

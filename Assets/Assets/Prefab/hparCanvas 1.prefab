@@ -147,6 +147,10 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3382121915739884301, guid: aff77b62cfcd00a4d9667bff63bf8b94, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.41895
+      objectReference: {fileID: 0}
+    - target: {fileID: 3382121915739884301, guid: aff77b62cfcd00a4d9667bff63bf8b94, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -195,8 +199,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5449143067750195049, guid: aff77b62cfcd00a4d9667bff63bf8b94, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 3511621295911615649, guid: aed2f6667627518458103fb0fe5c15aa, type: 3}
+    - target: {fileID: 5449143067750195049, guid: aff77b62cfcd00a4d9667bff63bf8b94, type: 3}
       propertyPath: m_FillAmount
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6258901988678952914, guid: aff77b62cfcd00a4d9667bff63bf8b94, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.023
       objectReference: {fileID: 0}
     - target: {fileID: 7489281074096744316, guid: aff77b62cfcd00a4d9667bff63bf8b94, type: 3}
       propertyPath: m_Colors.m_ColorMultiplier

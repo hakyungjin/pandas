@@ -122,7 +122,7 @@ public class InstallZone : MonoBehaviour, IDroppable
 
         spawnCooldown = towerData.spawnCooldown;
 
-        TowerPrefab2 = Instantiate(TowerPrefab, transform.position, Quaternion.identity);
+        TowerPrefab2 = Instantiate(TowerPrefab, transform.position, Quaternion.identity, transform);
         TowerPrefab2.transform.localPosition += new Vector3(-0.2f, 0.7f, 0);
         TowerPrefab2.GetComponent<SpriteRenderer>().sprite = towerData.TowerSprite;//타워 생성성
         attackSpeed = towerData.attackSpeed;//공격속도
@@ -247,12 +247,7 @@ public class InstallZone : MonoBehaviour, IDroppable
             {
                 unitSpriteRenderer.sprite = towerData.unitSprite;
                 unitSpriteRenderer.color = towerData.unitColor; // towerData의 색상 사용
-                Debug.Log($"CreateUnit: 스프라이트 및 색상 설정 완료 - {towerData.unitSprite.name}, 색상: {towerData.unitColor}");
             }
-        }
-        else
-        {
-            Debug.LogError($"CreateUnit: InstalledUnit 컴포넌트를 찾을 수 없습니다.");
         }
     }
 
@@ -271,37 +266,13 @@ public class InstallZone : MonoBehaviour, IDroppable
             installedObject = null;
         }
 
-        installedUnit = null;
-        unitPrefab = null;
-        isInstallable = true; // 다시 설치 가능하도록 변경
-
-        Debug.Log("유닛과 무한 생성이 제거되었습니다");
-    }
-
-    // 설치구역 자체를 파괴
-    public void DestroyZone()
-    {
-        // 이미 파괴 중인지 확인
-        if (this == null) return;
-        
-        Remove(); 
-
-        // GameManager에 파괴 알림
-        if (GameManager.instance != null)
-        {
-            GameManager.instance.OnInstallZoneDestroyed(this);
-        }
-        else
-        {
-            Debug.LogWarning("[InstallZone] GameManager를 찾을 수 없습니다!");
-        }
-        
-        // Tower 오브젝트가 존재하는지 확인 후 파괴
+        // Tower 스프라이트 오브젝트 파괴
         if (TowerPrefab2 != null)
         {
             try
             {
                 Destroy(TowerPrefab2);
+                TowerPrefab2 = null;
             }
             catch (System.Exception e)
             {
@@ -315,11 +286,33 @@ public class InstallZone : MonoBehaviour, IDroppable
             try
             {
                 Destroy(hpBarInstance2.gameObject);
+                hpBarInstance2 = null;
             }
             catch (System.Exception e)
             {
                 Debug.LogWarning($"[InstallZone] 쿨타임바 파괴 중 오류: {e.Message}");
             }
+        }
+
+        installedUnit = null;
+        unitPrefab = null;
+        isInstallable = true; // 다시 설치 가능하도록 변경
+
+        Debug.Log("유닛과 무한 생성이 제거되었습니다");
+    }
+
+    // 설치구역 자체를 파괴
+    public void DestroyZone()
+    {
+        // 이미 파괴 중인지 확인
+        if (this == null) return;
+        
+        Remove(); // Remove()에서 이미 TowerPrefab2와 hpBarInstance2를 파괴함
+
+        // GameManager에 파괴 알림
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.OnInstallZoneDestroyed(this);
         }
         
         Debug.Log("설치구역이 파괴되었습니다.");
