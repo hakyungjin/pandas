@@ -119,6 +119,10 @@ public class GameManager : MonoBehaviour
             gameTime += Time.deltaTime;
             UpdateTimerUI();
         }
+        if (installZones.Count == 0)
+        {
+            TriggerGameClear();
+        }
         
     }
     
