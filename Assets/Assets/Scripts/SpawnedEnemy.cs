@@ -311,27 +311,25 @@ public class SpawnedEnemy : MonoBehaviour
     }
 
     void TryAttack()
-    {
-        if (Time.time - lastAttackTime < attackSpeed) return;
 
-        // 타겟이 유효한지 한 번 더 확인
-        if (currentTarget == null||currentTarget.CompareTag("Hero")&&HeroPanda.instance.isDie==true)
+    {
+          if (currentTarget == null||currentTarget.CompareTag("Hero")&&HeroPanda.instance.isDie==true)
         {
             currentTarget = null;
             
             return;
         }
 
+        if (Time.time - lastAttackTime < attackSpeed) return;
+
+       
+
         lastAttackTime = Time.time;
 
         // 공격 애니메이션 시작
         isAttacking = true;
-        if(currentTarget.CompareTag("Hero")&&HeroPanda.instance.isDie==true)
-        {
-            currentTarget=null;
-            isAttacking=false;
-            return;
-        }
+        
+        
         if (animator != null)
         {
             // 타겟을 향한 방향 벡터 계산

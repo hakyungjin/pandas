@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 1;
             }
         }
-        
+       installZones.RemoveAll(zone => zone == null);
         
         // UI 토글
         if (Input.GetKeyDown(KeyCode.I))

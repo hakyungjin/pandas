@@ -371,6 +371,8 @@ public class HeroPanda : MonoBehaviour
         animator.SetBool("isdie", true);
         animator.SetBool("isAttacking", false);
         rb.linearVelocity = Vector2.zero;
+        heroCollider.enabled = false;
+
         herostate.SetReviveIcon();
         
         Debug.Log("Hero is dead");
@@ -622,6 +624,7 @@ public class HeroPanda : MonoBehaviour
         GameManager.instance.SpendGold(80);
 
         // 체력 복구 (레벨/경험치/스탯 유지)
+        heroCollider.enabled = true;
         hp = maxhp;
         isDie = false;
         animator.Rebind();
