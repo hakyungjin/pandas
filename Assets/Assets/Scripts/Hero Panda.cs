@@ -856,6 +856,7 @@ public class HeroPanda : MonoBehaviour
     public void isFollowingHerochange()
     {
         isFollowingHero = !isFollowingHero;
+        rb.linearVelocity = Vector2.zero;
     }
 }
 

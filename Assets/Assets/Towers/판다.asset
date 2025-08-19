@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: "\uD310\uB2E4"
   m_EditorClassIdentifier: 
   hp: 90
-  attack: 6
+  attack: 30
   moveSpeed: 5
   attackRange: 1
   attackSpeed: 3
