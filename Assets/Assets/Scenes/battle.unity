@@ -25320,10 +25320,10 @@ RectTransform:
   - {fileID: 1844935717}
   m_Father: {fileID: 2082322466}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 492.75, y: -90}
+  m_SizeDelta: {x: 157.1, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &469688500
 MonoBehaviour:
@@ -27688,6 +27688,7 @@ RectTransform:
   - {fileID: 1736091234}
   - {fileID: 1976879798}
   - {fileID: 2585560891765538838}
+  - {fileID: 1726962940}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -27733,10 +27734,10 @@ RectTransform:
   - {fileID: 426886283}
   m_Father: {fileID: 2082322466}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 285.65002, y: -90}
+  m_SizeDelta: {x: 157.1, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1212249224
 MonoBehaviour:
@@ -33756,6 +33757,81 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1726962939
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1726962940}
+  - component: {fileID: 1726962942}
+  - component: {fileID: 1726962941}
+  m_Layer: 5
+  m_Name: Y ui
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1726962940
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726962939}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1208241311}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 320, y: -53}
+  m_SizeDelta: {x: 600, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1726962941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726962939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 1381970531, guid: c8c61c7ae4696cc43a160aeffb20fe67, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1726962942
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726962939}
+  m_CullTransparentMesh: 1
 --- !u!4 &1730515815 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2862928829149056222, guid: 420df2eec3295d7408139d7414dd6c1d, type: 3}
@@ -35187,10 +35263,10 @@ RectTransform:
   - {fileID: 86320074}
   m_Father: {fileID: 2082322466}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 78.55, y: -90}
+  m_SizeDelta: {x: 157.1, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2035627167
 MonoBehaviour:
@@ -35471,6 +35547,7 @@ MonoBehaviour:
   skill1: {fileID: 7580288771925045509}
   skill2: {fileID: 4772174095241706022}
   skill3: {fileID: 5082611399337359070}
+  Reviveicon: {fileID: -2115755576091236881, guid: d3d4494af79e8634faade55482dfc968, type: 3}
   Reviveicon: {fileID: -9191924076640566859, guid: d4a77971d9c5ec748a3d99ad3b37f82a, type: 3}
   normalicon: {fileID: 7778529597509175358, guid: 719e7df5704f4ef4e8efd799c4acf1da, type: 3}
 --- !u!114 &4772174095241706022 stripped
