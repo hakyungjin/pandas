@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 public class HeroPanda : MonoBehaviour
 {
@@ -71,6 +72,13 @@ public class HeroPanda : MonoBehaviour
     public Transform respawnPoint; // 지정 시 해당 위치로 부활
     private Vector3 initialSpawnPosition; // 미지정 시 시작 위치로 부활
 
+    public bool isSkill1OnCooldown = false;
+    public bool isSkill2OnCooldown = false;
+    public bool isSkill3OnCooldown = false;
+    public float skill1Cooldown = 10f;
+    public float skill2Cooldown = 10f;
+    public float skill3Cooldown = 10f;
+
     void Start()
     {
         // 필수 컴포넌트들을 시작 시 한 번만 가져와 변수에 저장 (캐싱)
@@ -102,9 +110,41 @@ public class HeroPanda : MonoBehaviour
         if(!stop&&isFollowingHero){
             HandleMovementInput();
             HandleAttackInput();
-       HandleSkill2Input();
+            HandleSkill1Input();
+            HandleSkill2Input();
+            HandleSkill3Input();
 
              }
+             if (isSkill1OnCooldown && !IsInvoking("EndSkill1Cooldown"))
+             {
+                 Invoke("EndSkill1Cooldown", skill1Cooldown);
+             }
+             if (isSkill2OnCooldown && !IsInvoking("EndSkill2Cooldown"))
+             {
+                 Invoke("EndSkill2Cooldown", skill2Cooldown);
+             }
+             if (isSkill3OnCooldown && !IsInvoking("EndSkill3Cooldown"))
+             {
+                 Invoke("EndSkill3Cooldown", skill3Cooldown);
+             }
+             if(isSkill1OnCooldown){
+                herostate.SetSkill1Cooldown();
+             }
+             if(isSkill2OnCooldown){
+                herostate.SetSkill2Cooldown();
+             }
+             if(isSkill3OnCooldown){
+                herostate.SetSkill3Cooldown();
+             }
+             if(!isSkill1OnCooldown){
+                herostate.SetSkill1CooldownEnd();
+             }
+             if(!isSkill2OnCooldown){
+                herostate.SetSkill2CooldownEnd();
+             }
+             if(!isSkill3OnCooldown){
+                herostate.SetSkill3CooldownEnd();
+             }  
         
         
         
@@ -183,6 +223,31 @@ public class HeroPanda : MonoBehaviour
         isAnimationUpdating = false;
     }
 
+    // 스킬/행동 직전 캐릭터가 바라볼 방향을 강제로 맞추기 위한 유틸
+    private void FaceDirection(Vector2 direction)
+    {
+        if (direction.sqrMagnitude < 0.0001f) return;
+        Vector2 normalized = direction.normalized;
+        lastDirection = normalized;
+        lastAnimationDirection = normalized;
+        animator.SetFloat("MoveX", Mathf.Abs(normalized.x));
+        animator.SetFloat("MoveY", normalized.y);
+        if (Mathf.Abs(normalized.x) > 0.01f)
+        {
+            spriteRenderer.flipX = normalized.x < 0f;
+        }
+    }
+
+    // 입력이 있으면 입력 방향, 없으면 마지막 애니메이션 방향을 반환
+    private Vector2 GetAimDirection()
+    {
+        if (moveInput.sqrMagnitude > 0.01f)
+        {
+            return moveInput;
+        }
+        return lastAnimationDirection.sqrMagnitude > 0.0001f ? lastAnimationDirection : Vector2.down;
+    }
+
     // --- 입력 처리 함수들 ---
     private void HandleMovementInput()
     {
@@ -228,34 +293,78 @@ public class HeroPanda : MonoBehaviour
         animator.SetBool("isAttacking", false);
     }
 
+    private void HandleSkill1Input()
+    {
+        if (Input.GetKeyDown(KeyCode.Q) && !isDie && !isSkill1OnCooldown)
+        {
+            StartSkill1();
+        }
+    }
+    private void StartSkill1()
+    {
+        FaceDirection(GetAimDirection());
+        animator.SetBool("isSkill1", true);
+        isSkill1OnCooldown = true;
+        PerformSkill(1);
+        Invoke("EndSkill1", 1.5f);
+    }
+    private void EndSkill1()
+    {
+        
+        animator.SetBool("isSkill1", false);
+        animator.Rebind();
+        animator.Update(0f);
+    }
+    private void HandleSkill3Input()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !isDie && !isSkill3OnCooldown)
+        {
+            StartSkill3();
+        }
+    }
+
+    private void StartSkill3()
+    {
+        FaceDirection(GetAimDirection());
+        animator.SetBool("isSkill3", true);
+        isSkill3OnCooldown = true;
+        PerformSkill(3);
+       transform.DOMove(transform.position+new Vector3(moveInput.x*10,moveInput.y*10,0)*0.5f,1.5f);
+        Invoke("EndSkill3", 1.5f);
+        Invoke("EndSkill3Cooldown", skill3Cooldown);
+    }
+    private void EndSkill3()
+    {
+        animator.SetBool("isSkill3", false);
+        animator.Rebind();
+        animator.Update(0f);
+        
+    }
+
     private void HandleSkill2Input()
     {
         if (Input.GetKeyDown(KeyCode.E) && !isDie && !isSkill2OnCooldown)
         {
-            // autoattack 도중에도 스킬2 발동 가능
-            if (isAttacking)
-            {
-                // 애니메이터 rebind
-                animator.Rebind();
-                animator.Update(0f);
-            }
+            
             StartSkill2();
+
+
         }
     }
 
     private void StartSkill2()
     {
-        isSkill2 = true;
+        FaceDirection(GetAimDirection());
+        
         animator.SetBool("isSkill2", true);
+        isSkill2 = true;
         
         // 스킬2 시작 시 즉시 공격
-        PerformSkill2Attack();
+        PerformSkill(2);
         
         // 스킬2 지속 시간 동안 주기적으로 공격 (0.5초마다)
         InvokeRepeating("PerformSkill2Attack", 0.5f, 0.5f);
         
-        // 스킬2 이펙트 활성화
-        Invoke("skill2EffectActive", 0.2f);
         
         // 스킬2 종료 (3초 후)
         Invoke("EndSkill2", 2f);
@@ -265,19 +374,34 @@ public class HeroPanda : MonoBehaviour
     {
         isSkill2 = false;
         animator.SetBool("isSkill2", false);
+        animator.Rebind();
+        animator.Update(0f);
         
-        // 주기적 공격 중지
-        CancelInvoke("PerformSkill2Attack");
+       
         
         // 스킬2 이펙트 비활성화
-        skill2EffectInactive();
         
-        // 스킬2 쿨타임 시작
-        StartSkill2Cooldown();
+        isSkill2OnCooldown = true;
+        Invoke("EndSkill2Cooldown", skill2Cooldown);
+        
+        
+    }
+
+    private void EndSkill2Cooldown()
+    {
+        isSkill2OnCooldown = false;
+    }
+    private void EndSkill3Cooldown()
+    {
+        isSkill3OnCooldown = false;
+    }
+    private void EndSkill1Cooldown()
+    {
+        isSkill1OnCooldown = false;
     }
 
     // 스킬2 공격 수행
-    private void PerformSkill2Attack()
+    private void PerformSkill2()
     {
         if (isDie || !isSkill2) return;
         
@@ -285,7 +409,7 @@ public class HeroPanda : MonoBehaviour
         
         // 스킬2는 더 넓은 범위와 강한 데미지
         float skill2Range = attackRange * 1.5f; // 공격 범위
-        int skill2Damage = attackDamage + 10;  // 데미지 3배
+        int skill2Damage = attackDamage + 10;  
         
         // 스킬2 범위 내 모든 적 찾기
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, skill2Range);
@@ -307,6 +431,76 @@ public class HeroPanda : MonoBehaviour
         }
     }
 
+    // 통합 스킬 수행 함수 (애니메이션 이벤트에서 skillId(int) 전달하여 호출 가능)
+    private void PerformSkill(int skillId)
+    {
+        if (isDie) return;
+        if (skillId == 1)
+        {
+            PerformSkill1();
+        }
+        else if (skillId == 2)
+        {
+            PerformSkill2();
+        }
+        else if (skillId == 3)
+        {
+            PerformSkill3();
+        }
+    }
+
+    // 스킬1: 근거리 범위 공격(소형)
+    private void PerformSkill1()
+    {
+        float skill1Range = attackRange * 1.2f;
+        int skill1Damage = attackDamage + 5;
+        Debug.Log("스킬1 실행!");
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, skill1Range);
+        foreach (Collider2D enemyCollider in hitEnemies)
+        {
+            if (enemyCollider.CompareTag("Enemy") || enemyCollider.CompareTag("EnemyTower"))
+            {
+                var enemy = enemyCollider.GetComponent<SpawnedEnemy>();
+                if (enemy != null)
+                {
+                    enemy.TakeDamage(skill1Damage);
+                    continue;
+                }
+                var enemyTower = enemyCollider.GetComponent<EnemyTower>();
+                if (enemyTower != null)
+                {
+                    enemyTower.TakeDamage(skill1Damage);
+                }
+            }
+        }
+    }
+
+    // 스킬3: 근거리 대형 범위 공격(강력)
+    private void PerformSkill3()
+    {
+        float skill3Range = attackRange * 2f;
+        int skill3Damage = attackDamage + 20;
+        Debug.Log("스킬3 실행!");
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, skill3Range);
+        foreach (Collider2D enemyCollider in hitEnemies)
+        {
+            if (enemyCollider.CompareTag("Enemy") || enemyCollider.CompareTag("EnemyTower"))
+            {
+                var enemy = enemyCollider.GetComponent<SpawnedEnemy>();
+                if (enemy != null)
+                {
+                    enemy.TakeDamage(skill3Damage);
+                    continue;
+                }
+                var enemyTower = enemyCollider.GetComponent<EnemyTower>();
+                if (enemyTower != null)
+                {
+                    enemyTower.TakeDamage(skill3Damage);
+                }
+            }
+        }
+    }
+
     // 스킬2 이펙트 활성화
     void skill2EffectActive()
     {
@@ -316,14 +510,7 @@ public class HeroPanda : MonoBehaviour
         }
     }
 
-    // 스킬2 이펙트 비활성화
-    void skill2EffectInactive()
-    {
-        if (skill2Effect != null)
-        {
-            skill2Effect.SetActive(false);
-        }
-    }
+   
 
 
     // --- 상태 및 로직 함수들 ---

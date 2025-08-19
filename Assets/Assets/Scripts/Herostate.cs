@@ -8,9 +8,9 @@ public class Herostate : MonoBehaviour
     public TextMeshProUGUI levelText;
     public Image hpbar;
     public Image expbar;
-    public Image skill1;
-    public Image skill2;
-    public Image skill3;
+    public GameObject skill1;
+    public GameObject skill2;
+    public GameObject skill3;
 
     public Sprite Reviveicon;
     public Sprite normalicon;
@@ -35,17 +35,7 @@ public class Herostate : MonoBehaviour
     public void Setexp(float exp) {
         expbar.fillAmount=exp;
     }
-    public void SetSkill(int skill) {
-        if (skill==1) {
-            skill1.fillAmount=1;
-        }
-        else if (skill==2) {
-            skill2.fillAmount=1;
-        }
-        else if (skill==3) {
-            skill3.fillAmount=1;
-        }
-    }
+    
     public void SetReviveIcon() {
         icon.sprite=Reviveicon;
         icon.transform.GetChild(0).gameObject.SetActive(false);
@@ -55,5 +45,29 @@ public class Herostate : MonoBehaviour
         icon.sprite=normalicon;
         icon.transform.GetChild(0).gameObject.SetActive(true);
         icon.transform.GetChild(1).gameObject.SetActive(true);
+    }
+    public void SetSkill1Cooldown() {
+        skill1.transform.GetChild(0).gameObject.SetActive(true);
+        skill1.transform.GetChild(1).gameObject.SetActive(false);
+    }
+    public void SetSkill2Cooldown() {
+        skill2.transform.GetChild(0).gameObject.SetActive(true);
+        skill2.transform.GetChild(1).gameObject.SetActive(false);
+    }
+    public void SetSkill3Cooldown() {
+        skill3.transform.GetChild(0).gameObject.SetActive(true);
+        skill3.transform.GetChild(1).gameObject.SetActive(false);
+    }
+    public void SetSkill1CooldownEnd() {
+        skill1.transform.GetChild(0).gameObject.SetActive(false);
+        skill1.transform.GetChild(1).gameObject.SetActive(true);
+    }
+    public void SetSkill2CooldownEnd() {
+        skill2.transform.GetChild(0).gameObject.SetActive(false);
+        skill2.transform.GetChild(1).gameObject.SetActive(true);
+    }
+    public void SetSkill3CooldownEnd() {
+        skill3.transform.GetChild(0).gameObject.SetActive(false);
+        skill3.transform.GetChild(1).gameObject.SetActive(true);
     }
 }
