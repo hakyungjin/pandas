@@ -24,8 +24,8 @@ MonoBehaviour:
   unitColor: {r: 1, g: 1, b: 1, a: 1}
   goldCost: 4
   TowerSprite: {fileID: 1225518395, guid: 8575ee152fb4f104d86bc167653bdc27, type: 3}
-  TowerSprite2: {fileID: 0}
-  TowerSprite3: {fileID: 0}
+  TowerSprite2: {fileID: 1225518395, guid: 8575ee152fb4f104d86bc167653bdc27, type: 3}
+  TowerSprite3: {fileID: 1225518395, guid: 8575ee152fb4f104d86bc167653bdc27, type: 3}
   iconSprite: {fileID: 1225518395, guid: 8575ee152fb4f104d86bc167653bdc27, type: 3}
   spawnCooldown: 2
   isGoldTower: 1

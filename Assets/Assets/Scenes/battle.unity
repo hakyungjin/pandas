@@ -35471,7 +35471,7 @@ MonoBehaviour:
   skill1: {fileID: 7580288771925045509}
   skill2: {fileID: 4772174095241706022}
   skill3: {fileID: 5082611399337359070}
-  Reviveicon: {fileID: 13910288, guid: 9294385d963cc14439cbd5f854c88ee1, type: 3}
+  Reviveicon: {fileID: -9191924076640566859, guid: d4a77971d9c5ec748a3d99ad3b37f82a, type: 3}
   normalicon: {fileID: 7778529597509175358, guid: 719e7df5704f4ef4e8efd799c4acf1da, type: 3}
 --- !u!114 &4772174095241706022 stripped
 MonoBehaviour:
