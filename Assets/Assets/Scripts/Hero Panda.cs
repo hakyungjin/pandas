@@ -230,8 +230,15 @@ public class HeroPanda : MonoBehaviour
 
     private void HandleSkill2Input()
     {
-        if (Input.GetKeyDown(KeyCode.E) && !isDie && !isAttacking)
+        if (Input.GetKeyDown(KeyCode.E) && !isDie && !isSkill2OnCooldown)
         {
+            // autoattack 도중에도 스킬2 발동 가능
+            if (isAttacking)
+            {
+                // 애니메이터 rebind
+                animator.Rebind();
+                animator.Update(0f);
+            }
             StartSkill2();
         }
     }
@@ -264,6 +271,9 @@ public class HeroPanda : MonoBehaviour
         
         // 스킬2 이펙트 비활성화
         skill2EffectInactive();
+        
+        // 스킬2 쿨타임 시작
+        StartSkill2Cooldown();
     }
 
     // 스킬2 공격 수행
