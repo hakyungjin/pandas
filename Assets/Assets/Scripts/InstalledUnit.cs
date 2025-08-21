@@ -350,11 +350,7 @@ public class InstalledUnit : MonoBehaviour
             }
             else
             {
-                Debug.Log($"[InstalledUnit] 공격 범위 내에 적이 없습니다. 범위: {unitData.attackRange}");
-                isAttacking = false;
-                animator.SetBool("isAttacking", false);
-                // 공격 범위에 적이 없을 때는 자동 이동하지 않음 (플레이어가 선택해서 이동할 때만 이동 가능)
-                // MoveToTarget() 호출 제거
+                MoveToTarget();
             }
         }
     }
@@ -487,7 +483,6 @@ public class InstalledUnit : MonoBehaviour
                 rigidbody.linearVelocity = Vector2.zero;
                 UpdateAnimation(Vector2.zero);
             }
-            Debug.Log($"[InstalledUnit] 이동할 목표를 찾을 수 없습니다.");
         }
     }
 
@@ -536,21 +531,31 @@ public class InstalledUnit : MonoBehaviour
         Debug.Log("[InstalledUnit] 이동이 중지되었습니다.");
     }
 
-    // 이동할 목표 찾기 (적 우선, 없으면 적 기지)
+    // 이동할 목표 찾기 (범위 내 우선, 없으면 전체 맵에서 검색)
     Transform FindMoveTarget()
     {
-        // 1. 가장 가까운 적 찾기 (공격 범위와 관계없이)
-        Transform nearestEnemy = FindSearchEnemyAnywhere();
-        if (nearestEnemy != null)
+        // 1. 먼저 탐색 범위 내에서 가장 가까운 적 찾기
+        Transform nearestEnemyInRange = FindNearestEnemyInRange();
+        if (nearestEnemyInRange != null)
         {
-            return nearestEnemy;
+            Debug.Log($"[InstalledUnit] 탐색 범위 내 적 발견: {nearestEnemyInRange.name}");
+            return nearestEnemyInRange;
         }
 
+        // 2. 탐색 범위 내에 적이 없으면 전체 맵에서 가장 가까운 적 찾기
+        Transform nearestEnemyAnywhere = FindNearestEnemyAnywhere();
+        if (nearestEnemyAnywhere != null)
+        {
+            Debug.Log($"[InstalledUnit] 전체 맵에서 적 발견: {nearestEnemyAnywhere.name}");
+            return nearestEnemyAnywhere;
+        }
+
+        Debug.Log("[InstalledUnit] 이동할 적을 찾을 수 없습니다.");
         return null;
     }
 
-    // 공격 범위와 관계없이 가장 가까운 적 찾기
-  Transform FindSearchEnemyAnywhere()
+    // 탐색 범위 내에서 가장 가까운 적 찾기
+    Transform FindNearestEnemyInRange()
     {
         Collider2D[] allCollidersInRange = Physics2D.OverlapCircleAll(transform.position, searchRange);
 
@@ -569,6 +574,60 @@ public class InstalledUnit : MonoBehaviour
                 }
             }
         }
+        
+        if (nearestEnemy != null)
+        {
+            Debug.Log($"[InstalledUnit] 탐색 범위 내 적 발견: {nearestEnemy.name}, 거리: {nearestDistance:F2}");
+        }
+        
+        return nearestEnemy;
+    }
+
+    // 전체 맵에서 가장 가까운 적 찾기
+    Transform FindNearestEnemyAnywhere()
+    {
+        Transform nearestEnemy = null;
+        float nearestDistance = float.MaxValue;
+
+        // 전체 맵의 모든 Enemy 찾기
+        GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in allEnemies)
+        {
+            if (enemy != null)
+            {
+                float distance = Vector2.Distance(transform.position, enemy.transform.position);
+                if (distance < nearestDistance)
+                {
+                    nearestDistance = distance;
+                    nearestEnemy = enemy.transform;
+                }
+            }
+        }
+
+        // 전체 맵의 모든 EnemyTower 찾기
+        GameObject[] allEnemyTowers = GameObject.FindGameObjectsWithTag("EnemyTower");
+        foreach (GameObject enemyTower in allEnemyTowers)
+        {
+            if (enemyTower != null)
+            {
+                float distance = Vector2.Distance(transform.position, enemyTower.transform.position);
+                if (distance < nearestDistance)
+                {
+                    nearestDistance = distance;
+                    nearestEnemy = enemyTower.transform;
+                }
+            }
+        }
+
+        if (nearestEnemy != null)
+        {
+            Debug.Log($"[InstalledUnit] 전체 맵에서 가장 가까운 적 발견: {nearestEnemy.name}, 거리: {nearestDistance:F2}");
+        }
+        else
+        {
+            Debug.Log("[InstalledUnit] 전체 맵에 적이 없습니다.");
+        }
+        
         return nearestEnemy;
     }
 
@@ -689,5 +748,7 @@ System.Collections.IEnumerator DamageFlash()
 
 }
 
+    
+      
     
       

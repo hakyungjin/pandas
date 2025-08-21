@@ -193,7 +193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fillImage: {fileID: 3349770209959480220}
   background: {fileID: 8024301507560622863}
-  duration: 3
+  duration: 1
   upgradeCost: 10
   installZone: {fileID: 0}
   canvas: {fileID: 0}
