@@ -5,9 +5,10 @@ using System.Collections.Generic;
 public class EnemyTower : MonoBehaviour
 {
 
-    public hpbar hpBar;
+    public GameObject hpBarPrefab; // HP바 프리팹
     public int maxHealth = 100;
     public int currentHealth;
+
     public EnemySpawner EnemySpawner;
     public List<Enemy> enemyTypes = new List<Enemy>();
     public GameObject enemyPrefab;
@@ -15,6 +16,10 @@ public class EnemyTower : MonoBehaviour
     public float spawnInterval = 2f;
     public int maxEnemiesAroundBase = 7;
     public float initialDelay = 2f;
+
+    // HP바 관련 변수
+    private GameObject hpBarInstance; // 생성된 HP바 인스턴스
+    private hpbar hpBarComponent; // HP바 컴포넌트
 
     private bool isSpawning = false;
     private int wave = 0;
@@ -37,9 +42,13 @@ public class EnemyTower : MonoBehaviour
 
     public void TakeDamage(int damageAmount)
     {
-        currentHealth -= damageAmount;
-        if (currentHealth < 0) currentHealth = 0;
-        hpBar.decreaseHp(damageAmount);
+        // HP바 업데이트 및 데미지 숫자 표시
+        if (hpBarComponent != null)
+        {
+            hpBarComponent.decreaseHp(damageAmount);
+            // hpbar의 currentHp를 EnemyTower의 currentHealth와 동기화
+            currentHealth = (int)hpBarComponent.currentHp;
+        }
         if (currentHealth <= 0)
         {
             // EnemySpawner가 null이 아닌지 확인
@@ -58,7 +67,48 @@ public class EnemyTower : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        hpBar.SetHp(currentHealth);
+        // HP바 생성 및 설정
+        CreateHpBar();
+    }
+
+    // HP바 생성 메서드
+    private void CreateHpBar()
+    {
+        if (hpBarPrefab == null)
+        {
+            Debug.LogWarning("[EnemyTower] hpbar 컴포넌트를 찾을 수 없습니다.");
+            return;
+        }
+
+        // HP바 인스턴스를 부모 없이 생성
+        hpBarInstance = Instantiate(hpBarPrefab);
+        
+        // 캔버스를 월드 스페이스로 설정
+        Canvas canvas = hpBarInstance.GetComponent<Canvas>();
+        if (canvas != null)
+        {
+            canvas.renderMode = RenderMode.WorldSpace;
+            canvas.worldCamera = Camera.main;
+            canvas.sortingOrder = 6;
+        }
+
+        // HP바 컴포넌트 가져오기
+        hpBarComponent = hpBarInstance.GetComponentInChildren<hpbar>();
+        if (hpBarComponent == null)
+        {
+            Debug.LogWarning("[EnemyTower] hpbar 컴포넌트를 찾을 수 없습니다.");
+            return;
+        }
+
+        // 월드 좌표로 위치 설정 (적 기지 아래쪽)
+        Vector3 targetPosition = transform.position + new Vector3(0, -0.8f, 0);
+        hpBarInstance.transform.position = targetPosition;
+
+        // HP바 초기화 및 색상 설정
+        hpBarComponent.maxHp = maxHealth;
+        hpBarComponent.fullHpColor = Color.green; // 풀 HP일 때 초록색
+        hpBarComponent.lowHpColor = Color.red;    // 낮은 HP일 때 빨간색
+        hpBarComponent.SetHp(currentHealth);
     }
 
     // Update is called once per frame
@@ -133,5 +183,14 @@ public class EnemyTower : MonoBehaviour
             if (hit.CompareTag("Enemy")) count++;
         }
         return count;
+    }
+
+    // 오브젝트가 파괴될 때 HP바도 함께 파괴
+    void OnDestroy()
+    {
+        if (hpBarInstance != null)
+        {
+            Destroy(hpBarInstance);
+        }
     }
 }

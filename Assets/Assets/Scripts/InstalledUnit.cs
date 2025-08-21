@@ -304,6 +304,7 @@ public class InstalledUnit : MonoBehaviour
                 UpdateAnimation(rigidbody.linearVelocity);
             }
             CheckMoveCompletion();
+            return; // 명령 이동 중에는 다른 로직 실행하지 않음
         }
 
         // 공격 로직
@@ -497,6 +498,8 @@ public class InstalledUnit : MonoBehaviour
         // 공격 중이어도 플레이어가 선택한 이동은 실행
         isAttacking = false;
         animator.SetBool("isAttacking", isAttacking);
+        // 현재 타겟 초기화 (명령 이동 중에는 자동 타겟팅 중지)
+        currentTarget = null;
 
         // 이동은 Update에서 프레임 단위로 처리
         Debug.Log($"[InstalledUnit] moveUnit 시작 - 목표 위치: {target}, 프레임별 이동 진행");

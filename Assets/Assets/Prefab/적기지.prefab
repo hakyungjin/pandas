@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 541cb9b87caee9f44b65c473109886cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpBar: {fileID: 2756677030370875103}
+  hpBarPrefab: {fileID: 1341919351603256680, guid: aff77b62cfcd00a4d9667bff63bf8b94, type: 3}
   maxHealth: 300
   currentHealth: 0
   EnemySpawner: {fileID: 0}
@@ -299,14 +299,3 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1892735650981225699, guid: 0b288b66d6d49254fa4225016b42d65b, type: 3}
   m_PrefabInstance: {fileID: 2272752427891894239}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2756677030370875103 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4164667943794979072, guid: 0b288b66d6d49254fa4225016b42d65b, type: 3}
-  m_PrefabInstance: {fileID: 2272752427891894239}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8afa5edbaccb52b4faefdd47f192eae3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
