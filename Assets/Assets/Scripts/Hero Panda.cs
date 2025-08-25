@@ -329,7 +329,7 @@ public class HeroPanda : MonoBehaviour
         animator.SetBool("isSkill3", true);
         isSkill3OnCooldown = true;
         PerformSkill(3);
-       transform.DOMove(transform.position+new Vector3(moveInput.x*10,moveInput.y*10,0)*0.5f,1.5f);
+        transform.DOMove(transform.position+new Vector3(moveInput.x*10,moveInput.y*10,0)*0.5f,1.5f);
         Invoke("EndSkill3", 1.5f);
         Invoke("EndSkill3Cooldown", skill3Cooldown);
     }
@@ -347,8 +347,6 @@ public class HeroPanda : MonoBehaviour
         {
             
             StartSkill2();
-
-
         }
     }
 
@@ -562,17 +560,34 @@ public class HeroPanda : MonoBehaviour
 
     void Die()
     {
-        if (isDie) return;
         isDie = true;
-        herostate.Setstate(0,exprate,level);
-        animator.SetBool("isdie", true);
+        
+        
+        // DOTween 애니메이션 중지
+        transform.DOKill();
+        
+        // 스킬 상태 초기화
+        isSkill2 = false;
+        isSkill1OnCooldown = false;
+        isSkill2OnCooldown = false;
+        isSkill3OnCooldown = false;
+        
+        // 애니메이션 상태 머신 리셋
+        animator.Rebind();
+        animator.Update(0f);
+        
+        // 애니메이션 상태 정리
+        animator.SetBool("isSkill1", false);
+        animator.SetBool("isSkill2", false);
+        animator.SetBool("isSkill3", false);
         animator.SetBool("isAttacking", false);
+        animator.SetBool("isdie", true);
+        
+        // 사망 상태 설정
+        herostate.Setstate(0,exprate,level);
         rb.linearVelocity = Vector2.zero;
         heroCollider.enabled = false;
-
         herostate.SetReviveIcon();
-        
-        Debug.Log("Hero is dead");
     }
 
     public void TakeDamage(int damageAmount)
