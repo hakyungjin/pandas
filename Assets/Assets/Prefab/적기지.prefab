@@ -119,6 +119,8 @@ MonoBehaviour:
   spawnInterval: 2
   maxEnemiesAroundBase: 7
   initialDelay: 2
+  hpBarInstance: {fileID: 0}
+  hpBarComponent: {fileID: 0}
   enemyCount: 0
 --- !u!61 &1741827293636874726
 BoxCollider2D:

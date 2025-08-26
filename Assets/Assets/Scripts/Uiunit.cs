@@ -38,6 +38,7 @@ public class Uiunit : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        Debug.Log("OnBeginDrag");
         dragIconInstance = Instantiate(dragIconPrefab, canvas.transform);
         dragIconInstance.GetComponent<Image>().sprite = unitImage.sprite;
         dragIconInstance.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.5f); // 반투명
@@ -47,7 +48,8 @@ public class Uiunit : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 
     public void OnDrag(PointerEventData eventData)
     {
-       if (dragIconInstance != null)
+        Debug.Log("OnDrag");
+        if (dragIconInstance != null)
         {
             RectTransform rt = dragIconInstance.GetComponent<RectTransform>();
             Vector2 pos;

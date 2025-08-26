@@ -18,8 +18,8 @@ public class EnemyTower : MonoBehaviour
     public float initialDelay = 2f;
 
     // HP바 관련 변수
-    private GameObject hpBarInstance; // 생성된 HP바 인스턴스
-    private hpbar hpBarComponent; // HP바 컴포넌트
+    public GameObject hpBarInstance; // 생성된 HP바 인스턴스
+    public hpbar hpBarComponent; // HP바 컴포넌트
 
     private bool isSpawning = false;
     private int wave = 0;
@@ -42,13 +42,9 @@ public class EnemyTower : MonoBehaviour
 
     public void TakeDamage(int damageAmount)
     {
-        // HP바 업데이트 및 데미지 숫자 표시
-        if (hpBarComponent != null)
-        {
-            hpBarComponent.decreaseHp(damageAmount);
-            // hpbar의 currentHp를 EnemyTower의 currentHealth와 동기화
-            currentHealth = (int)hpBarComponent.currentHp;
-        }
+        // 데미지 적용
+        currentHealth -= damageAmount;
+        
         if (currentHealth <= 0)
         {
             // EnemySpawner가 null이 아닌지 확인
@@ -108,13 +104,20 @@ public class EnemyTower : MonoBehaviour
         hpBarComponent.maxHp = maxHealth;
         hpBarComponent.fullHpColor = Color.green; // 풀 HP일 때 초록색
         hpBarComponent.lowHpColor = Color.red;    // 낮은 HP일 때 빨간색
-        hpBarComponent.SetHp(currentHealth);
     }
 
     // Update is called once per frame
     void Update()
     {
+        // 오브젝트가 파괴되었는지 확인
+        if (this == null) return;
         
+        // HP바 업데이트
+        if (hpBarComponent != null)
+        {
+            // EnemyTower의 currentHealth를 HP바와 동기화
+            hpBarComponent.SetHp(currentHealth);
+        }
     }
     
     public void StartSpawning()

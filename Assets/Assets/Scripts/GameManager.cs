@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine.SceneManagement;
 using DamageNumbersPro;
+using UnityEngine.EventSystems;
+
 
 
 public class GameManager : MonoBehaviour
@@ -30,6 +32,7 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverUI;
     public GameObject gameClearUI;
     public GameObject gamePauseUI;
+    public GameObject gameStopUI;
 
     [Header("타일 설치&파괴 시스템")]
     public int tileCount;
@@ -68,22 +71,14 @@ public class GameManager : MonoBehaviour
         // 게임 시간 정상화 (리스타트 시에도 확실히)
         Time.timeScale = 1;
         
-        Debug.Log("[GameManager] 게임 시작 - 초기화 중...");
-        
         // 골드 시스템 초기화
         UpdateGoldUI();
         StartCoroutine(GoldIncreaseCoroutine());
-        Debug.Log("[GameManager] 골드 시스템 초기화 완료");
+
         
         // 타이머 시스템 초기화
         gameTime = 0f;
         UpdateTimerUI();
-        Debug.Log("[GameManager] 타이머 시스템 초기화 완료");
-        
-        
-        
-       
-       
         
         
     }
@@ -92,6 +87,21 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (!gameStopUI.activeSelf)
+            {
+                gameStopUI.SetActive(true);
+                Time.timeScale = 0;
+            }
+            else
+            {
+                gameStopUI.SetActive(false);
+                Time.timeScale = 1;
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (!gamePauseUI.activeSelf)
