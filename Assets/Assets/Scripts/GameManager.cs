@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using DamageNumbersPro;
 using UnityEngine.EventSystems;
-
+using UnityEngine.Animations;
 
 
 public class GameManager : MonoBehaviour
@@ -16,7 +16,9 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI goldText; // 골드 UI 텍스트 (인스펙터에서 연결)
     public TextMeshProUGUI timerText; // 타이머 UI 텍스트 (인스펙터에서 연결)
    
-   
+    [Header("영웅판다 애니메이션")]
+    public GameObject heropandaObject; // heropanda 오브젝트 (인스펙터에서 연결)
+    private Animator heropandaAnimator; // heropanda의 Animator 컴포넌트
     
     [Header("골드 시스템")]
     public int currentGold = 0; // 시작 골드
@@ -70,15 +72,19 @@ public class GameManager : MonoBehaviour
     {
         // 게임 시간 정상화 (리스타트 시에도 확실히)
         Time.timeScale = 1;
-        
+
         // 골드 시스템 초기화
         UpdateGoldUI();
         StartCoroutine(GoldIncreaseCoroutine());
 
-        
+
         // 타이머 시스템 초기화
         gameTime = 0f;
         UpdateTimerUI();
+
+        // 영웅판다 애니메이션 가져오기
+        heropandaAnimator = heropandaObject.GetComponent<Animator>();
+
         
         
     }
@@ -94,11 +100,13 @@ public class GameManager : MonoBehaviour
             {
                 gameStopUI.SetActive(true);
                 Time.timeScale = 0;
+                heropandaAnimator.SetBool("isPause", true);
             }
             else
             {
                 gameStopUI.SetActive(false);
                 Time.timeScale = 1;
+                heropandaAnimator.SetBool("isPause", false);
             }
         }
 
@@ -401,7 +409,6 @@ public class GameManager : MonoBehaviour
         sfxSource.loop = false;
         sfxSource.PlayOneShot(sfxMap[key], volume);
     }
-
 
 
     

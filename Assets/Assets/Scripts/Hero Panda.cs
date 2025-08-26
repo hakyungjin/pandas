@@ -103,66 +103,79 @@ public class HeroPanda : MonoBehaviour
     }
 
     void Update()
-    {    
-        if(!isDie) {
-        
-        
-        if(!stop&&isFollowingHero){
-            HandleMovementInput();
-            HandleAttackInput();
-            HandleSkill1Input();
-            HandleSkill2Input();
-            HandleSkill3Input();
+    {
+        if (GameManager.instance.gameStopUI.activeSelf)
+        {
+            return;
+        }
 
-             }
-             if (isSkill1OnCooldown && !IsInvoking("EndSkill1Cooldown"))
-             {
-                 Invoke("EndSkill1Cooldown", skill1Cooldown);
-             }
-             if (isSkill2OnCooldown && !IsInvoking("EndSkill2Cooldown"))
-             {
-                 Invoke("EndSkill2Cooldown", skill2Cooldown);
-             }
-             if (isSkill3OnCooldown && !IsInvoking("EndSkill3Cooldown"))
-             {
-                 Invoke("EndSkill3Cooldown", skill3Cooldown);
-             }
-             if(isSkill1OnCooldown){
+        if (!isDie)
+        {
+
+
+            if (!stop && isFollowingHero)
+            {
+                HandleMovementInput();
+                HandleAttackInput();
+                HandleSkill1Input();
+                HandleSkill2Input();
+                HandleSkill3Input();
+
+            }
+            if (isSkill1OnCooldown && !IsInvoking("EndSkill1Cooldown"))
+            {
+                Invoke("EndSkill1Cooldown", skill1Cooldown);
+            }
+            if (isSkill2OnCooldown && !IsInvoking("EndSkill2Cooldown"))
+            {
+                Invoke("EndSkill2Cooldown", skill2Cooldown);
+            }
+            if (isSkill3OnCooldown && !IsInvoking("EndSkill3Cooldown"))
+            {
+                Invoke("EndSkill3Cooldown", skill3Cooldown);
+            }
+            if (isSkill1OnCooldown)
+            {
                 herostate.SetSkill1Cooldown();
-             }
-             if(isSkill2OnCooldown){
+            }
+            if (isSkill2OnCooldown)
+            {
                 herostate.SetSkill2Cooldown();
-             }
-             if(isSkill3OnCooldown){
+            }
+            if (isSkill3OnCooldown)
+            {
                 herostate.SetSkill3Cooldown();
-             }
-             if(!isSkill1OnCooldown){
+            }
+            if (!isSkill1OnCooldown)
+            {
                 herostate.SetSkill1CooldownEnd();
-             }
-             if(!isSkill2OnCooldown){
+            }
+            if (!isSkill2OnCooldown)
+            {
                 herostate.SetSkill2CooldownEnd();
-             }
-             if(!isSkill3OnCooldown){
+            }
+            if (!isSkill3OnCooldown)
+            {
                 herostate.SetSkill3CooldownEnd();
-             }  
-        
-        
-        
-       
-        if(exp>=requetExp) {LevelUp() ;}
+            }
 
-        // --- 애니메이션 업데이트 ---
-        UpdateAnimation(rb.linearVelocity);
 
-        // --- 상태 체크 ---
-        CheckLevelUp();
-        CheckDeath();
-        
-        // --- 자동 공격 로직 ---
-        AutoAttack();
-        hprate=(float)hp/maxhp;
-        exprate=exp/requetExp;
-        
+
+
+            if (exp >= requetExp) { LevelUp(); }
+
+            // --- 애니메이션 업데이트 ---
+            UpdateAnimation(rb.linearVelocity);
+
+            // --- 상태 체크 ---
+            CheckLevelUp();
+            CheckDeath();
+
+            // --- 자동 공격 로직 ---
+            AutoAttack();
+            hprate = (float)hp / maxhp;
+            exprate = exp / requetExp;
+
         }
        
        
