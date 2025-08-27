@@ -122,6 +122,18 @@ public class HeroPanda : MonoBehaviour
                 HandleSkill3Input();
 
             }
+            else
+            {
+                animator.SetFloat("speed", 0);
+                animator.SetFloat("MoveX", 0);
+                animator.SetFloat("MoveY", 0);
+                animator.SetBool("isAttacking", false);
+                animator.SetBool("isSkill1", false);
+                animator.SetBool("isSkill2", false);
+                animator.SetBool("isSkill3", false);
+                animator.SetBool("ismoving", false);
+            }
+
             if (isSkill1OnCooldown && !IsInvoking("EndSkill1Cooldown"))
             {
                 Invoke("EndSkill1Cooldown", skill1Cooldown);

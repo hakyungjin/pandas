@@ -12,28 +12,36 @@ public class CameraEdgeScroll : MonoBehaviour
 
     public Transform hero;
     public bool isFollowingHero = true;
-
-
-    
-
+    public bool isPause = false;
 
   
 
-
-
-    
-
     void Update()
     {
-        if(!isFollowingHero)
+        if (!isFollowingHero)
         {
-        scrolldown();
+            scrolldown();
         }
-        if(Input.GetKeyDown(KeyCode.Y))
 
-        {   HeroPanda.instance.isFollowingHerochange();
+        if (GameManager.instance.gameStopUI.activeSelf)
+        {
+            isPause = !isPause;
+        }
+
+        if (isPause)
+        {
+            HeroPanda.instance.isFollowingHerochange();
+            isFollowingHero = !isFollowingHero;
+            isPause = !isPause;
+            return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Y) && !isPause)
+        {
+            HeroPanda.instance.isFollowingHerochange();
             isFollowingHero = !isFollowingHero;
         }
+        
         if(isFollowingHero)
         {
             if(hero!=null)
@@ -45,6 +53,7 @@ public class CameraEdgeScroll : MonoBehaviour
         
         
     }
+    
    
    void scrolldown() {
 
@@ -67,7 +76,7 @@ public class CameraEdgeScroll : MonoBehaviour
             move.y += 1f;
 
         // 이동 적용
-        transform.position += move * scrollSpeed * Time.deltaTime;
+        transform.position += move * scrollSpeed * Time.unscaledDeltaTime;
    }
 
    
