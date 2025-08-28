@@ -19,6 +19,10 @@ public class GameManager : MonoBehaviour
     [Header("영웅판다 애니메이션")]
     public GameObject heropandaObject; // heropanda 오브젝트 (인스펙터에서 연결)
     private Animator heropandaAnimator; // heropanda의 Animator 컴포넌트
+
+    [Header("카메라 스크롤 관련")]
+    public GameObject mainCamera;
+    public CameraEdgeScroll cameraScroll;
     
     [Header("골드 시스템")]
     public int currentGold = 0; // 시작 골드
@@ -50,6 +54,7 @@ public class GameManager : MonoBehaviour
     public AudioSource sfxSource; // SFX 재생용 AudioSource (인스펙터에서 연결)
     public List<AudioClip> bgmMap = new List<AudioClip>(); // 인스펙터에서 키-클립 등록
     public List<AudioClip> sfxMap = new List<AudioClip>(); // 인스펙터에서 키-클립 등록
+
    
 
     void Awake()
@@ -85,8 +90,8 @@ public class GameManager : MonoBehaviour
         // 영웅판다 애니메이션 가져오기
         heropandaAnimator = heropandaObject.GetComponent<Animator>();
 
-        
-        
+        // 카메라 스크롤 가져오기
+        cameraScroll = mainCamera.GetComponent<CameraEdgeScroll>();
     }
 
   
@@ -101,12 +106,16 @@ public class GameManager : MonoBehaviour
                 gameStopUI.SetActive(true);
                 Time.timeScale = 0;
                 heropandaAnimator.SetBool("isPause", true);
+                cameraScroll.startscroll();
+                HeroPanda.instance.isPause = true;
             }
             else
             {
                 gameStopUI.SetActive(false);
                 Time.timeScale = 1;
                 heropandaAnimator.SetBool("isPause", false);
+                cameraScroll.endscroll();
+                HeroPanda.instance.isPause = false;
             }
         }
 

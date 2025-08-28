@@ -25,17 +25,22 @@ public class HeroPanda : MonoBehaviour
     public TextMeshProUGUI levelText;
     public float exprate;
 
+    [Header("카메라 스크롤 관련")]
+    public GameObject mainCamera;
+
     // --- 내부 변수 ---
     private Rigidbody2D rb;
     private Vector2 moveInput;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     private Collider2D heroCollider;
+    private CameraEdgeScroll cameraScroll; // 카메라 스크롤 참조
 
     private bool isSkill2 = false;
 
     private bool isAttacking = false;
     public bool isDie = false;
+    public bool isPause = false;
 
     // 자동 공격을 위한 변수들 (InstalledUnit과 동일한 흐름)
     private float attackTimer = 0f;
@@ -49,12 +54,12 @@ public class HeroPanda : MonoBehaviour
 
     public bool isFollowingHero = true;
 
-    
+
     public GameObject slash;
     public GameObject hpbar;
     public GameObject expbar;
     public GameObject skill2Effect; // 스킬2 이펙트 (인스펙터에서 할당)
-    
+
     private hpbar hpBarComponent;
     private hpbar expBarComponent;
 
@@ -64,11 +69,11 @@ public class HeroPanda : MonoBehaviour
     public GameObject loading;
 
     public Herostate herostate;
-    public bool stop=false;
-    
+    public bool stop = false;
+
     [Header("부활 설정")]
     public float reviveDelay = 3f; // 부활 대기 시간
-    [Range(0f,1f)] public float reviveHpRatio = 0.5f; // 부활 시 회복 비율
+    [Range(0f, 1f)] public float reviveHpRatio = 0.5f; // 부활 시 회복 비율
     public Transform respawnPoint; // 지정 시 해당 위치로 부활
     private Vector3 initialSpawnPosition; // 미지정 시 시작 위치로 부활
 
@@ -86,6 +91,7 @@ public class HeroPanda : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         heroCollider = GetComponent<Collider2D>();
+        cameraScroll = FindObjectOfType<CameraEdgeScroll>(); // 카메라 스크롤 참조 가져오기
         if (hpbar != null)
         {
             hpBarComponent = hpbar.GetComponent<hpbar>();
@@ -96,24 +102,27 @@ public class HeroPanda : MonoBehaviour
         }
         instance = this;
 
-    
-        hp=maxhp;
-        herostate.Setstate(1,0,1);
+
+        hp = maxhp;
+        herostate.Setstate(1, 0, 1);
         initialSpawnPosition = transform.position;
     }
 
     void Update()
     {
-        if (GameManager.instance.gameStopUI.activeSelf)
+        if (isDie || isPause)
         {
+            cameraScroll.scrolldown();
+            Debug.Log("isDie: " + isDie);
+            Debug.Log("isPause: " + isPause);
             return;
         }
 
-        if (!isDie)
+        if (!isDie && !isPause)
         {
 
 
-            if (!stop && isFollowingHero)
+            if (!stop)
             {
                 HandleMovementInput();
                 HandleAttackInput();
@@ -121,17 +130,6 @@ public class HeroPanda : MonoBehaviour
                 HandleSkill2Input();
                 HandleSkill3Input();
 
-            }
-            else
-            {
-                animator.SetFloat("speed", 0);
-                animator.SetFloat("MoveX", 0);
-                animator.SetFloat("MoveY", 0);
-                animator.SetBool("isAttacking", false);
-                animator.SetBool("isSkill1", false);
-                animator.SetBool("isSkill2", false);
-                animator.SetBool("isSkill3", false);
-                animator.SetBool("ismoving", false);
             }
 
             if (isSkill1OnCooldown && !IsInvoking("EndSkill1Cooldown"))
@@ -189,8 +187,8 @@ public class HeroPanda : MonoBehaviour
             exprate = exp / requetExp;
 
         }
-       
-       
+
+
     }
 
     void FixedUpdate()
@@ -292,10 +290,10 @@ public class HeroPanda : MonoBehaviour
 
     private void HandleAttackInput()
     {
-       // 스페이스바를 누르면 공격 시작
+        // 스페이스바를 누르면 공격 시작
         if (Input.GetKeyDown(KeyCode.Space) && !isDie && !isAttacking)
         {
-         // StartAttack();
+            // StartAttack();
         }
     }
 
@@ -304,7 +302,7 @@ public class HeroPanda : MonoBehaviour
     {
         isAttacking = true;
         animator.SetBool("isAttacking", true);
-        
+
         Invoke("slashActive", 0.5f);
         PerformAttackCheck();
         Invoke("slashInactive", 2f);
@@ -335,7 +333,7 @@ public class HeroPanda : MonoBehaviour
     }
     private void EndSkill1()
     {
-        
+
         animator.SetBool("isSkill1", false);
         animator.Rebind();
         animator.Update(0f);
@@ -354,7 +352,7 @@ public class HeroPanda : MonoBehaviour
         animator.SetBool("isSkill3", true);
         isSkill3OnCooldown = true;
         PerformSkill(3);
-        transform.DOMove(transform.position+new Vector3(moveInput.x*10,moveInput.y*10,0)*0.5f,1.5f);
+        transform.DOMove(transform.position + new Vector3(moveInput.x * 10, moveInput.y * 10, 0) * 0.5f, 1.5f);
         Invoke("EndSkill3", 1.5f);
         Invoke("EndSkill3Cooldown", skill3Cooldown);
     }
@@ -363,14 +361,14 @@ public class HeroPanda : MonoBehaviour
         animator.SetBool("isSkill3", false);
         animator.Rebind();
         animator.Update(0f);
-        
+
     }
 
     private void HandleSkill2Input()
     {
         if (Input.GetKeyDown(KeyCode.E) && !isDie && !isSkill2OnCooldown)
         {
-            
+
             StartSkill2();
         }
     }
@@ -378,17 +376,17 @@ public class HeroPanda : MonoBehaviour
     private void StartSkill2()
     {
         FaceDirection(GetAimDirection());
-        
+
         animator.SetBool("isSkill2", true);
         isSkill2 = true;
-        
+
         // 스킬2 시작 시 즉시 공격
         PerformSkill(2);
-        
+
         // 스킬2 지속 시간 동안 주기적으로 공격 (0.5초마다)
         InvokeRepeating("PerformSkill2Attack", 0.5f, 0.5f);
-        
-        
+
+
         // 스킬2 종료 (3초 후)
         Invoke("EndSkill2", 2f);
     }
@@ -399,15 +397,15 @@ public class HeroPanda : MonoBehaviour
         animator.SetBool("isSkill2", false);
         animator.Rebind();
         animator.Update(0f);
-        
-       
-        
+
+
+
         // 스킬2 이펙트 비활성화
-        
+
         isSkill2OnCooldown = true;
         Invoke("EndSkill2Cooldown", skill2Cooldown);
-        
-        
+
+
     }
 
     private void EndSkill2Cooldown()
@@ -427,21 +425,21 @@ public class HeroPanda : MonoBehaviour
     private void PerformSkill2()
     {
         if (isDie || !isSkill2) return;
-        
+
         Debug.Log("스킬2 공격 실행!");
-        
+
         // 스킬2는 더 넓은 범위와 강한 데미지
         float skill2Range = attackRange * 1.5f; // 공격 범위
-        int skill2Damage = attackDamage + 10;  
-        
+        int skill2Damage = attackDamage + 10;
+
         // 스킬2 범위 내 모든 적 찾기
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, skill2Range);
-        
+
         foreach (Collider2D enemyCollider in hitEnemies)
         {
             if (enemyCollider.CompareTag("Enemy") || enemyCollider.CompareTag("EnemyTower"))
             {
-                
+
                 if (enemyCollider.GetComponent<SpawnedEnemy>() != null)
                 {
                     enemyCollider.GetComponent<SpawnedEnemy>().TakeDamage(skill2Damage);
@@ -533,7 +531,7 @@ public class HeroPanda : MonoBehaviour
         }
     }
 
-   
+
 
 
     // --- 상태 및 로직 함수들 ---
@@ -541,7 +539,7 @@ public class HeroPanda : MonoBehaviour
     {
         if (!isDie)
         {
-            
+
             rb.linearVelocity = moveInput * moveSpeed;
         }
         else
@@ -557,7 +555,7 @@ public class HeroPanda : MonoBehaviour
             LevelUp();
         }
     }
-    
+
     private void CheckDeath()
     {
         if (hp <= 0 && !isDie)
@@ -579,49 +577,52 @@ public class HeroPanda : MonoBehaviour
         hp += 10;
         maxhp += 10;
 
-        
-         herostate.Setstate(hprate,exprate,level);
+
+        herostate.Setstate(hprate, exprate, level);
     }
 
     void Die()
     {
         isDie = true;
-        
-        
+
+
         // DOTween 애니메이션 중지
         transform.DOKill();
-        
+
         // 스킬 상태 초기화
         isSkill2 = false;
         isSkill1OnCooldown = false;
         isSkill2OnCooldown = false;
         isSkill3OnCooldown = false;
-        
+
         // 애니메이션 상태 머신 리셋
         animator.Rebind();
         animator.Update(0f);
-        
+
         // 애니메이션 상태 정리
         animator.SetBool("isSkill1", false);
         animator.SetBool("isSkill2", false);
         animator.SetBool("isSkill3", false);
         animator.SetBool("isAttacking", false);
         animator.SetBool("isdie", true);
-        
+
         // 사망 상태 설정
-        herostate.Setstate(0,exprate,level);
+        herostate.Setstate(0, exprate, level);
         rb.linearVelocity = Vector2.zero;
         heroCollider.enabled = false;
         herostate.SetReviveIcon();
+
+        // 카메라 스크롤 시작
+        cameraScroll.startscroll();
     }
 
     public void TakeDamage(int damageAmount)
     {
         hp -= damageAmount;
-        
+
         OnMouseUp();
         if (hp < 0) { hp = 0; }
-        herostate.Setstate(hprate,exprate,level);
+        herostate.Setstate(hprate, exprate, level);
 
         if (hp <= 0 && !isDie)
         {
@@ -631,9 +632,9 @@ public class HeroPanda : MonoBehaviour
 
     public void PerformAttackCheck()
     {
-        if (isDie&&stop) return;
+        if (isDie || stop) return;
 
-        
+
         Debug.Log("Animation Event: Attack Check!");
 
         // 1. 공격 범위 내 모든 적 찾기
@@ -645,7 +646,7 @@ public class HeroPanda : MonoBehaviour
 
         foreach (Collider2D enemyCollider in hitEnemies)
         {
-            if (enemyCollider.CompareTag("Enemy")||enemyCollider.CompareTag("EnemyTower"))
+            if (enemyCollider.CompareTag("Enemy") || enemyCollider.CompareTag("EnemyTower"))
             {
                 float distance = Vector2.Distance(transform.position, enemyCollider.transform.position);
                 if (distance < minDistance)
@@ -661,11 +662,13 @@ public class HeroPanda : MonoBehaviour
         {
             Debug.Log($"가장 가까운 적 [{closestEnemy.name}]을(를) 공격!");
             // Enemy 스크립트의 TakeDamage 함수를 호출
-            
-            if(closestEnemy.GetComponent<SpawnedEnemy>()!=null){
+
+            if (closestEnemy.GetComponent<SpawnedEnemy>() != null)
+            {
                 closestEnemy.GetComponent<SpawnedEnemy>().TakeDamage(attackDamage);
             }
-            else if(closestEnemy.GetComponent<EnemyTower>()!=null){
+            else if (closestEnemy.GetComponent<EnemyTower>() != null)
+            {
                 closestEnemy.GetComponent<EnemyTower>().TakeDamage(attackDamage);
             }
         }
@@ -767,17 +770,20 @@ public class HeroPanda : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 
-    
 
-    void slashActive(){
+
+    void slashActive()
+    {
         slash.SetActive(true);
     }
 
-    void slashInactive(){
+    void slashInactive()
+    {
         slash.SetActive(false);
     }
 
-    void Destroy() {
+    void Destroy()
+    {
         // 부활 시스템 도입으로 비활성화는 하지 않음 (호환 유지용)
     }
 
@@ -789,22 +795,23 @@ public class HeroPanda : MonoBehaviour
         }
     }
 
-    public void Takeexp(float exp){
-        this.exp+=exp;
-        Debug.Log("exp: "+this.exp);
+    public void Takeexp(float exp)
+    {
+        this.exp += exp;
+        Debug.Log("exp: " + this.exp);
         herostate.Setexp(exprate);
-       
+
     }
 
     public void OnMouseDown()
 
     {
-        if(rb.linearVelocity.magnitude>0.1f)
+        if (rb.linearVelocity.magnitude > 0.1f)
         {
             return;
         }
-        stop=true;
-        rb.linearVelocity=Vector2.zero;
+        stop = true;
+        rb.linearVelocity = Vector2.zero;
         if (loading == null)
         {
             Debug.LogWarning("loading UI가 할당되지 않았습니다.");
@@ -820,17 +827,18 @@ public class HeroPanda : MonoBehaviour
     }
     public void OnMouseUp()
     {
-        stop=false;
+        stop = false;
         var loadingComponent = loading != null ? loading.GetComponent<loading>() : null;
-       
+
         if (loading != null)
         {
             loadingComponent.green();
             loading.SetActive(false);
-            
+
         }
     }
-    public void heroActive(){
+    public void heroActive()
+    {
         gameObject.SetActive(true);
     }
 
@@ -844,16 +852,17 @@ public class HeroPanda : MonoBehaviour
         if (spriteRenderer != null) spriteRenderer.enabled = false;
         if (heroCollider != null) heroCollider.enabled = false;
 
-       if(isDie){
-        StartCoroutine(HandleDeathAndRevive());
-       }
+        if (isDie)
+        {
+            StartCoroutine(HandleDeathAndRevive());
+        }
         Revive();
     }
 
     public void Revive()
     {
-        if(!isDie) return;
-        if(GameManager.instance.GetGold()<80)
+        if (!isDie) return;
+        if (GameManager.instance.GetGold() < 80)
         {
             return;
         }
@@ -867,12 +876,15 @@ public class HeroPanda : MonoBehaviour
         animator.Rebind();
         animator.SetBool("isdie", false);
 
-       
+
         if (heroCollider != null) heroCollider.enabled = true;
 
         // UI 갱신
         hprate = (float)hp / maxhp;
         herostate.Setstate(hprate, exprate, level);
+
+        // 카메라 스크롤 종료
+        cameraScroll.endscroll();
     }
 
     // 외부에서 즉시 부활 시키고 싶을 때 호출
@@ -893,10 +905,8 @@ public class HeroPanda : MonoBehaviour
         }
     }
 
-    public void isFollowingHerochange()
-    {
-        isFollowingHero = !isFollowingHero;
-        rb.linearVelocity = Vector2.zero;
-    }
+
+
+
 }
 

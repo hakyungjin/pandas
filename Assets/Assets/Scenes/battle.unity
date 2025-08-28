@@ -24985,7 +24985,6 @@ MonoBehaviour:
   scrollSpeed: 10
   edgeSize: 3
   hero: {fileID: 700894802}
-  isFollowingHero: 1
 --- !u!114 &351512270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25849,6 +25848,8 @@ MonoBehaviour:
   goldText: {fileID: 1394879463}
   timerText: {fileID: 293061109}
   heropandaObject: {fileID: 290126489}
+  mainCamera: {fileID: 351512263}
+  cameraScroll: {fileID: 0}
   currentGold: 0
   goldPerSecond: 1
   enemySpawner: {fileID: 567725027}
@@ -33976,7 +33977,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1726962940
 RectTransform:
   m_ObjectHideFlags: 0

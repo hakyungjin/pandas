@@ -64,7 +64,7 @@ public class loading : MonoBehaviour
         // 강화 진행 - UI만 변경
         if (isUpgrading)
         {
-            timer += Time.deltaTime;
+            timer += Time.unscaledDeltaTime;
             float progress = Mathf.Clamp01(timer / duration);
             fillImage.fillAmount = progress;
 
