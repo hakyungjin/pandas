@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+
 public class CameraEdgeScroll : MonoBehaviour
 {
     public float scrollSpeed = 10f;      // 카메라 이동 속도
@@ -77,7 +78,7 @@ public class CameraEdgeScroll : MonoBehaviour
 
     public void endscroll()
     {
-        transform.position = hero.position;
+        transform.position =new Vector3(hero.position.x, hero.position.y, -10);
     }
 }
    
